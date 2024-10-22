@@ -1,0 +1,119 @@
+/* Subscription Page - Full height with flexbox */
+.subscription-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensure footer is positioned correctly */
+  min-height: 100vh;
+  background-color: #f9fafc; /* Soft background for better readability */
+  padding: 0 0; /* Responsive padding */
+  box-sizing: border-box;
+}
+
+/* Title Styling */
+.title {
+  font-size: 3rem;
+  color: #333;
+  text-align: center;
+  margin: 40px 0;
+  font-weight: 700; /* More emphasis on the title */
+}
+
+/* Container for Subscription Plans */
+.plans-container {
+  display: flex;
+  justify-content: space-evenly; /* Even spacing for better alignment */
+  flex-wrap: wrap;
+  gap: 30px; /* Better spacing between cards */
+  padding-bottom: 30px;
+}
+
+/* Plan Cards */
+.plan-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer shadow for a cleaner look */
+  width: 320px; /* Wider card */
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.plan-card:hover {
+  transform: translateY(-10px); /* Slight elevation effect on hover */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Plan Name Styling */
+.plan-name {
+  font-size: 1.8rem;
+  color: #007bff;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+/* Price Styling */
+.plan-price {
+  font-size: 2.5rem;
+  color: #28a745;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Features List */
+.plan-features {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.plan-features li {
+  font-size: 1rem;
+  color: #666;
+  margin: 8px 0;
+}
+
+/* Subscribe Button Styling */
+.subscribe-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.subscribe-button:hover {
+  background-color: #0056b3;
+}
+
+/* Footer */
+.main-footer {
+  background-color: #f0f0f0;
+  padding: 20px;
+  text-align: center;
+  margin-top: auto;
+}
+
+.main-footer p {
+  color: #555;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .plans-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .plan-card {
+    width: 90%;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+}

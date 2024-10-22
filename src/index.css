@@ -1,0 +1,72 @@
+/* Global styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f9fafc; /* Global soft background */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Apply border-box model globally */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Default settings for text content */
+body {
+  line-height: 1.6;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Global styles for links */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #007bff;
+}
+
+/* Default styling for headers */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  color: #2c3e50;
+}
+
+/* Button global reset */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+/* Responsive image */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Utility class for centered text */
+.text-center {
+  text-align: center;
+}
+
+/* Utility class for margins */
+.mt-20 {
+  margin-top: 20px;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}

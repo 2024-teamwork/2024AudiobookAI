@@ -1,0 +1,92 @@
+.content-card {
+  background-color: #ffffff;
+  border-radius: 10px; /* Rounded corners for a softer look */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Slightly darker shadow */
+  padding: 30px; /* Increased padding for a more spacious feel */
+  margin-bottom: 20px;
+  transition: box-shadow 0.3s; /* Smooth shadow transition on hover */
+}
+
+.content-card:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
+}
+
+h2 {
+  color: #3a4fd0; /* Changed to match sidebar title color */
+  margin-bottom: 20px; /* More space below the heading */
+  font-size: 1.8rem; /* Increased font size for better emphasis */
+  font-weight: bold; /* Bold for emphasis */
+}
+
+.details {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold; /* Bold labels for clarity */
+}
+
+input[type="text"],
+input[type="number"],
+input[type="url"],
+input[type="date"],
+textarea {
+  width: 100%;
+  padding: 12px; /* Increased padding for input fields */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-top: 5px;
+  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition */
+}
+
+input:focus,
+textarea:focus {
+  border-color: rgb(58, 79, 208);
+  outline: none;
+  box-shadow: 0 0 5px rgba(58, 79, 208, 0.5); /* Add shadow on focus */
+}
+
+textarea {
+  height: 120px; /* Increased height for textarea */
+  resize: none;
+}
+
+.action-button {
+  background-color: rgb(58, 79, 208);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 18px; /* Increased padding for buttons */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Added transform transition */
+  margin-top: 10px;
+  font-size: 1rem; /* Larger font size for buttons */
+}
+
+.action-button:hover {
+  background-color: rgb(49, 66, 173);
+  transform: translateY(-2px); /* Slightly lift button on hover */
+}
+
+/* New styles for the uploaded pictures */
+.picture-previews {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.picture-preview {
+  width: 90px; /* Slightly larger preview images */
+  height: 90px;
+  object-fit: cover;
+  border-radius: 5px; /* Rounded corners for images */
+  border: 1px solid #ddd; /* Light border for images */
+}
+
+.audio-preview {
+  margin-top: 10px;
+}
