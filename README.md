@@ -10,3 +10,11 @@ npm install react-dropzone
 npm install react-icons
 
 ```
+
+linux
+```
+sudo nano /etc/nginx/sites-available/reactapp
+
+```
+
+# URL: http://audioai.alphalio.cn/
