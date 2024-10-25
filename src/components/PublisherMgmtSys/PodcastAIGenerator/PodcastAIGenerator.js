@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlay, FaPause } from 'react-icons/fa';
-import './AudioAIGenerator.css';
+import './PodcastAIGenerator.css';
 
-const AudioAIGenerator = () => {
+const PodcastAIGenerator = () => {
   const [status, setStatus] = useState('idle');
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -42,7 +42,7 @@ const AudioAIGenerator = () => {
 // Subcomponent for Idle State
 const IdleState = ({ onGenerate }) => (
   <button className="generate-button" onClick={onGenerate}>
-    Generate AI Audio
+    Generate Podcast
   </button>
 );
 
@@ -50,7 +50,7 @@ const IdleState = ({ onGenerate }) => (
 const LoadingState = () => (
   <div className="loading-container">
     <div className="spinner"></div>
-    <p className="loading-text">Generating Audio...</p>
+    <p className="loading-text">Generating Podcast...</p>
   </div>
 );
 
@@ -107,7 +107,7 @@ const DownloadButton = () => {
   };
   return (
     <button className="download-button" onClick={handleDownload}>
-      Download Audio
+      Download PodCast
     </button>
   );
 };
@@ -119,4 +119,4 @@ const formatTime = (seconds) => {
   return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
 };
 
-export default AudioAIGenerator;
+export default PodcastAIGenerator;

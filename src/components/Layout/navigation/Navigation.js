@@ -14,7 +14,7 @@ const user = {
       <div className="nav-links">
         <Link to="/subscription">Subscribe us!</Link>
         <Link to="/">Home</Link>
-        <Link to="/settings">Settings</Link>
+        {/* <Link to="/settings">Settings</Link> */}
       </div>
       
       <div className="user-info">
