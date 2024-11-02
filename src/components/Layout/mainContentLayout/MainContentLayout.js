@@ -11,10 +11,10 @@ const MainContentLayout = () => {
   return (
     <div className="content-wrapper">
       <div className="content-section">
-        <AvatorGenerator />
-        <AudioAIGenerator />
-        <PodcastAIGenerator />
         <SummaryGenerator />
+        <PodcastAIGenerator />
+        <AudioAIGenerator />
+        <AvatorGenerator />
         <AudioProductDetails />
 
       </div>
