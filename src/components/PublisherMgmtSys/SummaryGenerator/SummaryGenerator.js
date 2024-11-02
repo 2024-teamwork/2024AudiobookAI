@@ -4,9 +4,9 @@ import './SummaryGenerator.css';
 const SummaryGenerator = () => {
   return (
     <div className="content-card edit-content">
-      <h2>Summary</h2>
-      <textarea placeholder="Summary will show here..." className="textarea" />
-      <button className="action-button">Generate Summary</button>
+      <h2>Podcast Script</h2>
+      <textarea placeholder="Podcast Script will show here..." className="textarea" />
+      <button className="action-button">Save Podcast</button>
     </div>
   );
 };

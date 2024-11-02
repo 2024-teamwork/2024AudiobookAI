@@ -4,9 +4,9 @@ import './EditContent.css';
 const EditContent = () => {
   return (
     <div className="content-card edit-content">
-      <h2>Summary</h2>
-      <textarea placeholder="Write your content here..." className="textarea" />
-      <button className="action-button">Save Changes</button>
+      <h2>Podcast Script</h2>
+      <textarea placeholder="Podcast Script will show here..." className="textarea" />
+      <button className="action-button">Save Podcast</button>
     </div>
   );
 };
