@@ -50,7 +50,7 @@ const Sidebar = ({ pdfFiles = [], toggleSelect, selectAll, handleFileUpload, del
       <div className="file-frame">
         <div className="file-upload-wrapper">
           <label htmlFor="file-upload" className="custom-file-upload">
-          Upload Sources
+          Upload File
           </label>
           <input
             id="file-upload"
