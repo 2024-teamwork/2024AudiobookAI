@@ -5,6 +5,7 @@ import EditContent from './components/PublisherMgmtSys/EditContent/EditContent';
 import AudioProductDetails from './components/PublisherMgmtSys/AudioProductDetails/AudioProductDetails';
 import MainContentLayout from './components/Layout/mainContentLayout/MainContentLayout';
 import SubscriptionPage from './components/PublisherMgmtSys/SubscriptionPage/SubscriptionPage';
+import UserCenter from './components/PublisherMgmtSys/UserCenter/UserCenter';
 
 const App = () => {
   const [pdfFiles, setPdfFiles] = useState([
@@ -59,8 +60,10 @@ const App = () => {
             </Layout>
           }
         />
-        {/* Route for the Subscription Page */}
+
+        {/* Route for other Pages */}
         <Route path="/subscription" element={<SubscriptionPage />} />
+        <Route path="/user-center" element={<UserCenter />} />
       </Routes>
     </Router>
   );

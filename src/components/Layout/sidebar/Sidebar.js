@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 
 const Sidebar = ({ pdfFiles = [], toggleSelect, selectAll, handleFileUpload, deleteFile }) => {
+  const navigate = useNavigate();
   const [selectAllChecked, setSelectAllChecked] = useState(false);
   const [notification, setNotification] = useState(''); // State for notification
 
@@ -34,13 +36,21 @@ const Sidebar = ({ pdfFiles = [], toggleSelect, selectAll, handleFileUpload, del
     toggleSelect(index);
   };
 
+  // Navigate to UserCenter
+  const goToUserCenter = () => {
+    navigate('/user-center');
+  };
+  
   return (
     <div className="sidebar">
-      <h2 className="sidebar-title">Upload Sources</h2>
+      <h2 className="sidebar-title" onClick={goToUserCenter} style={{ cursor: 'pointer' }}>
+        AudioBook AI
+      </h2>
+      
       <div className="file-frame">
         <div className="file-upload-wrapper">
           <label htmlFor="file-upload" className="custom-file-upload">
-            Choose Files
+          Upload Sources
           </label>
           <input
             id="file-upload"

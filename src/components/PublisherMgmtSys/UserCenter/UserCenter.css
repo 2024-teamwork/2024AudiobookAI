@@ -1,0 +1,23 @@
+.user-center {
+          font-family: Arial, sans-serif;
+          padding: 20px;
+          background-color: #f3f4f6;
+        }
+        
+        .user-center h1 {
+          font-size: 24px;
+          margin-bottom: 20px;
+        }
+        
+        .user-center h2 {
+          font-size: 20px;
+          margin-top: 30px;
+          margin-bottom: 15px;
+        }
+        
+        .notebook-grid {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 20px;
+        }
+        
