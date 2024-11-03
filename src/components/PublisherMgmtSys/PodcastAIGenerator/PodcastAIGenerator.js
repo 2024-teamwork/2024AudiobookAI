@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlay, FaPause } from 'react-icons/fa';
 import './PodcastAIGenerator.css';
+import SummaryGenerator from '../SummaryGenerator/SummaryGenerator';
 
 const PodcastAIGenerator = () => {
   const [status, setStatus] = useState('idle');
