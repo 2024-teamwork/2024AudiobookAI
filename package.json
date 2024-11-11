@@ -47,5 +47,6 @@
   "description": "``` npm install react-router-dom",
   "main": "index.js",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "keywords": []
 }

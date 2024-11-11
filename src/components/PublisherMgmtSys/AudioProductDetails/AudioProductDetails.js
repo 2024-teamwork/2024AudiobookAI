@@ -13,9 +13,10 @@ const AudioProductDetails = () => {
     genre: '',
     description: ''
   });
-  
+
   const [pictures, setPictures] = useState([]);
   const [audio, setAudio] = useState(null);
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,6 +39,26 @@ const AudioProductDetails = () => {
     }
   };
 
+  const removeImage = (index) => {
+    setPictures((prevPictures) => prevPictures.filter((_, i) => i !== index));
+  };
+
+  const handleExpandImage = (index) => {
+    setExpandedIndex(index);
+  };
+
+  const handleCloseExpanded = () => {
+    setExpandedIndex(null);
+  };
+
+  const handleRemoveCurrentImage = () => {
+    if (expandedIndex !== null) {
+      const newPictures = pictures.filter((_, i) => i !== expandedIndex);
+      setPictures(newPictures);
+      setExpandedIndex(newPictures.length > 0 ? (expandedIndex % newPictures.length) : null);
+    }
+  };
+
   const handleSave = () => {
     console.log('Saved details:', details);
     console.log('Uploaded pictures:', pictures);
@@ -50,20 +71,66 @@ const AudioProductDetails = () => {
     <div className="content-card audio-product-details">
       <h2>Audio Product Details</h2>
       <div className="details">
-        <label>
-          <strong>Upload Pictures:</strong>
-          <input type="file" multiple accept="image/*" onChange={handleFileUpload} />
-        </label>
+      <div className="image-upload-container">
+        <strong className="upload-text">Upload Pictures: </strong>
+        
+          <label htmlFor="image-upload" className="custom-file-upload-small">
+            Choose Files
+          </label>
+
+          <input
+            id="image-upload"
+            type="file"
+            multiple accept="image/*" 
+            className="image-upload"
+            onChange={handleFileUpload} 
+          />
+        
         <div className="picture-previews">
           {pictures.map((src, index) => (
-            <img key={index} src={src} alt="Uploaded Preview" className="picture-preview" />
+            <div key={index} className="picture-preview-container">
+              <img
+                src={src}
+                alt="Uploaded Preview"
+                className="picture-preview"
+                onClick={() => handleExpandImage(index)}
+              />
+              <button className="remove-image" onClick={() => removeImage(index)}>
+                &times;
+              </button>
+            </div>
           ))}
         </div>
 
-        <label>
-          <strong>Upload Audio:</strong>
-          <input type="file" accept="audio/*" onChange={handleAudioUpload} />
-        </label>
+        </div>
+
+        {expandedIndex !== null && (
+          <div className="expanded-view">
+            <button className="close-expanded" onClick={handleCloseExpanded}>&times;</button>
+            <img src={pictures[expandedIndex]} alt="Expanded Preview" className="expanded-image" />
+            <button className="remove-expanded" onClick={handleRemoveCurrentImage}>Remove Image</button>
+            {expandedIndex > 0 && (
+              <button className="prev-image" onClick={() => setExpandedIndex(expandedIndex - 1)}>&lt;</button>
+            )}
+            {expandedIndex < pictures.length - 1 && (
+              <button className="next-image" onClick={() => setExpandedIndex(expandedIndex + 1)}>&gt;</button>
+            )}
+          </div>
+        )}
+        
+
+        <div className="audio-upload-container">
+          <strong className='upload-text'>Upload Audio: </strong>
+          <label htmlFor="audio-upload" className="custom-file-upload-small">
+              Choose Files
+            </label>
+            <input
+              id="audio-upload"
+              type="file"
+              multiple accept="audio/*" 
+              className="audio-upload"
+              onChange={handleAudioUpload} 
+            />
         {audio && (
           <div className="audio-preview">
             <audio controls src={audio}>
@@ -71,6 +138,8 @@ const AudioProductDetails = () => {
             </audio>
           </div>
         )}
+        </div>
+
 
         <label>
           <strong>Name:</strong>
@@ -116,3 +185,4 @@ const AudioProductDetails = () => {
 };
 
 export default AudioProductDetails;
+
