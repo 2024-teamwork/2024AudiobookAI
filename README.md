@@ -9,6 +9,8 @@ npm install react-dropzone
 
 npm install react-icons
 
+npm install axios
+
 ```
 
 linux

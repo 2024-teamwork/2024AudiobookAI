@@ -4,7 +4,7 @@ import './Card.css';
 
 const Card = ({ title, date, sources, icon, isNew }) => {
   const handleRedirect = () => {
-          window.location.href = 'http://localhost:3000/';
+          window.location.href = '/';
   };                
   
   return (

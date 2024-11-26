@@ -1,0 +1,95 @@
+.register-container {
+          max-width: 400px;
+          margin: auto;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          background-color: #f9f9f9;
+        }
+        
+        h2 {
+          text-align: center;
+        }
+        
+        .form-group {
+          margin-bottom: 15px;
+        }
+        
+        label {
+          display: block;
+          margin-bottom: 5px;
+        }
+        
+        input {
+          width: 100%;
+          padding: 8px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+        
+        button {
+          width: 100%;
+          padding: 10px;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        
+        button:hover {
+          background-color: #0056b3;
+        }
+        
+        .message {
+          margin-top: 15px;
+          text-align: center;
+          font-size: 14px;
+        }
+        
+        .oauth-buttons {
+          margin-top: 20px;
+          text-align: center;
+        }
+        
+        .oauth-buttons button {
+          margin: 5px;
+          padding: 10px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          color: white;
+        }
+        
+        .google-btn {
+          background-color: #db4437;
+        }
+        
+        .github-btn {
+          background-color: #333;
+        }
+        
+        .alipay-btn {
+          background-color: #0077ee;
+        }
+        
+        .wechat-btn {
+          background-color: #1aad19;
+        }
+        
+        .google-btn:hover {
+          background-color: #c33227;
+        }
+        
+        .github-btn:hover {
+          background-color: #24292e;
+        }
+        
+        .alipay-btn:hover {
+          background-color: #005bbb;
+        }
+        
+        .wechat-btn:hover {
+          background-color: #128f17;
+        }
+        

@@ -1,0 +1,92 @@
+.podcast-container {
+          width: 95%;
+          margin: 0 auto;
+          text-align: center;
+          font-family: Arial, sans-serif;
+        }
+        
+        h1 {
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+        
+        p {
+          color: #555;
+          margin-bottom: 20px;
+        }
+        
+        .audio-player {
+          margin: 20px 0;
+        }
+        
+        audio {
+          width: 100%;
+          max-width: 600px;
+          outline: none;
+        }
+        
+        .script-editor {
+          margin: 20px 0;
+        }
+        
+        .script-editor textarea {
+          width: 100%;
+          max-width: 1000px;
+          height: 400px; /* Increase height */
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          resize: vertical;
+          font-size: 16px;
+          font-family: Arial, sans-serif;
+        }
+                
+        .script-editor button {
+          margin-top: 10px;
+          padding: 10px 20px;
+          background-color: #6e44ff;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+        
+        .script-editor button:disabled {
+          background-color: #ccc;
+          cursor: not-allowed;
+        }
+        
+        .message {
+          margin-top: 10px;
+          color: green;
+          font-size: 14px;
+        }
+        
+        .button-container {
+          display: flex;
+          justify-content: center; /* Align buttons horizontally in the center */
+          gap: 10px; /* Add space between buttons */
+          margin-top: 20px; /* Optional spacing from content above */
+        }
+        
+        .button-container button {
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          background-color: #6e44ff;
+          color: white;
+          cursor: pointer;
+          font-size: 16px;
+          transition: background-color 0.3s ease;
+        }
+        
+        .button-container button:disabled {
+          background-color: #ccc;
+          cursor: not-allowed;
+        }
+        
+        .button-container button:hover:not(:disabled) {
+          background-color: #5a37d2;
+        }
+        
