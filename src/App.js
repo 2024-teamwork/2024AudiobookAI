@@ -6,6 +6,11 @@ import AudioProductDetails from './components/PublisherMgmtSys/AudioProductDetai
 import MainContentLayout from './components/Layout/mainContentLayout/MainContentLayout';
 import SubscriptionPage from './components/PublisherMgmtSys/SubscriptionPage/SubscriptionPage';
 import UserCenter from './components/PublisherMgmtSys/UserCenter/UserCenter';
+import LoginPage from './components/LoginRegister/Login/LoginPage';
+import RegisterPage from './components/LoginRegister/Register/RegisterPage';
+import AIPodcast from './components/AIPodcastSysPublisher/AIPodcast/AIPodcast';
+import PublisherAIPodcastLayout from './components/Layout/PublisherAIPodcastLayout/PublisherAIPodcastLayout';
+import PodcastPlayer from './components/AIPodcastSysPublisher/PodcastPlayer/PodcastPlayer';
 
 const App = () => {
   const [pdfFiles, setPdfFiles] = useState([
@@ -47,7 +52,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route
-          path="/"
+          path="/customer-view"
           element={
             <Layout
               pdfFiles={pdfFiles}
@@ -64,6 +69,26 @@ const App = () => {
         {/* Route for other Pages */}
         <Route path="/subscription" element={<SubscriptionPage />} />
         <Route path="/user-center" element={<UserCenter />} />
+
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/podcast" element={<AIPodcast />} />
+
+        <Route
+          path="/"
+          element={
+            <Layout
+              pdfFiles={pdfFiles}
+              toggleSelect={toggleSelect}
+              selectAll={selectAll}
+              handleFileUpload={handleFileUpload}
+              deleteFile={deleteFile} // Pass delete function to Layout
+            >
+              <PublisherAIPodcastLayout />
+            </Layout>
+          }
+        />
+
       </Routes>
     </Router>
   );

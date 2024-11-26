@@ -14,13 +14,15 @@ const user = {
       <div className="nav-links">
         <Link to="/subscription">Subscribe us!</Link>
         <Link to="/">Home</Link>
+        <Link to="/customer-view">Customer View</Link>
+        <Link to="/login">Welcome! Please Login</Link>
         {/* <Link to="/settings">Settings</Link> */}
       </div>
       
       <div className="user-info">
         {user ? (
           <>
-            <span className="welcome">Welcome! {user.name}</span>
+            {/* <span className="welcome">Welcome! {user.name}</span> */}
             <img 
               src={user.avatar} 
               alt="Avatar" 

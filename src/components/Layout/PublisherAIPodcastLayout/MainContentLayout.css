@@ -1,0 +1,16 @@
+.content-wrapper {
+          display: flex;
+          gap: 20px; /* Space between sections */
+        }
+        
+        .content-section {
+          flex: 1; /* Allow sections to grow equally */
+          min-width: 300px; /* Minimum width for responsiveness */
+        }
+        
+        @media (max-width: 768px) {
+          .content-wrapper {
+            flex-direction: column; /* Stack on small screens */
+          }
+        }
+        
