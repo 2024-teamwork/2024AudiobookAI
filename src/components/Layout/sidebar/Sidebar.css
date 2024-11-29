@@ -9,7 +9,7 @@
 }
 
 .sidebar-title {
-  color: #3a4fd0;
+  color: #6e44ff;
   background-color: white;
   height: 70px;
   line-height: 70px; /* Vertical alignment for text */
@@ -41,7 +41,7 @@
 .custom-file-upload {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #4caf50;
+  background-color: #6e44ff;
   border: #a4a2a2 solid 1px;
   color: white;
   border-radius: 5px;
@@ -52,7 +52,7 @@
 }
 
 .custom-file-upload:hover {
-  background-color: #45a049;
+  background-color: #6e44ff;
 }
 
 .file-upload {
@@ -187,7 +187,7 @@
 }
 
 a {
-  color: #007bff;
+  color: #6e44ff;
   text-decoration: none;
 }
 

@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #3a4fd0;
+  background-color: #6e44ff;
   color: white;
   padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -79,7 +79,7 @@
 }
 
 .dropdown a {
-  color: #3a4fd0;
+  color: #6e44ff;
   padding: 10px;
   text-decoration: none;
   display: block;

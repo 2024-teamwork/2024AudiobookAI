@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Sidebar.css";
 
-const FileUploader = () => { // {onUploadSuccess}
+const FileUploader = ({ onUploadSuccess }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
 
@@ -30,9 +30,8 @@ const FileUploader = () => { // {onUploadSuccess}
         }
       );
       alert("Files uploaded successfully!");
-//       onUploadSuccess(response.data);
-      console.log(response.data);
-      setSelectedFiles([]);
+      onUploadSuccess(response.data); // Call parent function to update file list
+      setSelectedFiles([]); // Clear selected files
     } catch (error) {
       alert("Upload failed: " + (error.response?.data || error.message));
     } finally {
