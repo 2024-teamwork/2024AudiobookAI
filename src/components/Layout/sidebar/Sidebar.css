@@ -136,3 +136,61 @@
 .select-all input {
   margin-right: 10px;
 }
+
+
+/* Notification styles */
+.notification {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+/* Loading text */
+.pdf-list p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* File item */
+.pdf-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+.pdf-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.pdf-item input[type="checkbox"] {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.pdf-item:last-child {
+  border-bottom: none;
+}
+
+.pdf-item:last-child {
+  border-bottom: none;
+}
+
+.pdf-name {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

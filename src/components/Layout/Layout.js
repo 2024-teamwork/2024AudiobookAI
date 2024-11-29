@@ -12,7 +12,7 @@ const Layout = ({ children, pdfFiles, toggleSelect, selectAll, handleFileUpload,
         toggleSelect={toggleSelect}
         selectAll={selectAll}
         handleFileUpload={handleFileUpload}
-        deleteFile={deleteFile} // Pass delete function to Sidebar
+        deleteFile={deleteFile}
       />
       <div className="main-content">
         <Navigation />
