@@ -1,5 +1,5 @@
 import React from "react";
-import "./MainContentLayout.css"
+import "./MainContentLayout.css";
 
 const TabNavigation = ({ tabs, activeTab, onTabChange }) => {
   return (
@@ -9,6 +9,7 @@ const TabNavigation = ({ tabs, activeTab, onTabChange }) => {
           key={key}
           onClick={() => onTabChange(key)}
           className={activeTab === key ? "active" : ""}
+          title={`Go to ${tab.label}`}
         >
           {tab.label}
         </button>
