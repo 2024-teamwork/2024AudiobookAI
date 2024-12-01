@@ -1,25 +1,33 @@
-import React from 'react';
-import Sidebar from './sidebar/Sidebar';
-import Navigation from './navigation/Navigation';
-import Footer from './footer/Footer';
-import './Layout.css';
+import React, { useState } from "react";
+import Sidebar from "./sidebar/Sidebar";
+import Navigation from "./navigation/Navigation";
+import MainContentLayout from "./mainContentLayout2/MainContentLayout"
+import AIPodcast from "../AIPodcastSysPublisher/AIPodcast/AIPodcast"
+import Footer from "./footer/Footer";
+import "./Layout.css";
 
-const Layout = ({ children, pdfFiles, toggleSelect, selectAll, handleFileUpload, deleteFile }) => {
+const Layout = ({ children }) => {
+  const [selectedFiles, setSelectedFiles] = useState([]); // State for selected files
+
+  const handleFilesSelected = (files) => {
+    setSelectedFiles(files); // Update selected files
+  };
+
   return (
     <div className="app-container">
-      <Sidebar
-        pdfFiles={pdfFiles}
-        toggleSelect={toggleSelect}
-        selectAll={selectAll}
-        handleFileUpload={handleFileUpload}
-        deleteFile={deleteFile}
-      />
+      <Sidebar onFilesSelected={handleFilesSelected} /> {/* Pass handler */}
+      {/* Main content */}
       <div className="main-content">
         <Navigation />
-        <div className="content-area">
-          {children}
-        </div>
+        {/* <div className="content-area">
+          <AIPodcast selectedFiles={selectedFiles} />
+        </div> */}
+
+        {/* MainContentLayout handles the dynamic content switching */}
+        <MainContentLayout selectedFiles={selectedFiles} />
+
       </div>
+      {/* Footer */}
       {/* <Footer /> */}
     </div>
   );

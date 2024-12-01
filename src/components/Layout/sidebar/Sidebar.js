@@ -4,16 +4,19 @@ import FileList from "./FileList";
 import axios from "axios";
 import "./Sidebar.css";
 
-const Sidebar = () => {
-  const [fileList, setFileList] = useState([]); // State for storing the list of files
+const Sidebar = ({ onFilesSelected }) => {
+  const [fileList, setFileList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
-  // Fetch the initial list of files from the backend
+  // Fetch files from backend
   const fetchFileList = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:9001/api/cos/get-pdf/user");
-      setFileList(response.data); // Update the file list
+      const response = await axios.get(
+        "http://localhost:9001/api/cos/get-pdf/user"
+      );
+      setFileList(response.data);
     } catch (error) {
       console.error("Failed to fetch files:", error.message);
     } finally {
@@ -21,10 +24,18 @@ const Sidebar = () => {
     }
   };
 
-  // Fetch the file list on component mount
   useEffect(() => {
     fetchFileList();
   }, []);
+
+  const toggleFileSelection = (cosUrl) => {
+    const updatedSelection = selectedFiles.includes(cosUrl)
+      ? selectedFiles.filter((url) => url !== cosUrl)
+      : [...selectedFiles, cosUrl];
+
+    setSelectedFiles(updatedSelection);
+    onFilesSelected(updatedSelection); // Notify parent
+  };
 
   // Handle successful file upload
   const handleUploadSuccess = (uploadedFiles) => {
@@ -42,7 +53,14 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="sidebar-title">AudioBook AI</div>
       <FileUploader onUploadSuccess={handleUploadSuccess} />
-      <FileList fileList={fileList} loading={loading} />
+      {/* <FileList fileList={fileList} loading={loading} /> */}
+
+      <FileList
+        fileList={fileList}
+        loading={loading}
+        onFileToggle={toggleFileSelection}
+        selectedFiles={selectedFiles}
+      />
     </div>
   );
 };

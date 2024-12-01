@@ -3,7 +3,7 @@ import axios from "axios";
 import "./AIPodcast.css";
 import PodcastPlayer from "../PodcastPlayer/PodcastPlayer";
 
-const AIPodcast = () => {
+const AIPodcast = ({ selectedFiles = [] }) => {
   const [formData, setFormData] = useState({
     topic: "",
     text: "",
@@ -15,8 +15,6 @@ const AIPodcast = () => {
     conversationConfig: "",
   });
 
-  const [file, setFile] = useState(null);
-  const [transcriptFile, setTranscriptFile] = useState(null);
   const [responseMessage, setResponseMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [jobId, setJobId] = useState(null);
@@ -26,19 +24,11 @@ const AIPodcast = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-  };
-
-  const handleTranscriptFileChange = (e) => {
-    setTranscriptFile(e.target.files[0]);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.urlList && !file && !transcriptFile && !formData.text && !formData.topic) {
-      setResponseMessage("Please provide at least one input: Topic, Text, or URL.");
+    if (!formData.urlList && !selectedFiles.length && !formData.text && !formData.topic) {
+      setResponseMessage("Please provide at least one input: Topic, Text, URL, or select a file.");
       return;
     }
 
@@ -46,32 +36,10 @@ const AIPodcast = () => {
     data.append("topic", formData.topic);
     data.append("text", formData.text);
     data.append("url_list", formData.urlList);
-    data.append("ttd_model", formData.ttsModel);
+    data.append("selected_files", JSON.stringify(selectedFiles)); // Include selected files
+    data.append("language", formData.language);
+    data.append("tts_model", formData.ttsModel);
     data.append("transcript_only", formData.transcriptOnly);
-
-    if (formData.config) {
-      try {
-        data.append("config", JSON.stringify(JSON.parse(formData.config)));
-      } catch {
-        setResponseMessage("Invalid JSON in config field.");
-        return;
-      }
-    }
-
-    if (formData.conversationConfig) {
-      try {
-        data.append(
-          "conversation_config",
-          JSON.stringify(JSON.parse(formData.conversationConfig))
-        );
-      } catch {
-        setResponseMessage("Invalid JSON in conversationConfig field.");
-        return;
-      }
-    }
-
-    if (file) data.append("file", file);
-    if (transcriptFile) data.append("transcript_file", transcriptFile);
 
     setLoading(true);
     setResponseMessage("");
@@ -97,7 +65,6 @@ const AIPodcast = () => {
       <p>Convert any content to audio dialog</p>
 
       <form onSubmit={handleSubmit} className="ai-podcast-form">
-        {/* Combined input fields */}
         <div className="form-group">
           <label>Topic</label>
           <textarea
@@ -130,24 +97,12 @@ const AIPodcast = () => {
         </div>
 
         <div className="form-group">
-          <label>Language</label>
-          <input
-            type="text"
-            name="language"
-            placeholder="Enter a language"
-            value={formData.language}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Upload File</label>
-          <input type="file" onChange={handleFileChange} />
-        </div>
-
-        <div className="form-group">
-          <label>Transcript File</label>
-          <input type="file" onChange={handleTranscriptFileChange} />
+          <label>Selected Files</label>
+          <ul>
+            {selectedFiles.map((file, index) => (
+              <li key={index}>{file}</li>
+            ))}
+          </ul>
         </div>
 
         <button type="submit" disabled={loading}>
