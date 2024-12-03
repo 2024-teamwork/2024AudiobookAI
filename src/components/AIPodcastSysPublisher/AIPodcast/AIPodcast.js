@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./AIPodcast.css";
-import PodcastPlayer from "../PodcastPlayer/PodcastPlayer";
+import PodcastPlayer from "./PodcastPlayer/PodcastPlayer"
 
 const AIPodcast = ({ selectedFiles = [] }) => {
   const [formData, setFormData] = useState({

@@ -1,6 +1,5 @@
 import React from 'react';
 import AIPodcast from '../../AIPodcastSysPublisher/AIPodcast/AIPodcast';
-import PodcastPlayer from '../../AIPodcastSysPublisher/AIPodcast/PodcastPlayer/PodcastPlayer';
 
 const PublisherAIPodcastLayout = () => {
   return (

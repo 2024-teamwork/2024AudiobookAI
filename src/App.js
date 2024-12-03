@@ -10,7 +10,7 @@ import LoginPage from './components/LoginRegister/Login/LoginPage';
 import RegisterPage from './components/LoginRegister/Register/RegisterPage';
 import AIPodcast from './components/AIPodcastSysPublisher/AIPodcast/AIPodcast';
 import PublisherAIPodcastLayout from './components/Layout/PublisherAIPodcastLayout/PublisherAIPodcastLayout';
-import PodcastPlayer from './components/AIPodcastSysPublisher/PodcastPlayer/PodcastPlayer';
+import PodcastPlayer from './components/AIPodcastSysPublisher/AIPodcast/PodcastPlayer/PodcastPlayer';
 
 const App = () => {
   const [pdfFiles, setPdfFiles] = useState([
