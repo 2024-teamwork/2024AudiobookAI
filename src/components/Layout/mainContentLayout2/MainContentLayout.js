@@ -4,11 +4,13 @@ import AIPodcast from "../../AIPodcastSysPublisher/AIPodcast/AIPodcast";
 import AIAudioBook from "../../AIPodcastSysPublisher/AIAudioBook/AIAudioBook"
 import ProductDetails from "../../AIPodcastSysPublisher/ProductDetails/ProductDetails"
 import "./MainContentLayout.css"
+import AvatarGenerator from "../../AIPodcastSysPublisher/AIAvatorGenerator/AvatorGenerator"
 
 const TABS = {
   AIPodcast: { label: "AI Podcast", component: AIPodcast },
   AIAudioBook: { label: "AI Audiobook", component: AIAudioBook },
-  ProductDetails: { label: "Product Details", component: ProductDetails },
+  AvatarGenerator: { label: "Your AI Avatar", component: AvatarGenerator },
+  ProductDetails: { label: "Audio Product", component: ProductDetails },
 };
 
 const MainContentLayout = ({ selectedFiles }) => {

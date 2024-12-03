@@ -1,3 +1,13 @@
+# important updates
+1. code under `under2024AudiobookAI\src\components\PublisherMgmtSys`
+
+**has been deprecated !!!**
+
+2. code under `2024AudiobookAI\src\components\Layout\mainContentLayout`
+
+**has been deprecated !!!**
+
+
 ```
 npm install react-router-dom
 

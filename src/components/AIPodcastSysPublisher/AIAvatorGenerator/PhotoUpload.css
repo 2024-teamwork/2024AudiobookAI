@@ -1,0 +1,142 @@
+/* General container for the upload section */
+.image-upload-container_avatar {
+  border: 2px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px; /* Fixed width for stability */
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+/* Title for the upload section */
+.upload-text {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+/* Style for the file upload input (hidden, styled as a button) */
+.custom-file-upload-small {
+  display: inline-block;
+  padding: 5px 20px;
+  background-color: #4caf50;
+  border: #a4a2a2 solid 1px;
+  color: white;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px; /* Space below the button */
+}
+
+.custom-file-upload-small:hover {
+  background-color: #45a049;
+}
+
+.image-upload {
+  display: none; /* Hide the default file input */
+}
+
+/* Container for the preview images */
+.picture-previews {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0px;
+  margin-top: 10px;
+}
+
+/* Preview container for each image */
+.picture-preview-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f0f0f0; /* Light background to make the preview area consistent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Image preview style */
+.picture-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  border: #ccc solid 1px;
+  transition: 0.3s ease;
+}
+
+/* Styling for the close button */
+.remove-image {
+  position: absolute;
+  background-color: rgb(255, 53, 53);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  max-width: 10px;
+  height: 30px;
+  font-size: 14px;
+  cursor: pointer;
+
+}
+
+.remove-image:hover{
+  background-color: rgb(219, 174, 174);
+}
+
+/* Styling for the expanded image view */
+.expanded-view {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  flex-direction: column;
+}
+
+/* Expanded image styles */
+.expanded-image {
+  max-width: 80%;
+  max-height: 80%;
+}
+
+/* Close button in expanded view */
+.close-expanded {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 40px;
+  color: white;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Navigation buttons for the expanded view */
+.prev-image, .next-image {
+  position: absolute;
+  top: 50%;
+  font-size: 40px;
+  color: white;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.prev-image {
+  left: 20px;
+}
+
+.next-image {
+  right: 20px;
+}
+
+.prev-image:hover, .next-image:hover {
+  opacity: 0.7;
+}
