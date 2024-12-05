@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Sidebar.css";
+import ErrorPopup from "../ErrorPopUpWindow/ErrorPopup";
 
 const FileUploader = ({ onUploadSuccess }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
@@ -13,7 +15,7 @@ const FileUploader = ({ onUploadSuccess }) => {
 
   const handleUpload = async () => {
     if (selectedFiles.length === 0) {
-      alert("Please select files to upload.");
+      setErrorMessage("Please select files to upload.");
       return;
     }
 
@@ -33,10 +35,16 @@ const FileUploader = ({ onUploadSuccess }) => {
       onUploadSuccess(response.data); // Call parent function to update file list
       setSelectedFiles([]); // Clear selected files
     } catch (error) {
-      alert("Upload failed: " + (error.response?.data || error.message));
+      // alert("Upload failed: " + (error.response?.data || error.message));
+      // console.log(error.response.data); // File upload failed: You have exceeded your total allowed number of files( 20 ) in your current space!
+      setErrorMessage(error.response.data); // Display error message in the popup
     } finally {
       setUploading(false);
     }
+  };
+
+  const handleCloseError = () => {
+    setErrorMessage(""); // Clear the error message when the popup is dismissed
   };
 
   return (
@@ -63,6 +71,7 @@ const FileUploader = ({ onUploadSuccess }) => {
         >
           {uploading ? "Uploading..." : "Submit"}
         </button>
+        <ErrorPopup message={errorMessage} onClose={handleCloseError} />
       </div>
     </div>
   );
