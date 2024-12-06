@@ -37,7 +37,7 @@ const FileUploader = ({ onUploadSuccess }) => {
     } catch (error) {
       // alert("Upload failed: " + (error.response?.data || error.message));
       // console.log(error.response.data); // File upload failed: You have exceeded your total allowed number of files( 20 ) in your current space!
-      setErrorMessage(error.response.data); // Display error message in the popup
+      setErrorMessage(error.response?.data || error.message); // Display error message in the popup
     } finally {
       setUploading(false);
     }
