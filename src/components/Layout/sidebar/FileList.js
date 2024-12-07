@@ -13,8 +13,8 @@ const FileList = ({ fileList = [], loading, onFileToggle, selectedFiles = [] }) 
             {/* Ensure the input is controlled */}
             <input
               type="checkbox"
-              checked={selectedFiles.includes(file.cosUrl)} // Controlled checkbox
-              onChange={() => onFileToggle(file.cosUrl)} // Notify parent about toggle
+              checked={selectedFiles.includes(file.fileName)} // Controlled checkbox
+              onChange={() => onFileToggle(file.fileName)} // Notify parent about toggle
             />
             <span className="pdf-name">{file.fileName}</span>
             <a href={file.cosUrl} target="_blank" rel="noopener noreferrer">
