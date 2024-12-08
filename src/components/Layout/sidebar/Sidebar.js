@@ -51,9 +51,7 @@ const Sidebar = ({ onFilesSelected }) => {
 
   return (
     <div className="sidebar">
-      <div className="sidebar-title">AudioBook AI</div>
       <FileUploader onUploadSuccess={handleUploadSuccess} />
-      {/* <FileList fileList={fileList} loading={loading} /> */}
 
       <FileList
         fileList={fileList}

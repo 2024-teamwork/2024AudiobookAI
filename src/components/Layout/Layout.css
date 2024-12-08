@@ -5,15 +5,8 @@
   overflow: hidden;
 }
 
-.sidebar {
-  width: 20%;
-  background-color: #f4f4f9;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
-}
-
 .main-content {
-  width: 80%; /* 确保和 sidebar 左右布局配合 */
+  width: 100%; /* 确保和 sidebar 左右布局配合 */
   display: flex;
   flex-direction: column;
   background-color: #ffffff;

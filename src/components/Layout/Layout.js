@@ -15,7 +15,8 @@ const Layout = ({ children }) => {
 
   return (
     <div className="app-container">
-      <Sidebar onFilesSelected={handleFilesSelected} /> {/* Pass handler */}
+       {/* Pass handler */}
+      {/* <Sidebar onFilesSelected={handleFilesSelected} /> */}
       {/* Main content */}
       <div className="main-content">
         <Navigation />
@@ -24,7 +25,9 @@ const Layout = ({ children }) => {
         </div> */}
 
         {/* MainContentLayout handles the dynamic content switching */}
-        <MainContentLayout selectedFiles={selectedFiles} />
+        {/* <MainContentLayout selectedFiles={selectedFiles} /> */}
+        <MainContentLayout />
+
 
       </div>
       {/* Footer */}
