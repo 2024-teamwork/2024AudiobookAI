@@ -1,11 +1,12 @@
 /* Sidebar container */
 .sidebar {
-  width: 300px;
-  padding: 20px;
-  background-color: #f9f9f9; /* Consistent background color for the entire sidebar */
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  position: relative; /* For the right border */
+  width: 100%; /* Fixed width for the sidebar */
+  height: 100vh; /* Full height of the viewport */
+  overflow-y: hidden; /* Enable vertical scrolling */
+  overflow-x: auto; /* Prevent horizontal scrolling */
+  background-color: #f8f9fa; /* Optional: light background */
+  padding: 10px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
 }
 
 .sidebar-title {
