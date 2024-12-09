@@ -4,6 +4,7 @@ import "./AIPodcast.css";
 import PodcastPlayer from "./PodcastPlayer/PodcastPlayer"
 
 const AIPodcast = ({ selectedFiles = [] }) => {
+  const jsonSelectedFiles = JSON.stringify(selectedFiles);
   const [formData, setFormData] = useState({
     topic: "",
     text: "",
@@ -27,7 +28,7 @@ const AIPodcast = ({ selectedFiles = [] }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.urlList && !selectedFiles.length && !formData.text && !formData.topic) {
+    if (!formData.urlList && !jsonSelectedFiles.length && !formData.text && !formData.topic) {
       setResponseMessage("Please provide at least one input: Topic, Text, URL, or select a file.");
       return;
     }
@@ -36,13 +37,23 @@ const AIPodcast = ({ selectedFiles = [] }) => {
     data.append("topic", formData.topic);
     data.append("text", formData.text);
     data.append("url_list", formData.urlList);
-    data.append("selected_files", JSON.stringify(selectedFiles)); // Include selected files
+    data.append("selected_files", jsonSelectedFiles); // Include selected files
     data.append("language", formData.language);
     data.append("tts_model", formData.ttsModel);
     data.append("transcript_only", formData.transcriptOnly);
 
     setLoading(true);
     setResponseMessage("");
+    console.log("this is selectedFiles in formData:", jsonSelectedFiles);
+    console.log("FormData content:", {
+      topic: formData.topic,
+      text: formData.text,
+      url_list: formData.urlList,
+      selected_files: jsonSelectedFiles,
+      language: formData.language,
+      tts_model: formData.ttsModel,
+      transcript_only: formData.transcriptOnly,
+    });
 
     try {
       const response = await axios.post(
@@ -100,7 +111,7 @@ const AIPodcast = ({ selectedFiles = [] }) => {
           <label>Selected Files</label>
           <ul>
             {selectedFiles.map((file, index) => (
-              <li key={index}>{file}</li>
+              <li key={index}>{file.fileName}</li>
             ))}
           </ul>
         </div>

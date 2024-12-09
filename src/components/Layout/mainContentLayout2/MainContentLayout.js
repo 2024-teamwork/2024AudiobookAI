@@ -23,7 +23,6 @@ const MainContentLayout = () => {
 
   const handleFilesSelected = (files) => {
     setSelectedFiles(files); // Update selected files
-    console.log(selectedFiles);
   };
 
   const handleSubmit = () => {

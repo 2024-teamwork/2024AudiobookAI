@@ -28,13 +28,13 @@ const Sidebar = ({ onFilesSelected }) => {
     fetchFileList();
   }, []);
 
-  const toggleFileSelection = (cosUrl) => {
-    const updatedSelection = selectedFiles.includes(cosUrl)
-      ? selectedFiles.filter((url) => url !== cosUrl)
-      : [...selectedFiles, cosUrl];
+  const toggleFileSelection = (file) => {
+    const updatedSelection = selectedFiles.find((selected) => selected.cosUrl === file.cosUrl)
+      ? selectedFiles.filter((selected) => selected.cosUrl !== file.cosUrl) // Remove file if already selected
+      : [...selectedFiles, file]; // Add file if not selected
 
     setSelectedFiles(updatedSelection);
-    onFilesSelected(updatedSelection); // Notify parent
+    onFilesSelected(updatedSelection); // Notify parent with the updated file objects
   };
 
   // Handle successful file upload

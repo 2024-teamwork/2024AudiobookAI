@@ -10,11 +10,11 @@ const FileList = ({ fileList = [], loading, onFileToggle, selectedFiles = [] }) 
       ) : fileList.length > 0 ? (
         fileList.map((file, index) => (
           <div key={index} className="pdf-item">
-            {/* Ensure the input is controlled */}
             <input
               type="checkbox"
-              checked={selectedFiles.includes(file.fileName)} // Controlled checkbox
-              onChange={() => onFileToggle(file.fileName)} // Notify parent about toggle
+              checked={selectedFiles.fileName}
+              // checked={selectedFiles.some((selected) => selected.cosUrl === file.cosUrl)} 
+              onChange={() => onFileToggle(file)} // Pass the entire file object to parent
             />
             <span className="pdf-name">{file.fileName}</span>
             <a href={file.cosUrl} target="_blank" rel="noopener noreferrer">
