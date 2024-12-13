@@ -1,34 +1,37 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./AIPodcast.css";
-import PodcastPlayer from "./PodcastPlayer/PodcastPlayer"
+import PodcastPlayer from "./PodcastPlayer/PodcastPlayer";
 
 const AIPodcast = ({ selectedFiles = [] }) => {
-  const jsonSelectedFiles = JSON.stringify(selectedFiles);
   const [formData, setFormData] = useState({
     topic: "",
     text: "",
-    urlList: "",
-    language: "",
-    ttsModel: "openai",
-    transcriptOnly: false,
+    urls: "",
+    longform: false,
+    generateAudio: true,
     config: "",
-    conversationConfig: "",
   });
+
+  const jsonSelectedFiles = JSON.stringify(selectedFiles);
 
   const [responseMessage, setResponseMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [jobId, setJobId] = useState(null);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.urlList && !jsonSelectedFiles.length && !formData.text && !formData.topic) {
+    formData.urls += jsonSelectedFiles;
+    if ((!formData.urls || !jsonSelectedFiles) && selectedFiles.length === 0 && !formData.text && !formData.topic) {
       setResponseMessage("Please provide at least one input: Topic, Text, URL, or select a file.");
       return;
     }
@@ -36,33 +39,26 @@ const AIPodcast = ({ selectedFiles = [] }) => {
     const data = new FormData();
     data.append("topic", formData.topic);
     data.append("text", formData.text);
-    data.append("url_list", formData.urlList);
-    data.append("selected_files", jsonSelectedFiles); // Include selected files
-    data.append("language", formData.language);
-    data.append("tts_model", formData.ttsModel);
-    data.append("transcript_only", formData.transcriptOnly);
+    data.append("urls", formData.urls);
+    data.append("longform", formData.longform);
+    data.append("generateAudio", formData.generateAudio);
+    data.append("config", formData.config);
+
+    console.log(jsonSelectedFiles);
+    console.log(formData);
+    console.log(data);
 
     setLoading(true);
     setResponseMessage("");
-    console.log("this is selectedFiles in formData:", jsonSelectedFiles);
-    console.log("FormData content:", {
-      topic: formData.topic,
-      text: formData.text,
-      url_list: formData.urlList,
-      selected_files: jsonSelectedFiles,
-      language: formData.language,
-      tts_model: formData.ttsModel,
-      transcript_only: formData.transcriptOnly,
-    });
 
     try {
       const response = await axios.post(
         "http://localhost:9002/api/ai/submit-job",
-        data,
+        formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-      setResponseMessage(`Job submitted successfully! Job ID: ${response.data.job_id}`);
-      setJobId(response.data.job_id);
+      setResponseMessage(`Job submitted successfully! Job ID: ${response.data.jobId}`);
+      setJobId(response.data.jobId);
     } catch (error) {
       setResponseMessage(`Error: ${error.response?.data || "Server error"}`);
     } finally {
@@ -100,9 +96,39 @@ const AIPodcast = ({ selectedFiles = [] }) => {
           <label>URL</label>
           <input
             type="text"
-            name="urlList"
-            placeholder="Enter a URL"
-            value={formData.urlList}
+            name="urls"
+            placeholder="Enter URLs"
+            value={formData.urls}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        {/* <div className="form-group">
+          <label>Longform</label>
+          <input
+            type="checkbox"
+            name="longform"
+            checked={formData.longform}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Generate Audio</label>
+          <input
+            type="checkbox"
+            name="generateAudio"
+            checked={formData.generateAudio}
+            onChange={handleInputChange}
+          />
+        </div> */}
+
+        <div className="form-group">
+          <label>Configuration</label>
+          <textarea
+            name="config"
+            placeholder="Enter configuration settings"
+            value={formData.config}
             onChange={handleInputChange}
           />
         </div>
