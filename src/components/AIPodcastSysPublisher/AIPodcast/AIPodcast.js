@@ -30,23 +30,32 @@ const AIPodcast = ({ selectedFiles = [] }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    formData.urls += jsonSelectedFiles;
-    if ((!formData.urls || !jsonSelectedFiles) && selectedFiles.length === 0 && !formData.text && !formData.topic) {
+    formData.text += jsonSelectedFiles;
+    console.log("this is text:", formData.text);
+    if (!formData.urls && selectedFiles.length === 0 && (!formData.text || jsonSelectedFiles) && !formData.topic) {
       setResponseMessage("Please provide at least one input: Topic, Text, URL, or select a file.");
       return;
     }
 
+    // 确保 config 是合法的 JSON 字符串
+    let parsedConfig;
+    try {
+        parsedConfig = JSON.parse(formData.config || "{}"); // 如果 config 为空，则默认为空字典 {}
+    } catch (error) {
+        setResponseMessage("Invalid JSON in config field.");
+        return;
+    }
+    
     const data = new FormData();
     data.append("topic", formData.topic);
     data.append("text", formData.text);
     data.append("urls", formData.urls);
     data.append("longform", formData.longform);
     data.append("generateAudio", formData.generateAudio);
-    data.append("config", formData.config);
+    data.append("config", parsedConfig);
 
-    console.log(jsonSelectedFiles);
-    console.log(formData);
-    console.log(data);
+    console.log("this is jsonSelectedFiles: ", jsonSelectedFiles);
+    console.log("this is formData: ", formData);
 
     setLoading(true);
     setResponseMessage("");
@@ -54,12 +63,14 @@ const AIPodcast = ({ selectedFiles = [] }) => {
     try {
       const response = await axios.post(
         "http://localhost:9002/api/ai/submit-job",
-        formData,
+        data,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-      setResponseMessage(`Job submitted successfully! Job ID: ${response.data.jobId}`);
-      setJobId(response.data.jobId);
+      setResponseMessage(`Job submitted successfully! Job ID: ${response.data.task_id}`);
+      setJobId(response.data.task_id);
+      console.log("this is response", response);
     } catch (error) {
+      console.log("error.response", error.response);
       setResponseMessage(`Error: ${error.response?.data || "Server error"}`);
     } finally {
       setLoading(false);
