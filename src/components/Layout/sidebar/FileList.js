@@ -1,7 +1,7 @@
 import React from "react";
 import "./Sidebar.css";
 
-const FileList = ({ fileList = [], loading, onFileToggle, selectedFiles = [] }) => {
+const FileList = ({ fileList = [], loading, onFileToggle, onDeleteFile, selectedFiles = [] }) => {
   return (
     <div className="pdf-list">
       <h3>Uploaded Files</h3>
@@ -20,6 +20,12 @@ const FileList = ({ fileList = [], loading, onFileToggle, selectedFiles = [] }) 
             <a href={file.cosUrl} target="_blank" rel="noopener noreferrer">
               View
             </a>
+            <button
+              className="delete-button"
+              onClick={() => onDeleteFile(file.fileId)} // 只传递当前文件的fileId
+            >
+              Delete
+            </button>
           </div>
         ))
       ) : (
