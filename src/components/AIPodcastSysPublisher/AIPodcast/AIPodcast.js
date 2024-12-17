@@ -7,10 +7,7 @@ const AIPodcast = ({ selectedFiles = [] }) => {
   const [formData, setFormData] = useState({
     topic: "",
     text: "",
-    urls: "",
-    longform: false,
-    generateAudio: true,
-    config: "",
+    file_urls: [],
   });
 
   const jsonSelectedFiles = JSON.stringify(selectedFiles);
@@ -19,43 +16,45 @@ const AIPodcast = ({ selectedFiles = [] }) => {
   const [loading, setLoading] = useState(false);
   const [jobId, setJobId] = useState(null);
 
+  // const handleInputChange = (e) => {
+  //   const { name, value, type, checked } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: type === "checkbox" ? checked : value,
+  //   });
+  // };
+
+  // Handle input changes
   const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
+  // Prepare file_urls array
+  const prepareFileUrls = () => {
+    return selectedFiles.map((file) => ({
+      fileName: file.fileName,
+      cosUrl: file.cosUrl,
+    }));
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    formData.text += jsonSelectedFiles;
-    console.log("this is text:", formData.text);
-    if (!formData.urls && selectedFiles.length === 0 && (!formData.text || jsonSelectedFiles) && !formData.topic) {
-      setResponseMessage("Please provide at least one input: Topic, Text, URL, or select a file.");
+    // Validate required fields
+    if (!formData.topic && !formData.text && selectedFiles.length === 0) {
+      setResponseMessage("Please provide Topic, Text, or upload files.");
       return;
     }
 
-    // 确保 config 是合法的 JSON 字符串
-    let parsedConfig;
-    try {
-        parsedConfig = JSON.parse(formData.config || "{}"); // 如果 config 为空，则默认为空字典 {}
-    } catch (error) {
-        setResponseMessage("Invalid JSON in config field.");
-        return;
-    }
-    
-    const data = new FormData();
-    data.append("topic", formData.topic);
-    data.append("text", formData.text);
-    data.append("urls", formData.urls);
-    data.append("longform", formData.longform);
-    data.append("generateAudio", formData.generateAudio);
-    data.append("config", parsedConfig);
+    // Build AIJobRequest payload
+    const requestPayload = {
+      topic: formData.topic,
+      text: formData.text,
+      file_urls: prepareFileUrls(),
+    };
 
-    console.log("this is jsonSelectedFiles: ", jsonSelectedFiles);
-    console.log("this is formData: ", formData);
+    console.log("Submitting Payload:", requestPayload);
 
     setLoading(true);
     setResponseMessage("");
@@ -63,14 +62,15 @@ const AIPodcast = ({ selectedFiles = [] }) => {
     try {
       const response = await axios.post(
         "http://localhost:9002/api/ai/submit-job",
-        data,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        requestPayload,
+        { headers: { "Content-Type": "application/json" } }
       );
+
       setResponseMessage(`Job submitted successfully! Job ID: ${response.data.task_id}`);
       setJobId(response.data.task_id);
-      console.log("this is response", response);
+      console.log("Response:", response);
     } catch (error) {
-      console.log("error.response", error.response);
+      console.error("Submission Error:", error.response);
       setResponseMessage(`Error: ${error.response?.data || "Server error"}`);
     } finally {
       setLoading(false);
@@ -104,47 +104,6 @@ const AIPodcast = ({ selectedFiles = [] }) => {
         </div>
 
         <div className="form-group">
-          <label>URL</label>
-          <input
-            type="text"
-            name="urls"
-            placeholder="Enter URLs"
-            value={formData.urls}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        {/* <div className="form-group">
-          <label>Longform</label>
-          <input
-            type="checkbox"
-            name="longform"
-            checked={formData.longform}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Generate Audio</label>
-          <input
-            type="checkbox"
-            name="generateAudio"
-            checked={formData.generateAudio}
-            onChange={handleInputChange}
-          />
-        </div> */}
-
-        <div className="form-group">
-          <label>Configuration</label>
-          <textarea
-            name="config"
-            placeholder="Enter configuration settings"
-            value={formData.config}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="form-group">
           <label>Selected Files</label>
           <ul>
             {selectedFiles.map((file, index) => (
@@ -160,7 +119,7 @@ const AIPodcast = ({ selectedFiles = [] }) => {
 
       {responseMessage && <p>{responseMessage}</p>}
 
-      {jobId && <PodcastPlayer jobId={jobId} />}
+      {/* {jobId && <PodcastPlayer jobId={jobId} />} */}
     </div>
   );
 };

@@ -32,7 +32,7 @@ const Sidebar = ({ onFilesSelected }) => {
     const updatedSelection = selectedFiles.find((selected) => selected.cosUrl === file.cosUrl)
       ? selectedFiles.filter((selected) => selected.cosUrl !== file.cosUrl) // Remove file if already selected
       : [...selectedFiles, file]; // Add file if not selected
-
+    
     setSelectedFiles(updatedSelection);
     onFilesSelected(updatedSelection); // Notify parent with the updated file objects
   };
@@ -49,6 +49,19 @@ const Sidebar = ({ onFilesSelected }) => {
     setFileList((prev) => [...prev, ...newFiles]); // Add newly uploaded files to the state
   };
 
+  const handleDeleteFile = async (fileId) => {
+    try {
+      await axios.delete(`http://localhost:9001/api/cos/delete-pdf/${fileId}`); // Use fileId in the API endpoint
+      setFileList((prev) => prev.filter((file) => file.fileId !== fileId)); // Remove deleted file from state
+      if (selectedFiles?.fileId === fileId) {
+        setSelectedFiles(null); // Clear selected file if it's deleted
+        onFilesSelected(null);
+      }
+    } catch (error) {
+      console.error("Failed to delete file:", error.message);
+    }
+  };
+  
   return (
     <div className="sidebar">
       <FileUploader onUploadSuccess={handleUploadSuccess} />
@@ -57,6 +70,7 @@ const Sidebar = ({ onFilesSelected }) => {
         fileList={fileList}
         loading={loading}
         onFileToggle={toggleFileSelection}
+        onDeleteFile={handleDeleteFile} // Pass the delete handler
         selectedFiles={selectedFiles}
       />
     </div>

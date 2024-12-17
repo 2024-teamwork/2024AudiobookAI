@@ -4,8 +4,8 @@ import "./LoginPage.css";
 
 const LoginPage = ({ onNavigate }) => {
   const [formData, setFormData] = useState({
-    username: "keyu@alphalio.cn",
-    password: "Keyu12345!",
+    username: "test_user1",
+    password: "kytestaudioai",
     role: "customer", // Default role
   });
 
@@ -26,7 +26,7 @@ const LoginPage = ({ onNavigate }) => {
     }
 
     try {
-      const response = await fetch("https://audioai.alphalio.cn/api/login", {
+      const response = await fetch("https://audioai.alphalio.cn/api/v1/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",

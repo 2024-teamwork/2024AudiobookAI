@@ -195,3 +195,18 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.delete-button {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.delete-button:hover {
+  background-color: #d9363e;
+}
