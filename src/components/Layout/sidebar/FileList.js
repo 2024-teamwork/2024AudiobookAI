@@ -18,6 +18,11 @@ const sampleFiles = [
     cosUrl: "https://www.nber.org/papers/w32966",
   },
   {
+    "fileId": 7,
+    "fileName": "经济学原理.txt",
+    "cosUrl": "https://pdf-store-1257970690.cos.ap-shanghai.myqcloud.com/uploads/1734492745419_134e46db-e59b-4280-9b6d-8c399a7f8c14_%E7%BB%8F%E6%B5%8E%E5%AD%A6%E5%8E%9F%E7%90%86.txt?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDEKDtMcfU6WjiV5SREoBMRJxOcdRAnESS%26q-sign-time%3D1734492747%3B1993692747%26q-key-time%3D1734492747%3B1993692747%26q-header-list%3Dhost%26q-url-param-list%3D%26q-signature%3D8eff3ea975975e0cb719675f0d46dcea62c6a170"
+  },
+  {
 		"fileId": 6,
 		"fileName": "Generative AI-Business & Information Systems Engineering.pdf",
 		"cosUrl": "https://pdf-store-1257970690.cos.ap-shanghai.myqcloud.com/uploads/1734415933455_6fadee86-ab31-413b-8a6e-82755ddfe838_Generative%20AI-Business%20%26%20Information%20Systems%20Engineering.pdf?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDEKDtMcfU6WjiV5SREoBMRJxOcdRAnESS%26q-sign-time%3D1734415948%3B1993615948%26q-key-time%3D1734415948%3B1993615948%26q-header-list%3Dhost%26q-url-param-list%3D%26q-signature%3D6d0313cdb67bbf415ae9bd74d3e403774975eb78"

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { FaPlay, FaPause, FaFileUpload } from 'react-icons/fa';
-import './AIAudioBook.css';
+import React, { useState } from "react";
+import { FaPlay, FaPause, FaFileUpload } from "react-icons/fa";
+import ReactPlayer from "react-player";
+import "./AIAudioBook.css";
 
 const AIAudioBook = ({ selectedFiles = [] }) => {
-  const [status, setStatus] = useState('idle'); // idle, loading, generated
+  const [status, setStatus] = useState("idle"); // idle, loading, generated
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handleGenerateAudio = async () => {
@@ -12,40 +13,36 @@ const AIAudioBook = ({ selectedFiles = [] }) => {
       return;
     }
 
-    setStatus('loading');
+    setStatus("loading");
 
     const payload = {
-      // text: "场景描述文本",
       text_url: {
         fileName: selectedFiles[0].fileName,
-        cosUrl: selectedFiles[0].cosUrl, // Replace with your logic
+        cosUrl: selectedFiles[0].cosUrl,
       },
     };
-    console.log(payload);
 
     try {
-      const response = await fetch('https://audioai.alphalio.cn/api/v1/jobs/submit/env_sound', {
-        method: 'POST',
+      await fetch("https://audioai.alphalio.cn/api/v1/jobs/submit/env_sound", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3MzcwNjk2NDJ9.uKR7IA1j5n9i0xBlksTZMNPl-gnbu_3qyG6znRzE5Xc' // Add the Bearer Token here
+          "Content-Type": "application/json",
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3MzcwNjk2NDJ9.uKR7IA1j5n9i0xBlksTZMNPl-gnbu_3qyG6znRzE5Xc",
         },
         body: JSON.stringify(payload),
-        mode: 'no-cors',
+        mode: "no-cors",
       });
 
-      if (!response.ok) throw new Error('Failed to generate audio');
-
-      setStatus('generated');
+      setStatus("generated");
     } catch (error) {
       console.error(error);
-      alert('Error generating audio');
-      setStatus('idle');
+      alert("Error generating audio");
+      setStatus("idle");
     }
   };
 
   return (
-    <div className="audio-ai-generator bordered">
+    <div className="audio-ai-generator">
       <h2>AI Audio Book Generator</h2>
 
       {/* File Selection */}
@@ -62,52 +59,40 @@ const AIAudioBook = ({ selectedFiles = [] }) => {
         )}
       </div>
 
-      {/* Submit Button */}
-      {status === 'idle' && (
-        <button className="submit-button" onClick={handleGenerateAudio}>
+      {/* State Management */}
+      {status === "idle" && (
+        <button className="generate-button" onClick={handleGenerateAudio}>
           Submit Generating Audio
         </button>
       )}
-
-      {/* Loading State */}
-      {status === 'loading' && (
+      {status === "loading" && (
         <div className="loading-container">
           <div className="spinner"></div>
           <p>Generating Audio...</p>
         </div>
       )}
-
-      {/* Generated State */}
-      {status === 'generated' && (
-        <div>
-          <AudioPlayer isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
-          <DownloadButton />
-        </div>
+      {status === "generated" && (
+        <>
+          <AudioPlayer audioSrc="https://www.youtube.com/watch?v=Oud9Gzy89dw" />
+          <DownloadButton downloadUrl="https://example.com/sample-audio.mp3" />
+        </>
       )}
     </div>
   );
 };
 
-// Audio Player Component
-const AudioPlayer = ({ isPlaying, setIsPlaying }) => {
-  return (
-    <div className="audio-player">
-      <button onClick={() => setIsPlaying(!isPlaying)} className="play-pause-button">
-        {isPlaying ? <FaPause /> : <FaPlay />}
-      </button>
-      <p>Audio Playback (Mock)</p>
-    </div>
-  );
-};
+// AudioPlayer Component
+const AudioPlayer = ({ audioSrc }) => (
+  <div className="audio-player">
+    <ReactPlayer url={audioSrc} controls width="100%" height="60px" />
+  </div>
+);
 
-// Download Button Component
-const DownloadButton = () => (
-  <button
-    className="download-button"
-    onClick={() => alert('Downloading audio file...')}
-  >
+// DownloadButton Component
+const DownloadButton = ({ downloadUrl }) => (
+  <a href={downloadUrl} download className="download-button">
     Download Audio
-  </button>
+  </a>
 );
 
 export default AIAudioBook;
