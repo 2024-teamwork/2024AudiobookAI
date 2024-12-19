@@ -67,7 +67,6 @@ const Sidebar = ({ onFilesSelected }) => {
   return (
     <div className="sidebar">
       <FileUploader onUploadSuccess={handleUploadSuccess} />
-
       <FileList
         fileList={fileList}
         loading={loading}
