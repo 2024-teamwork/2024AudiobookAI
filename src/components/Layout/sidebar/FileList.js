@@ -54,23 +54,26 @@ const FileList = ({ fileList = [], loading, onFileToggle, onDeleteFile, selected
         <p>Loading files...</p>
       ) : combinedFiles.length > 0 ? (
         combinedFiles.map((file, index) => (
-          <div key={index} className="pdf-item">
-            <input
-              type="checkbox"
-              checked={selectedFiles.fileName}
-              onChange={() => onFileToggle(file)} // Pass the entire file object to parent
-            />
-            <span className="pdf-name">{file.fileName}</span>
-            <a href={file.cosUrl} target="_blank" rel="noopener noreferrer">
-              View
-            </a>
-            <button
-              className="delete-button"
-              onClick={() => onDeleteFile(file.fileId)} // 只传递当前文件的fileId
-            >
-              Delete
-            </button>
+        <div className="file-container">
+          <label key={index} className="pdf-item">
+              <input
+                type="checkbox"
+                checked={selectedFiles.some(selected => selected.fileId === file.fileId)}
+                onChange={() => onFileToggle(file)} // Pass the entire file object to parent
+              />
+              <span className="pdf-name">{file.fileName}</span>
+              <a href={file.cosUrl} target="_blank" rel="noopener noreferrer">
+                View
+              </a>
+              <button
+                className="delete-button"
+                onClick={() => onDeleteFile(file.fileId)} // 只传递当前文件的fileId
+              >
+                Delete
+              </button>
+            </label>
           </div>
+          
         ))
       ) : (
         <p>No files uploaded yet.</p>
