@@ -1,33 +1,31 @@
-/* Sidebar container */
 .sidebar {
-  width: 100%; /* Fixed width for the sidebar */
-  height: 100vh; /* Full height of the viewport */
-  overflow-y: hidden; /* Enable vertical scrolling */
-  overflow-x: auto; /* Prevent horizontal scrolling */
-  background-color: #f8f9fa; /* Optional: light background */
+  width: 100%;
+  height: 100vh;
+  overflow-y: hidden;
+  overflow-x: auto;
+  background-color: white;
   padding: 10px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
 }
 
 .sidebar-title {
-  color: #6e44ff;
+  color: #7287f9;
   background-color: white;
   height: 70px;
-  line-height: 70px; /* Vertical alignment for text */
+  line-height: 70px;
   font-size: 1.5rem;
   text-align: center;
-  border-radius: 10px 10px 0 0; /* Rounded corners at the top */
-  width: calc(100% + 40px); /* Expand to cover full sidebar width including padding */
-  margin: -20px -20px 20px -20px; /* Correct positioning to align with sidebar's edges */
+  border-radius: 10px 10px 0 0;
+  width: calc(100% + 40px);
+  margin: -20px -20px 20px -20px;
 }
 
 .file-frame {
   padding: 15px;
-  border: 1px solid #ddd;
+  border: 2px dashed #7988e3;
   border-radius: 10px;
   background-color: white;
   min-width: 260px;
-  margin-left:-5px;
+  margin-left: -5px;
   margin-top: -10px;
 }
 
@@ -42,22 +40,21 @@
 .custom-file-upload {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #6e44ff;
+  background-color: #7287f9;
   border: #a4a2a2 solid 1px;
   color: white;
   border-radius: 5px;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-bottom: 10px;
 }
 
 .custom-file-upload:hover {
-  background-color: #6e44ff;
+  background-color: #8a9af6;
 }
 
 .file-upload {
-  display: none; /* Hide the default file input */
+  display: none;
 }
 
 .file-count {
@@ -65,67 +62,79 @@
   color: #555;
 }
 
+.file-container {
+  width: 100%;
+}
+
 .notification {
-  color: red; /* Red text for notification */
+  color: red;
   font-size: 0.9rem;
-  margin-top: 5px; /* Space above notification */
+  margin-top: 5px;
 }
 
 .pdf-list {
-  border-top: 1px solid #ddd;
-  margin-top: 10px;
-  padding-top: 10px;
+  padding: 15px;
+  margin-top: 15px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .pdf-item {
-  display: flex;
-  align-items: center;
-  padding: 8px 0;
+  padding: 8px 10px;
   border-bottom: 1px solid #eee;
-  cursor: pointer; /* Change cursor to pointer */
+  cursor: pointer;
   border-radius: 10px;
-  transition: background-color 0.2s ease; /* Add smooth background transition */
+  transition: background-color 0.2s ease;
 }
 
-.pdf-item:hover, .pdf-item:active {
-  background-color: #e0e0e0; /* Darken background on hover or active */
+.pdf-item:hover {
+  background-color: #e0e0e0;
 }
 
-.pdf-item:last-child {
-  border-bottom: none;
-}
-
-.pdf-icon {
-  margin-right: 10px;
+input[type="checkbox"] {
+  margin-right: 5px;
+  flex-shrink: 0;
+  max-width: 10px;
 }
 
 .pdf-name {
-  margin-left: 5px;
   flex-grow: 1;
-  max-width: 150px; /* Limit max width of file name */
+  margin-left: 0px;
+  max-width: 60%;
   overflow: hidden;
-  text-overflow: ellipsis; /* Add ellipsis if overflow */
-  white-space: normal; /* Allow text to wrap */
-  word-break: break-word; /* Break long words */
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* Limit to 2 lines */
-  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+a {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #007bff;
+  flex-shrink: 0;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .delete-button {
   background: none;
   border: none;
   cursor: pointer;
-  width: 30px; /* Fixed width for alignment */
-  margin-left: 10px; /* Space from the file name */
-  transition: transform 0.2s ease, background-color 0.2s ease; /* Click effect */
-  border-radius: 50%; /* Make delete button round */
+  width: 55px;
+  height: 30px;
+  margin-left: 10px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
 }
 
-.delete-button:hover, .delete-button:active {
-  background-color: #f5b7b7; /* Light red background when clicked */
-  transform: scale(1.1); /* Slightly increase size on hover */
+.delete-button:hover {
+  background-color: #d3d3d3;
+  transform: scale(1.1);
 }
+
 
 .select-all {
   display: flex;

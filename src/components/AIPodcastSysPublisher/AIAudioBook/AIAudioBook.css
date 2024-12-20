@@ -1,106 +1,184 @@
+.audio-ai-generator.bordered {
+  position: relative;
+  height: auto;
+  max-height:800px;
+  overflow-y: auto;
+  margin-top: 20px; 
+}
+
 .audio-ai-generator {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Slightly darker shadow */
-          height: 200px; /* Set a fixed height */
-          border: 2px solid #ddd;
-          border-radius: 8px;
-          padding: 20px;
-          margin-top: 20px;
-          background-color: #ffffff;
-        }
-        
-        .generate-button, .download-button {
-          padding: 12px 22px;
-          background-color: rgb(58, 79, 208);
-          color: white;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          font-size: 15px;
-          transition: background-color 0.3s;
-        }
-        
-        .generate-button:hover, .download-button:hover {
-          background-color: rgb(49, 66, 173);
-        }
-        
-        /* Loading container styles */
-        .loading-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-        
-        .spinner {
-          width: 40px;
-          height: 40px;
-          border: 4px solid rgba(58, 79, 208, 0.3);
-          border-top: 4px solid rgb(58, 79, 208);
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-          margin-bottom: 10px;
-        }
-        
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        
-        .loading-text {
-          font-size: 1.1em;
-          color: #3a4fd0;
-          animation: pulse 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
-        }
-        
-        .audio-player {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          width: 100%;
-          justify-content: center;
-        }
-        
-        .play-pause-button {
-          background: none;
-          border: none;
-          color: #3a4fd0;
-          font-size: 1.5em;
-          cursor: pointer;
-        }
-        
-        .progress-container {
-          display: flex;
-          align-items: center;
-          gap: 5px;
-          width: 100%;
-        }
-        
-        .progress-bar {
-          width: 100%;
-          height: 5px;
-          background-color: #555;
-          border-radius: 5px;
-          overflow: hidden;
-          position: relative;
-        }
-        
-        .progress {
-          height: 100%;
-          background-color: #1db954;
-          width: 0;
-          transition: width 0.1s;
-        }
-        
-        .timestamp {
-          font-size: 0.9em;
-          color: #aaa;
-        }
-        
+  position: relative;
+  height: auto;
+  max-height:800px;
+  overflow-y: auto;
+  margin-top: 20px; 
+
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 500px;
+  min-height: 200px; /* Minimum height for proper structure */
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 25px;
+  margin: 20px auto;
+  background: linear-gradient(to bottom, #ffffff, #f9f9f9);
+  transition: transform 0.2s ease-in-out, height 0.3s ease;
+}
+
+.selected-files-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  text-align: left;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.selected-files-list li {
+  background: #f3f3f3;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 8px 12px;
+  margin: 5px 0;
+  color: #555;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.generate-button,
+.download-button {
+  padding: 12px 24px;
+  background-color: rgb(58, 79, 208);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.generate-button:hover,
+.download-button:hover {
+  background-color: rgb(49, 66, 173);
+  transform: scale(1.05);
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(58, 79, 208, 0.3);
+  border-top: 4px solid rgb(58, 79, 208);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-size: 1.2em;
+  color: #3a4fd0;
+  font-weight: bold;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.audio-player {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.play-pause-button {
+  background: none;
+  border: none;
+  color: #3a4fd0;
+  font-size: 2em;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, color 0.3s;
+}
+
+.play-pause-button:hover {
+  color: #1db954;
+  transform: scale(1.2);
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.progress {
+  height: 100%;
+  background-color: #1db954; /* Spotify-like green */
+  width: 0;
+  transition: width 0.3s ease;
+}
+
+.timestamp {
+  font-size: 0.9em;
+  color: #777;
+  font-weight: 500;
+}
+
+
+
+.file-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: #3a4fd0;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.file-label:hover {
+  color: #1db954;
+}

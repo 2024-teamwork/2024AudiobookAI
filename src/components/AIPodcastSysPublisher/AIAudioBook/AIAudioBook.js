@@ -1,124 +1,98 @@
-import React, { useState, useEffect } from 'react';
-import { FaPlay, FaPause } from 'react-icons/fa';
-import './AIAudioBook.css';
+import React, { useState } from "react";
+import { FaPlay, FaPause, FaFileUpload } from "react-icons/fa";
+import ReactPlayer from "react-player";
+import "./AIAudioBook.css";
 
-const AIAudioBook = () => {
-  const [status, setStatus] = useState('idle');
+const AIAudioBook = ({ selectedFiles = [] }) => {
+  const [status, setStatus] = useState("idle"); // idle, loading, generated
   const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const duration = 60; // Assume a 60-second audio for demonstration
 
-  const handleGenerateAudio = () => {
-    setStatus('loading');
-    setTimeout(() => {
-      setStatus('generated');
-      setProgress(0);
-    }, 3000);
+  const handleGenerateAudio = async () => {
+    if (selectedFiles.length === 0) {
+      alert("Please select at least one file!");
+      return;
+    }
+
+    setStatus("loading");
+
+    const payload = {
+      text_url: {
+        fileName: selectedFiles[0].fileName,
+        cosUrl: selectedFiles[0].cosUrl,
+      },
+    };
+
+    try {
+      await fetch("https://audioai.alphalio.cn/api/v1/jobs/submit/env_sound", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3MzcwNjk2NDJ9.uKR7IA1j5n9i0xBlksTZMNPl-gnbu_3qyG6znRzE5Xc",
+        },
+        body: JSON.stringify(payload),
+        mode: "no-cors",
+      });
+
+      setStatus("generated");
+    } catch (error) {
+      console.error(error);
+      alert("Error generating audio");
+      setStatus("idle");
+    }
   };
 
   return (
-    <div className="audio-ai-generator bordered">
+    <div className="audio-ai-generator">
       <h2>AI Audio Book Generator</h2>
 
-      {status === 'idle' && <IdleState onGenerate={handleGenerateAudio} />}
-      {status === 'loading' && <LoadingState />}
-      {status === 'generated' && (
+      {/* File Selection */}
+      <div className="form-group">
+        <label htmlFor="fileInput" className="file-label">
+          <FaFileUpload /> Select Files
+        </label>
+        {selectedFiles.length > 0 && (
+          <ul className="selected-files-list">
+            {selectedFiles.map((file, index) => (
+              <li key={index}>{file.fileName}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      {/* State Management */}
+      {status === "idle" && (
+        <button className="generate-button" onClick={handleGenerateAudio}>
+          Submit Generating Audio
+        </button>
+      )}
+      {status === "loading" && (
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p>Generating Audio...</p>
+        </div>
+      )}
+      {status === "generated" && (
         <>
-          <AudioPlayer
-            isPlaying={isPlaying}
-            setIsPlaying={setIsPlaying}
-            progress={progress}
-            setProgress={setProgress}
-            currentTime={currentTime}
-            setCurrentTime={setCurrentTime}
-            duration={duration}
-          />
-          <DownloadButton />
+          <AudioPlayer audioSrc="https://www.youtube.com/watch?v=Oud9Gzy89dw" />
+          <DownloadButton downloadUrl="https://example.com/sample-audio.mp3" />
         </>
       )}
     </div>
   );
 };
 
-// Subcomponent for Idle State
-const IdleState = ({ onGenerate }) => (
-  <button className="generate-button" onClick={onGenerate}>
-    Generate AI Audio
-  </button>
-);
-
-// Subcomponent for Loading State
-const LoadingState = () => (
-  <div className="loading-container">
-    <div className="spinner"></div>
-    <p className="loading-text">Generating Audio...</p>
+// AudioPlayer Component
+const AudioPlayer = ({ audioSrc }) => (
+  <div className="audio-player">
+    <ReactPlayer url={audioSrc} controls width="100%" height="60px" />
   </div>
 );
 
-// Subcomponent for Audio Player
-const AudioPlayer = ({
-  isPlaying,
-  setIsPlaying,
-  progress,
-  setProgress,
-  currentTime,
-  setCurrentTime,
-  duration
-}) => {
-  useEffect(() => {
-    if (isPlaying) {
-      const interval = setInterval(() => {
-        setCurrentTime((prevTime) => {
-          if (prevTime < duration) {
-            setProgress(((prevTime + 1) / duration) * 100);
-            return prevTime + 1;
-          } else {
-            setIsPlaying(false); // Stop when the duration ends
-            return prevTime;
-          }
-        });
-      }, 1000);
-      return () => clearInterval(interval);
-    }
-  }, [isPlaying, duration, setCurrentTime, setProgress, setIsPlaying]);
-
-  const toggleAudioPlay = () => setIsPlaying(!isPlaying);
-
-  return (
-    <div className="audio-player">
-      <button className="play-pause-button" onClick={toggleAudioPlay}>
-        {isPlaying ? <FaPause /> : <FaPlay />}
-      </button>
-      <div className="progress-container">
-        <span className="timestamp">{formatTime(currentTime)}</span>
-        <div className="progress-bar">
-          <div className="progress" style={{ width: `${progress}%` }}></div>
-        </div>
-        <span className="timestamp">{formatTime(duration)}</span>
-      </div>
-    </div>
-  );
-};
-
-// Subcomponent for Download Button
-const DownloadButton = () => {
-  const handleDownload = () => {
-    // Placeholder for download logic
-    alert('Downloading audio file...');
-  };
-  return (
-    <button className="download-button" onClick={handleDownload}>
-      Download Audio
-    </button>
-  );
-};
-
-// Helper function to format time
-const formatTime = (seconds) => {
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds % 60;
-  return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-};
+// DownloadButton Component
+const DownloadButton = ({ downloadUrl }) => (
+  <a href={downloadUrl} download className="download-button">
+    Download Audio
+  </a>
+);
 
 export default AIAudioBook;

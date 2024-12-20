@@ -8,6 +8,13 @@ const AIPodcast = ({ selectedFiles = [] }) => {
     topic: "",
     text: "",
     file_urls: [],
+    script: "",
+    language: "English",
+    voice: "Soft",
+    character1: "Male",
+    speed: "1x",
+    topicSelect:"",
+    character2: "Female",
   });
 
   const jsonSelectedFiles = JSON.stringify(selectedFiles);
@@ -54,7 +61,14 @@ const AIPodcast = ({ selectedFiles = [] }) => {
       file_urls: prepareFileUrls(),
     };
 
+    //additional user selections
+    const podcastSelections = {
+      ...formData,
+      file_urls: prepareFileUrls(),
+    };
+    
     console.log("Submitting Payload:", requestPayload);
+    console.log("Podcast Selections:", podcastSelections);
 
     setLoading(true);
     setResponseMessage("");
@@ -111,6 +125,129 @@ const AIPodcast = ({ selectedFiles = [] }) => {
             ))}
           </ul>
         </div>
+
+
+        <div className="form-group">
+          <label>Script</label>
+          <textarea
+            name="script"
+            placeholder="Enter the script"
+            value={formData.script}
+            onChange={handleInputChange}
+            style={{ width: "100%", height: "80px" }}
+          />
+        </div>
+
+        <div className="form-group-row">
+          {/* First Row: Language, Speed */}
+          <div className="form-column">
+            <div className="form-group">
+              <label>Language</label>
+              <select
+                name="language"
+                value={formData.language}
+                onChange={handleInputChange}
+              >
+                <option value="English">English</option>
+                <option value="Spanish">Spanish</option>
+                <option value="Chinese">Chinese</option>
+              </select>
+            </div>
+          </div>
+          
+          <div className="form-column">
+            <div className="form-group">
+              <label>Speed</label>
+              <select
+                name="speed"
+                value={formData.speed}
+                onChange={handleInputChange}
+              >
+                <option value="0.5x">0.5x</option>
+                <option value="0.75x">0.75x</option>
+                <option value="1x">1x</option>
+                <option value="1.25x">1.25x</option>
+                <option value="1.5x">1.5x</option>
+                <option value="1.75x">1.75x</option>
+                <option value="2x">2x</option>
+                <option value="3x">3x</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div className="form-group-row">
+          {/* Second Row: Voice, Topic */}
+          <div className="form-column">
+            <div className="form-group">
+              <label>Voice</label>
+              <select
+                name="voice"
+                value={formData.voice}
+                onChange={handleInputChange}
+              >
+                <option value="Soft">Soft</option>
+                <option value="Serious">Serious</option>
+                <option value="Neutral">Neutral</option>
+              </select>
+            </div>
+          </div>
+          
+          <div className="form-column">
+            <div className="form-group">
+              <label>Topic</label>
+              <select
+                name="topicSelect"
+                value={formData.topicSelect}
+                onChange={handleInputChange}
+              >
+                <option value="Technology">Technology</option>
+                <option value="Business">Business</option>
+                <option value="Health & Wellness">Health & Wellness</option>
+                <option value="True Crime">True Crime</option>
+                <option value="Entertainment & Pop Culture">
+                  Entertainment & Pop Culture
+                </option>
+                <option value="Science & Education">Science & Education</option>
+                <option value="Society & Culture">Society & Culture</option>
+                <option value="Sports">Sports</option>
+                <option value="General">General</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div className="form-group-row">
+          {/* Third Row: Character 1, Character 2 */}
+          <div className="form-column">
+            <div className="form-group">
+              <label>Character 1</label>
+              <select
+                name="character1"
+                value={formData.character1}
+                onChange={handleInputChange}
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="form-column">
+            <div className="form-group">
+              <label>Character 2</label>
+              <select
+                name="character2"
+                value={formData.character2}
+                onChange={handleInputChange}
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
 
         <button type="submit" disabled={loading}>
           {loading ? "Submitting..." : "Generate"}
