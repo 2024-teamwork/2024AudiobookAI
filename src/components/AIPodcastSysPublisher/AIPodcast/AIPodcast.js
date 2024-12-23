@@ -15,14 +15,8 @@ const AIPodcast = ({ selectedFiles = [] }) => {
   const [responseMessage, setResponseMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [jobId, setJobId] = useState(null);
-
-  // const handleInputChange = (e) => {
-  //   const { name, value, type, checked } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: type === "checkbox" ? checked : value,
-  //   });
-  // };
+  const taskId = '8961e00f-ad32-4f31-9b5e-35cab438bf72';
+  // setJobId('8961e00f-ad32-4f31-9b5e-35cab438bf72');
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -67,7 +61,7 @@ const AIPodcast = ({ selectedFiles = [] }) => {
       );
 
       setResponseMessage(`Job submitted successfully! Job ID: ${response.data.task_id}`);
-      setJobId(response.data.task_id);
+      // setJobId(response.data.task_id);
       console.log("Response:", response);
     } catch (error) {
       console.error("Submission Error:", error.response);
@@ -119,7 +113,7 @@ const AIPodcast = ({ selectedFiles = [] }) => {
 
       {responseMessage && <p>{responseMessage}</p>}
 
-      {/* {jobId && <PodcastPlayer jobId={jobId} />} */}
+      {taskId && <PodcastPlayer jobId={taskId} />}
     </div>
   );
 };
