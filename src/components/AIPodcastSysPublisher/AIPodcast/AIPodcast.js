@@ -22,6 +22,7 @@ const AIPodcast = ({ selectedFiles = [] }) => {
   const [responseMessage, setResponseMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [jobId, setJobId] = useState(null);
+  const taskId = '8961e00f-ad32-4f31-9b5e-35cab438bf72';
 
   // const handleInputChange = (e) => {
   //   const { name, value, type, checked } = e.target;
@@ -256,7 +257,7 @@ const AIPodcast = ({ selectedFiles = [] }) => {
 
       {responseMessage && <p>{responseMessage}</p>}
 
-      {/* {jobId && <PodcastPlayer jobId={jobId} />} */}
+      <PodcastPlayer />
     </div>
   );
 };
