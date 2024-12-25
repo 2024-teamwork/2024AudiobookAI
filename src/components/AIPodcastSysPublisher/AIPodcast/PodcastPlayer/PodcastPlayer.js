@@ -1,78 +1,125 @@
-import React, { useState, useEffect } from "react";
-import "./PodcastPlayer.css";
+import React, { useEffect, useState } from "react";
 
-const PodcastPlayer = ({ jobId }) => {
-  // Blob text
-  const blobData = `
-    ID3#TSSELavf58.76.100���Info �K...
-  `;
+const PodcastPlayer = () => {
+  const [audioUrl, setAudioUrl] = useState(null);
+  const [transcript, setTranscript] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [audioBlobUrl, setAudioBlobUrl] = useState(null);
+  const fetchAudioAndTranscript = async () => {
+    setIsLoading(true);
+
+    try {
+      // Fetch the audio file
+      const audioResponse = await fetch(
+        "https://audioai.alphalio.cn/api/v1/jobs/download?task_id=8961e00f-ad32-4f31-9b5e-35cab438bf72&result_type=podcast",
+        {
+          headers: {
+            Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3MzcwNjk2NDJ9.uKR7IA1j5n9i0xBlksTZMNPl-gnbu_3qyG6znRzE5Xc",
+          },
+        }
+      );
+
+      const audioBlob = await audioResponse.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+      setAudioUrl(audioUrl);
+
+      // Fetch the transcript
+      const transcriptResponse = await fetch(
+        "https://audioai.alphalio.cn/api/v1/jobs/download?task_id=8961e00f-ad32-4f31-9b5e-35cab438bf72&result_type=transcript",
+        {
+          headers: {
+            Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3MzcwNjk2NDJ9.uKR7IA1j5n9i0xBlksTZMNPl-gnbu_3qyG6znRzE5Xc",
+          },
+        }
+      );
+
+      const transcriptText = await transcriptResponse.text();
+      const formattedTranscript = parseTranscript(transcriptText);
+      setTranscript(formattedTranscript);
+    } catch (error) {
+      console.error("Error fetching audio or transcript:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const parseTranscript = (text) => {
+    const lines = text.split("\n");
+    return lines.map((line) => {
+      const match = line.match(/<(\w+)> "(.*)"/);
+      if (match) {
+        return { speaker: match[1], text: match[2] };
+      }
+      return null;
+    }).filter(Boolean);
+  };
 
   useEffect(() => {
-    // Convert the blobData to a Blob and create a URL
-    const blob = new Blob([blobData], { type: "audio/mpeg" });
-    const url = URL.createObjectURL(blob);
-    setAudioBlobUrl(url);
+    fetchAudioAndTranscript();
+  }, []);
 
-    // Cleanup blob URL on component unmount
-    return () => {
-      URL.revokeObjectURL(url);
-    };
-  }, [blobData]);
-
-  const transcript = `
-    Voice 1: Welcome back to our show, everyone! I'm Alex, your host for today's episode where we're diving into an exciting and increasingly popular trend — secondhand shopping!
-    Voice 2: Hey there, Alex! I'm Amy, and I'm thrilled to be joining you for this discussion. I've noticed a significant shift in recent years towards embracing secondhand items. It's fascinating to see how consumer behavior is evolving.
-    Voice 1: Absolutely, Jamie! It's remarkable how secondhand shopping has gone from being seen as a necessity for some to a stylish, eco-friendly choice for many. So, let's start with the basics. Why do you think secondhand shopping has become more popular than ever?
-    Voice 2: Well, I think there are several factors at play. Firstly, the economic aspect can't be ignored. In today's world, where costs are continually rising, finding quality items at affordable prices is a huge draw.
-  `;
-
-  const [showTranscript, setShowTranscript] = useState(true);
-
-  const handleRegenerate = () => {
-    alert("Regenerate functionality is not implemented yet.");
-  };
-
-  const handleSave = () => {
-    alert("Save functionality is not implemented yet.");
-  };
-
-  const handleShare = () => {
-    alert("Share functionality is not implemented yet.");
-  };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div className="podcast-player-container">
-      <div className="status-message">
-        <p>Your audio has been successfully generated. You may further customize it or simply download it for use.</p>
+    <div style={styles.container}>
+      <div style={styles.header}>
+        <h3 style={styles.title}>Podcast Player</h3>
       </div>
-      <div className="audio-section">
-        {audioBlobUrl ? (
-          <audio controls>
-            <source src={audioBlobUrl} type="audio/mpeg" />
+      <div style={styles.audioPlayer}>
+        {audioUrl && (
+          <audio controls style={styles.audio}>
+            <source src={audioUrl} type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>
-        ) : (
-          <p>Loading audio...</p>
         )}
       </div>
-      <div className="transcript-section">
-        {showTranscript && <p className="transcript-text">{transcript}</p>}
-      </div>
-      <div className="action-buttons">
-        <button onClick={handleRegenerate} className="button regenerate">
-          Regenerate
-        </button>
-        <button onClick={handleSave} className="button save">
-          Save
-        </button>
-        <button onClick={handleShare} className="button share">
-          Share
-        </button>
+      <div style={styles.transcript}>
+        {transcript.map((item, index) => (
+          <p key={index} style={styles.transcriptText}>
+            <strong>{item.speaker}: </strong>
+            {item.text}
+          </p>
+        ))}
       </div>
     </div>
   );
+};
+
+const styles = {
+  container: {
+    border: "1px solid #ccc",
+    borderRadius: "8px",
+    padding: "16px",
+    maxWidth: "100%",
+    margin: "0 auto",
+    fontFamily: "Arial, sans-serif",
+    backgroundColor: "#f9f9f9",
+  },
+  header: {
+    marginBottom: "16px",
+  },
+  title: {
+    margin: 0,
+  },
+  audioPlayer: {
+    marginBottom: "16px",
+  },
+  audio: {
+    width: "100%",
+  },
+  transcript: {
+    maxHeight: "300px",
+    overflowY: "auto",
+    padding: "8px",
+    backgroundColor: "#fff",
+    border: "1px solid #ddd",
+    borderRadius: "4px",
+  },
+  transcriptText: {
+    margin: "8px 0",
+  },
 };
 
 export default PodcastPlayer;
