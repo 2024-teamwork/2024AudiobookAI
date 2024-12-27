@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import "./PodcastPlayer.css";
 
-const PodcastPlayer = () => {
+const PodcastPlayer = ({ jobId }) => {
   const [audioUrl, setAudioUrl] = useState(null);
   const [transcript, setTranscript] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isJobReady, setIsJobReady] = useState(false);
+  console.log("jobId: ", jobId);
 
   const fetchAudioAndTranscript = async () => {
     setIsLoading(true);
@@ -11,13 +14,24 @@ const PodcastPlayer = () => {
     try {
       // Fetch the audio file
       const audioResponse = await fetch(
-        "https://audioai.alphalio.cn/api/v1/jobs/download?task_id=8961e00f-ad32-4f31-9b5e-35cab438bf72&result_type=podcast",
+        `https://audioai.alphalio.cn/api/v1/jobs/download?task_id=${jobId}&result_type=podcast`,
         {
           headers: {
-            Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3MzcwNjk2NDJ9.uKR7IA1j5n9i0xBlksTZMNPl-gnbu_3qyG6znRzE5Xc",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3MzcwNjk2NDJ9.uKR7IA1j5n9i0xBlksTZMNPl-gnbu_3qyG6znRzE5Xc",
           },
         }
       );
+
+      if (audioResponse.status === 400) {
+        const errorDetails = await audioResponse.json();
+        if (errorDetails.detail === "Job result not ready") {
+          console.log("Audio job result not ready. Retrying...");
+          setTimeout(fetchAudioAndTranscript, 5000); // Retry after 5 seconds
+          return;
+        }
+        throw new Error(errorDetails.detail || "Error fetching audio file");
+      }
 
       const audioBlob = await audioResponse.blob();
       const audioUrl = URL.createObjectURL(audioBlob);
@@ -25,17 +39,29 @@ const PodcastPlayer = () => {
 
       // Fetch the transcript
       const transcriptResponse = await fetch(
-        "https://audioai.alphalio.cn/api/v1/jobs/download?task_id=8961e00f-ad32-4f31-9b5e-35cab438bf72&result_type=transcript",
+        `https://audioai.alphalio.cn/api/v1/jobs/download?task_id=${jobId}&result_type=transcript`,
         {
           headers: {
-            Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3MzcwNjk2NDJ9.uKR7IA1j5n9i0xBlksTZMNPl-gnbu_3qyG6znRzE5Xc",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3MzcwNjk2NDJ9.uKR7IA1j5n9i0xBlksTZMNPl-gnbu_3qyG6znRzE5Xc",
           },
         }
       );
 
+      if (transcriptResponse.status === 400) {
+        const errorDetails = await transcriptResponse.json();
+        if (errorDetails.detail === "Job result not ready") {
+          console.log("Transcript job result not ready. Retrying...");
+          setTimeout(fetchAudioAndTranscript, 5000); // Retry after 5 seconds
+          return;
+        }
+        throw new Error(errorDetails.detail || "Error fetching transcript");
+      }
+
       const transcriptText = await transcriptResponse.text();
       const formattedTranscript = parseTranscript(transcriptText);
       setTranscript(formattedTranscript);
+      setIsJobReady(true);
     } catch (error) {
       console.error("Error fetching audio or transcript:", error);
     } finally {
@@ -45,13 +71,15 @@ const PodcastPlayer = () => {
 
   const parseTranscript = (text) => {
     const lines = text.split("\n");
-    return lines.map((line) => {
-      const match = line.match(/<(\w+)> "(.*)"/);
-      if (match) {
-        return { speaker: match[1], text: match[2] };
-      }
-      return null;
-    }).filter(Boolean);
+    return lines
+      .map((line) => {
+        const match = line.match(/<(\w+)> "(.*)"/);
+        if (match) {
+          return { speaker: match[1], text: match[2] };
+        }
+        return null;
+      })
+      .filter(Boolean);
   };
 
   useEffect(() => {
@@ -59,25 +87,41 @@ const PodcastPlayer = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loading-container">
+        <button className="loading-button" disabled>
+          Loading...
+        </button>
+      </div>
+    );
+  }
+
+  if (!isJobReady) {
+    return (
+      <div className="loading-container">
+        <button className="loading-button" disabled>
+          Loading...
+        </button>
+      </div>
+    );
   }
 
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
-        <h3 style={styles.title}>Podcast Player</h3>
+    <div className="podcast-container">
+      <div className="podcast-header">
+        <h3 className="podcast-title">Podcast Player</h3>
       </div>
-      <div style={styles.audioPlayer}>
+      <div className="audio-player">
         {audioUrl && (
-          <audio controls style={styles.audio}>
+          <audio controls className="audio-element">
             <source src={audioUrl} type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>
         )}
       </div>
-      <div style={styles.transcript}>
+      <div className="transcript">
         {transcript.map((item, index) => (
-          <p key={index} style={styles.transcriptText}>
+          <p key={index} className="transcript-text">
             <strong>{item.speaker}: </strong>
             {item.text}
           </p>
@@ -85,41 +129,6 @@ const PodcastPlayer = () => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    border: "1px solid #ccc",
-    borderRadius: "8px",
-    padding: "16px",
-    maxWidth: "100%",
-    margin: "0 auto",
-    fontFamily: "Arial, sans-serif",
-    backgroundColor: "#f9f9f9",
-  },
-  header: {
-    marginBottom: "16px",
-  },
-  title: {
-    margin: 0,
-  },
-  audioPlayer: {
-    marginBottom: "16px",
-  },
-  audio: {
-    width: "100%",
-  },
-  transcript: {
-    maxHeight: "300px",
-    overflowY: "auto",
-    padding: "8px",
-    backgroundColor: "#fff",
-    border: "1px solid #ddd",
-    borderRadius: "4px",
-  },
-  transcriptText: {
-    margin: "8px 0",
-  },
 };
 
 export default PodcastPlayer;
