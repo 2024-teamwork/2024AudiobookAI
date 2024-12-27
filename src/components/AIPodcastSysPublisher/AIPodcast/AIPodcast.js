@@ -82,7 +82,7 @@ const AIPodcast = ({ selectedFiles = [] }) => {
       );
 
       setResponseMessage(`Job submitted successfully! Job ID: ${response.data.task_id}`);
-      setJobId(response.data.task_id);
+      // setJobId(response.data.task_id);
       console.log("Response:", response);
     } catch (error) {
       console.error("Submission Error:", error.response);
