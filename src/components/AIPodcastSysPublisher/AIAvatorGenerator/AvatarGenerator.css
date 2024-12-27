@@ -73,7 +73,7 @@
   width: 100%;
 }
 
-button {
+.avatarGenButton button {
   background-color: #007bff;
   color: white;
   border: none;
@@ -84,11 +84,11 @@ button {
   font-size: 14px;
 }
 
-button:disabled {
+.avatarGenButton button:disabled {
   background-color: #ccc;
 }
 
-button:hover:not(:disabled) {
+.avatarGenButton button:hover:not(:disabled) {
   background-color:#87bbf3;
 }
 

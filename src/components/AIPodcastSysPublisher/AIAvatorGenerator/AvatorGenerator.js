@@ -44,7 +44,7 @@ const AvatarGenerator = () => {
 
   return (
     <div className="avatar-generator">
-      <button onClick={handleOpenModal}>Generate Your Avatar</button>
+      <button class="avatarGenButton" onClick={handleOpenModal}>Generate Your Avatar</button>
 
       <Modal isOpen={modalOpen} onClose={handleCloseModal}>
         <div className="modal-content">

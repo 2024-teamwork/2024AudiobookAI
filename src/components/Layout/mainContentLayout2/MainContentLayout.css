@@ -27,11 +27,11 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  background: #dcdcdc;
+  background: #f7f7f7;
   width: 95%;
   margin: 15px auto;
-  border-radius: 10px;
-  padding: 2px 0;
+  border-radius: 15px;
+  padding: 5px 0;
 }
 
 .tab-navigation button {
@@ -40,25 +40,23 @@
   border: none;
   background: none;
   color: rgb(0, 0, 0);
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 300;
   padding: 10px;
-  width: 300px;
-  height: auto;
-  transition: all 0.3s ease;
-  border-radius: 10px;
+  width: 290px;
+  height: 72%;
+  transition: all 0.2s ease;
+  border-radius: 8px;
 }
 
 .tab-navigation button:hover {
-  background-color: #b5b5b5;
+  background-color: #e0e5ff !important;
 }
 
 .tab-navigation button.active {
   background: #ffffff;
   color: #7288fa;
   font-weight: bold;
-  border: 1px solid #dcdcdc;
-  padding: 8px;
 }
 
 .content-area {

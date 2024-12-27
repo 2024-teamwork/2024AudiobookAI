@@ -74,7 +74,7 @@
   padding: 8px;
   border: 1.5px solid #dadee2;
   border-radius: 4px;
-  font-family: 'Roboto', sans-serif; /* Apply Roboto font */
+  font-family:sans-serif;
 }
 
 .form-group textarea {

@@ -75,7 +75,7 @@ const ProductDetails = () => {
         <strong className="upload-text">Upload Pictures: </strong>
         
           <label htmlFor="image-upload" className="custom-file-upload-small">
-            Choose Files
+            Select Images
           </label>
 
           <input
@@ -122,7 +122,7 @@ const ProductDetails = () => {
         <div className="audio-upload-container">
           <strong className='upload-text'>Upload Audio: </strong>
           <label htmlFor="audio-upload" className="custom-file-upload-small">
-              Choose Files
+              Upload / Reupload Audio
             </label>
             <input
               id="audio-upload"
@@ -131,58 +131,71 @@ const ProductDetails = () => {
               className="audio-upload"
               onChange={handleAudioUpload} 
             />
-        {audio && (
-          <div className="audio-preview">
-            <audio controls src={audio}>
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-        )}
+          {audio && (
+            <div className="audio-preview">
+              <audio controls src={audio}>
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+          )}
         </div>
 
 
-        <label>
-          <strong>Name:</strong>
+        <div className="form-group">
+          <label>Description</label>
+          <textarea
+            name="description"
+            value={details.description}
+            onChange={handleChange}
+            style={{ height: "80px" }}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Name</label>
           <input type="text" name="property" value={details.property} onChange={handleChange} />
-        </label>
-        <label>
-          <strong>Price:</strong>
+        </div>
+
+        <div className="form-group">
+          <label>Price</label>
           <input type="number" name="price" value={details.price} onChange={handleChange} />
-        </label>
-        <label>
-          <strong>Date:</strong>
+        </div>
+
+        <div className="form-group">
+          <label>Date</label>
           <input type="date" name="date" value={details.date} onChange={handleChange} />
-        </label>
-        <label>
-          <strong>URL:</strong>
+        </div>
+
+        <div className="form-group">
+          <label>URL</label>
           <input type="url" name="url" value={details.url} onChange={handleChange} />
-        </label>
-        <label>
-          <strong>ISBN-10:</strong>
+        </div>
+
+        <div className="form-group">
+          <label>ISBN-10</label>
           <input type="text" name="isbn10" value={details.isbn10} onChange={handleChange} />
-        </label>
-        <label>
-          <strong>ISBN-13:</strong>
+        </div>
+
+        <div className="form-group">
+          <label>ISBN-13</label>
           <input type="text" name="isbn13" value={details.isbn13} onChange={handleChange} />
-        </label>
-        <label>
-          <strong>Publisher:</strong>
+        </div>
+
+        <div className="form-group">
+          <label>Publisher</label>
           <input type="text" name="publisher" value={details.publisher} onChange={handleChange} />
-        </label>
-        <label>
-          <strong>Genre:</strong>
+        </div>
+
+        <div className="form-group">
+          <label>Genre</label>
           <input type="text" name="genre" value={details.genre} onChange={handleChange} />
-        </label>
-        <label>
-          <strong>Description:</strong>
-          <textarea name="description" value={details.description} onChange={handleChange} />
-        </label>        
+        </div>
       </div>
-      
+
       <button className="action-button" onClick={handleSave}>Save Changes</button>
-    </div>
-  );
-};
 
-export default ProductDetails;
+      </div>
+    );
+  };
 
+  export default ProductDetails;
