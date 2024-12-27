@@ -76,7 +76,7 @@ const Navigation = () => {
         {/* Render dropdown only if logged in */}
         
           <div className="dropdown">
-            <Link to="/profile">Go to Profile</Link>
+            <Link to="/user-center">User Center</Link>
             <Link to="/logout">Log Out</Link>
           </div>
         

@@ -39,15 +39,25 @@
 }
 
 .custom-file-upload {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 10px 20px;
   background-color: #7287f9;
-  border: #a4a2a2 solid 1px;
+  /*border: #a4a2a2 solid 1px;*/
   color: white;
-  border-radius: 5px;
-  font-size: 1rem;
+  border-radius: 15px;
+  font-size: 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-weight: 600;
+  width: 150px;
+  height: 40px;
+}
+
+.custom-file-upload:hover {
+  opacity: 70%;
+  background-color: #7287f9;
 }
 
 .custom-file-upload:hover {

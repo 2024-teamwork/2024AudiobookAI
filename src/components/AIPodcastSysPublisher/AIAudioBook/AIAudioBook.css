@@ -1,3 +1,25 @@
+.audiobook-button-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ai-audio-book-container button{
+  border-radius: 15px;
+  background-color: #7287f9;
+  font-weight: 600;
+  width: 350px;
+  font-size: 16px;
+  color: white;
+  border: none;
+  }
+  
+.ai-audio-book-container button:hover{
+  background-color: #7287f9;
+  opacity: 70%;
+  }
+
+
 .audio-ai-generator.bordered {
   position: relative;
   height: auto;
@@ -182,3 +204,4 @@
 .file-label:hover {
   color: #1db954;
 }
+

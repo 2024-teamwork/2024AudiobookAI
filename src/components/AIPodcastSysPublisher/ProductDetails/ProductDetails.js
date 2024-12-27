@@ -185,14 +185,11 @@ const ProductDetails = () => {
           <label>Publisher</label>
           <input type="text" name="publisher" value={details.publisher} onChange={handleChange} />
         </div>
-
-        <div className="form-group">
-          <label>Genre</label>
-          <input type="text" name="genre" value={details.genre} onChange={handleChange} />
-        </div>
       </div>
 
-      <button className="action-button" onClick={handleSave}>Save Changes</button>
+      <div className="save-container">
+        <button className="action-button" onClick={handleSave}>Save</button>
+      </div>
 
       </div>
     );

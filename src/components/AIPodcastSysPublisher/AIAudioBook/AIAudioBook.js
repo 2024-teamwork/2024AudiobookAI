@@ -75,8 +75,9 @@ const AIAudioBook = ({  selectedFiles = [] }) => {
             onChange={handleInputChange}
           />
         </div>
-
+      <div className="audiobook-button-container">
         <button type="submit">Generate</button>
+      </div>
       </form>
 
       {jobId && <AudioBookPlayer jobId = {jobId}/>}
