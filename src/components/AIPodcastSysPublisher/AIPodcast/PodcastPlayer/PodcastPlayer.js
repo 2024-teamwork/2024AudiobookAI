@@ -1,116 +1,132 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
 import "./PodcastPlayer.css";
 
 const PodcastPlayer = ({ jobId }) => {
-  const [script, setScript] = useState("");
-  const [audioUrl, setAudioUrl] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
-  const [sharing, setSharing] = useState(false);
-  const [message, setMessage] = useState("");
+  const [audioUrl, setAudioUrl] = useState(null);
+  const [transcript, setTranscript] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isJobReady, setIsJobReady] = useState(false);
+  console.log("jobId: ", jobId);
 
-  // Fetch the text script
+  const fetchAudioAndTranscript = async () => {
+    setIsLoading(true);
+
+    try {
+      // Fetch the audio file
+      const audioResponse = await fetch(
+        `https://audioai.alphalio.cn/api/v1/jobs/download?task_id=${jobId}&result_type=podcast`,
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3MzcwNjk2NDJ9.uKR7IA1j5n9i0xBlksTZMNPl-gnbu_3qyG6znRzE5Xc",
+          },
+        }
+      );
+
+      if (audioResponse.status === 400) {
+        const errorDetails = await audioResponse.json();
+        if (errorDetails.detail === "Job result not ready") {
+          console.log("Audio job result not ready. Retrying...");
+          setTimeout(fetchAudioAndTranscript, 5000); // Retry after 5 seconds
+          return;
+        }
+        throw new Error(errorDetails.detail || "Error fetching audio file");
+      }
+
+      const audioBlob = await audioResponse.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+      setAudioUrl(audioUrl);
+
+      // Fetch the transcript
+      const transcriptResponse = await fetch(
+        `https://audioai.alphalio.cn/api/v1/jobs/download?task_id=${jobId}&result_type=transcript`,
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3MzcwNjk2NDJ9.uKR7IA1j5n9i0xBlksTZMNPl-gnbu_3qyG6znRzE5Xc",
+          },
+        }
+      );
+
+      if (transcriptResponse.status === 400) {
+        const errorDetails = await transcriptResponse.json();
+        if (errorDetails.detail === "Job result not ready") {
+          console.log("Transcript job result not ready. Retrying...");
+          setTimeout(fetchAudioAndTranscript, 5000); // Retry after 5 seconds
+          return;
+        }
+        throw new Error(errorDetails.detail || "Error fetching transcript");
+      }
+
+      const transcriptText = await transcriptResponse.text();
+      const formattedTranscript = parseTranscript(transcriptText);
+      setTranscript(formattedTranscript);
+      setIsJobReady(true);
+    } catch (error) {
+      console.error("Error fetching audio or transcript:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const parseTranscript = (text) => {
+    const lines = text.split("\n");
+    return lines
+      .map((line) => {
+        const match = line.match(/<(\w+)> "(.*)"/);
+        if (match) {
+          return { speaker: match[1], text: match[2] };
+        }
+        return null;
+      })
+      .filter(Boolean);
+  };
+
   useEffect(() => {
-    const fetchScript = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:9002/api/ai/download/text/${jobId}`
-        );
-        setScript(response.data);
-      } catch (error) {
-        console.error("Error fetching script:", error);
-        setMessage(
-          "Failed to fetch podcast script. Please Select one script to show here!"
-        );
-      }
-    };
+    fetchAudioAndTranscript();
+  }, []);
 
-    const fetchAudio = async () => {
-      try {
-        const audioResponse = `http://localhost:9002/api/ai/download/audio/${jobId}`;
-        setAudioUrl(audioResponse); // Set audio URL for the audio player
-      } catch (error) {
-        console.error("Error fetching audio:", error);
-        setMessage("Failed to fetch podcast audio.");
-      }
-    };
+  if (isLoading) {
+    return (
+      <div className="loading-container">
+        <button className="loading-button" disabled>
+          Loading...
+        </button>
+      </div>
+    );
+  }
 
-    // Fetch both script and audio
-    fetchScript();
-    fetchAudio();
-    setLoading(false);
-  }, [jobId]);
-
-  // Save the updated script
-  const saveScript = async () => {
-    setSaving(true);
-    try {
-      // await axios.post(`http://localhost:9002/api/ai/update/text/${jobId}`, {
-      //   text: script,
-      // });
-      setMessage("Script saved successfully.");
-    } catch (error) {
-      console.error("Error saving script:", error);
-      setMessage("Failed to save script.");
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  const shareScript = async () => {
-    setSharing(true);
-    try {
-      setMessage("Script shared successfully.");
-    } catch (error) {
-      console.error("Error sharing script:", error);
-      setMessage("Failed to share script.");
-    } finally {
-      setSharing(false);
-    }
-  };
+  if (!isJobReady) {
+    return (
+      <div className="loading-container">
+        <button className="loading-button" disabled>
+          Loading...
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="podcast-container">
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          <h1>Your Podcast</h1>
-          <p>
-            Your audio has been successfully generated. You may further
-            customize it or download it for use.
+      <div className="podcast-header">
+        <h3 className="podcast-title">Podcast Player</h3>
+      </div>
+      <div className="audio-player">
+        {audioUrl && (
+          <audio controls className="audio-element">
+            <source src={audioUrl} type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+        )}
+      </div>
+      <div className="transcript">
+        {transcript.map((item, index) => (
+          <p key={index} className="transcript-text">
+            <strong>{item.speaker}: </strong>
+            {item.text}
           </p>
-
-          {/* Audio Player */}
-          <div className="audio-player">
-            <audio controls src={audioUrl}>
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          {/* Script Editor */}
-          <div className="script-editor">
-            <textarea
-              value={script}
-              onChange={(e) => setScript(e.target.value)}
-              placeholder="Your podcast script will appear here..."
-            ></textarea>
-            <div className="button-container">
-              <button onClick={saveScript} disabled={saving}>
-                {saving ? "Saving..." : "Save"}
-              </button>
-
-              <button onClick={shareScript} disabled={saving}>
-                {sharing ? "Sharing..." : "Share to my social media platform"}
-              </button>
-            </div>
-          </div>
-
-          {/* Display message */}
-          {message && <p className="message">{message}</p>}
-        </>
-      )}
+        ))}
+      </div>
     </div>
   );
 };
