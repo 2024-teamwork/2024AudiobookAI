@@ -60,7 +60,7 @@ const FileUploader = ({ onUploadSuccess }) => {
         <div className="file-count">
           {selectedFiles.length > 0
             ? `${selectedFiles.length} files selected`
-            : "No files selected"}
+            : "No file selected"}
         </div>
         <button
           onClick={handleUpload}
