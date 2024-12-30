@@ -1,5 +1,6 @@
-import React from "react";
 import "./Sidebar.css";
+import {useState} from 'react';
+
 
 const sampleFiles = [
   {
@@ -39,13 +40,44 @@ const sampleFiles = [
     cosUrl:
       "https://pdf-store-1257970690.cos.ap-shanghai.myqcloud.com/uploads/1734407756859_2003d6bc-90ac-4591-8fa7-831dc302256f_The%20Cue-of-the-Cloud%20Effec%20-%20When%20Reminders%20of%20Online%20Information%20Availability%20Increase%20Purchase%20Intentions%20and%20Choice.pdf?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDEKDtMcfU6WjiV5SREoBMRJxOcdRAnESS%26q-sign-time%3D1734407757%3B1993607757%26q-key-time%3D1734407757%3B1993607757%26q-header-list%3Dhost%26q-url-param-list%3D%26q-signature%3D5a4a01e0f14116f17c12029dba9eaf7aa38cc542",
   },
+  {
+    fileId: 8,
+    fileName:
+      "Text-to-audio Conversion Using LLMs to Preserve Character Identification.pdf",
+    cosUrl:
+      "https://pdf-store-1257970690.cos.ap-shanghai.myqcloud.com/uploads/1735335050406_5012feae-e097-46be-9bbf-e602e41b80f7_SpencerChin_Dan%20Kimberg%20.pdf?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDEKDtMcfU6WjiV5SREoBMRJxOcdRAnESS%26q-sign-time%3D1735335050%3B1994535050%26q-key-time%3D1735335050%3B1994535050%26q-header-list%3Dhost%26q-url-param-list%3D%26q-signature%3Df129b53c6f03a2d5c8d6bab0651b8776d3b9493c",
+  },
+  {
+    fileId: 9,
+    fileName:
+      "Generative AI and the Publishing Industry.pdf",
+    cosUrl:
+      "https://pdf-store-1257970690.cos.ap-shanghai.myqcloud.com/uploads/1735335050749_ccaadefb-97ff-4b45-8334-a4008474decb_ClaireTucker.pdf?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDEKDtMcfU6WjiV5SREoBMRJxOcdRAnESS%26q-sign-time%3D1735335051%3B1994535051%26q-key-time%3D1735335051%3B1994535051%26q-header-list%3Dhost%26q-url-param-list%3D%26q-signature%3D0ac8012160988b1895e5f7d62b7c03e8e0b2a2d1",
+  },
+  {
+    fileId: 10,
+    fileName:
+      "Integrating synthesised narration into an audiobook service.pdf",
+    cosUrl:
+      "https://pdf-store-1257970690.cos.ap-shanghai.myqcloud.com/uploads/1735335046504_873245ac-63e7-4fee-accc-f1675c321728_KristinaBergquist.pdf?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDEKDtMcfU6WjiV5SREoBMRJxOcdRAnESS%26q-sign-time%3D1735335050%3B1994535050%26q-key-time%3D1735335050%3B1994535050%26q-header-list%3Dhost%26q-url-param-list%3D%26q-signature%3D245a5703aec89a7c57902e9af1f51d15323a1f99",
+  },
 ];
 
-const FileList = ({ fileList = [], loading, onFileToggle, onDeleteFile, selectedFiles = [] }) => {
+const FileList = ({ fileList = [], loading, onFileToggle, onDeleteFile, selectedFiles = [], setSelectedFiles }) => {
   // 合并传入的 fileList 和 sampleFiles，确保不会重复展示文件
   const combinedFiles = [...sampleFiles, ...fileList.filter(
     (file) => !sampleFiles.some((sample) => sample.fileId === file.fileId)
   )];
+
+  // Store the filter criteria in a state
+  const [fieldFilter, setFieldFilter] = useState("");
+
+  // Update the filter criteria
+  const onFieldFilter = (value) => {
+    setFieldFilter(value.toLowerCase()); // Ensure case-insensitive matching
+  };
+
+
 
   return (
     <div className="pdf-list">
@@ -53,28 +85,29 @@ const FileList = ({ fileList = [], loading, onFileToggle, onDeleteFile, selected
       {loading ? (
         <p>Loading files...</p>
       ) : combinedFiles.length > 0 ? (
-        combinedFiles.map((file, index) => (
-        <div className="file-container">
-          <label key={index} className="pdf-item">
-              <input
-                type="checkbox"
-                checked={selectedFiles.some(selected => selected.fileId === file.fileId)}
-                onChange={() => onFileToggle(file)} // Pass the entire file object to parent
-              />
-              <span className="pdf-name">{file.fileName}</span>
-              <a href={file.cosUrl} target="_blank" rel="noopener noreferrer">
-                View
-              </a>
-              <button
-                className="delete-button"
-                onClick={() => onDeleteFile(file.fileId)} // 只传递当前文件的fileId
-              >
-                Delete
-              </button>
-            </label>
-          </div>
-          
-        ))
+        <>
+          {combinedFiles.map((file, index) => (
+            <div key={index} className="file-container">
+              <label className="pdf-item">
+                <input
+                  type="checkbox"
+                  checked={selectedFiles.some((selected) => selected.fileName === file.fileName)}
+                  onChange={() => onFileToggle(file)} // Pass the entire file object to parent
+                />
+                <span className="pdf-name">{file.fileName}</span>
+                <a href={file.cosUrl} target="_blank" rel="noopener noreferrer">
+                  View
+                </a>
+                <button
+                  className="delete-button"
+                  onClick={() => onDeleteFile(file.fileId)} // Pass only the fileId
+                >
+                  Delete
+                </button>
+              </label>
+            </div>
+          ))}
+        </>
       ) : (
         <p>No files uploaded yet.</p>
       )}
