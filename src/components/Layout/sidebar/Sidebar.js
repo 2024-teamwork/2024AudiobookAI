@@ -34,7 +34,8 @@ const Sidebar = ({ onFilesSelected }) => {
     const updatedSelection = selectedFiles.find((selected) => selected.cosUrl === file.cosUrl)
       ? selectedFiles.filter((selected) => selected.cosUrl !== file.cosUrl) // Remove file if already selected
       : [...selectedFiles, file]; // Add file if not selected
-    
+      
+    console.log(file);
     setSelectedFiles(updatedSelection);
     onFilesSelected(updatedSelection); // Notify parent with the updated file objects
   };
