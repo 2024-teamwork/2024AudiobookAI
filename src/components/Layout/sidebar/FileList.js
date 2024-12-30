@@ -25,7 +25,7 @@ const sampleFiles = [
   },
   {
 		"fileId": 6,
-		"fileName": "Generative AI-Business & Information Systems Engineering.pdf",
+		"fileName": "Generative AI-Business & Information Systems Engineering_1.pdf",
 		"cosUrl": "https://pdf-store-1257970690.cos.ap-shanghai.myqcloud.com/uploads/1734415933455_6fadee86-ab31-413b-8a6e-82755ddfe838_Generative%20AI-Business%20%26%20Information%20Systems%20Engineering.pdf?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDEKDtMcfU6WjiV5SREoBMRJxOcdRAnESS%26q-sign-time%3D1734415948%3B1993615948%26q-key-time%3D1734415948%3B1993615948%26q-header-list%3Dhost%26q-url-param-list%3D%26q-signature%3D6d0313cdb67bbf415ae9bd74d3e403774975eb78"
 	},
   {
@@ -50,7 +50,7 @@ const sampleFiles = [
   {
     fileId: 9,
     fileName:
-      "Generative AI and the Publishing Industry.pdf",
+      "Generative AI and the Publishing Industry_1.pdf",
     cosUrl:
       "https://pdf-store-1257970690.cos.ap-shanghai.myqcloud.com/uploads/1735335050749_ccaadefb-97ff-4b45-8334-a4008474decb_ClaireTucker.pdf?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDEKDtMcfU6WjiV5SREoBMRJxOcdRAnESS%26q-sign-time%3D1735335051%3B1994535051%26q-key-time%3D1735335051%3B1994535051%26q-header-list%3Dhost%26q-url-param-list%3D%26q-signature%3D0ac8012160988b1895e5f7d62b7c03e8e0b2a2d1",
   },
