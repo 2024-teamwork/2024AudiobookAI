@@ -2,6 +2,21 @@ import React, { useEffect, useState } from "react";
 import "./AudioBookPlayer.css";
 import microphoneIcon from '../../../../images/icon/microphone.png';
 
+const subscriptionInfo = {
+  planType: 'Free Plan',
+  planTokenCount: 5000
+};
+
+const handleRegenerate =()=>{
+};
+
+const handleSave=()=> {
+};
+
+const handleShare=()=> {
+};
+
+
 const AudioBookPlayer = ({ jobId,audiobookText }) => {
   const [audioUrl, setAudioUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -83,6 +98,16 @@ const AudioBookPlayer = ({ jobId,audiobookText }) => {
             {audiobookText}
         </div>
       </div>
+      <div className="audiobook-actions">
+        <button onClick={handleRegenerate} className="action-button">Regenerate</button>
+        <button onClick={handleSave} className="action-button">Save</button>
+        <button onClick={handleShare} className="action-button">Share</button>
+      </div>
+      <p class="subscription-info">
+        <span class="plan-type">{subscriptionInfo.planType}</span>
+        <span class="token-count">{subscriptionInfo.planTokenCount}</span>
+        <span class="tokens-left">tokens left</span>
+      </p>
     </div>
   );  
 };

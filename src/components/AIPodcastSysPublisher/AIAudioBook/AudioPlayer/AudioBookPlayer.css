@@ -1,7 +1,7 @@
 .audiobook-header{
-  height: 112px;
+  height: 100px;
   background-color: #F3F5F7;
-  padding: 24px 24px 64px 24px;
+  padding: 14px 24px 64px 24px;
   border-radius: 20px;
   font-size: 17px;
   font-weight: 400;
@@ -26,8 +26,7 @@
   border-radius: 10px;
   height: 37px;
   width: 920px;
-  margin-top: 25px;
-  margin-bottom: 10px;
+  margin-top: 15px;
   position: relative;
   z-index: 0;
 }
@@ -98,7 +97,7 @@
 }
 
 .audiobook-output-display{
-  height: 328px;
+  height: 345px;
   width: 1000px;
   background-color: #F3F5F7;
   border-radius: 20px;
@@ -112,4 +111,55 @@
   align-items: center;
   justify-content: center;
   margin: auto;  
+}
+
+.audiobook-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 900px;
+  align-items: center;
+  gap: 10px;
+  margin: 5px auto;
+}
+
+.audiobook-actions .action-button {
+  border-radius: 15px;
+  background-color: #7287f9;
+  font-weight: 600;
+  width: 250px;
+  font-size: 16px;
+  color: white;
+  border: none;
+}
+
+.audiobook-actions .action-button:hover {
+  background-color: #7287f9;
+  opacity: 70%;
+}
+
+.subscription-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 12px;
+}
+
+.plan-type {
+  font-weight: 500;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.token-count {
+  color: #7287f9;
+  font-weight: 400;
+  font-size: 13px;
+  margin-right: 5px;
+}
+
+.tokens-left {
+  font-weight: 400;
+  color: black;
+  font-size: 13px;
 }
