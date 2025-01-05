@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./AudioBookPlayer.css";
+import microphoneIcon from '../../../../images/icon/microphone.png';
 
-const AudioBookPlayer = ({ jobId }) => {
+const AudioBookPlayer = ({ jobId,audiobookText }) => {
   const [audioUrl, setAudioUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isJobReady, setIsJobReady] = useState(false);
@@ -51,6 +52,10 @@ const AudioBookPlayer = ({ jobId }) => {
   if (isLoading || !isJobReady) {
     return (
       <div className="loading-container">
+        <div className="audiobook-intro-container">
+          <h1>AI Audio Books</h1>
+          <p>Your file has been submittted! We are producing your audiobook...</p>
+        </div>
         <div className="loading-bar"></div>
         <button className="loading-button" disabled>
           Loading...
@@ -61,19 +66,25 @@ const AudioBookPlayer = ({ jobId }) => {
 
   return (
     <div className="audiobook-container">
-      <div className="audiobook-header">
-        <h3 className="audiobook-title">AudioBook Player</h3>
+      <div className="audiobook-header" style={{ position: 'relative', paddingBottom: '36px' }}>
+        Your audio has been successfully generated. You may further customize it or simply download it for use.
+        <img src={microphoneIcon} className="microphoneIcon" />
       </div>
-      <div className="audio-player">
-        {audioUrl && (
-          <audio controls className="audio-element">
-            <source src={audioUrl} type="audio/mpeg" />
-            Your browser does not support the audio element.
-          </audio>
-        )}
+      <div className="audiobook-output-display">
+        <div className="audio-player">
+          {audioUrl && (
+            <audio controls className="audio-element">
+              <source src={audioUrl} type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          )}
+        </div>
+        <div className="audiobook-text">
+            {audiobookText}
+        </div>
       </div>
     </div>
-  );
+  );  
 };
 
 export default AudioBookPlayer;
