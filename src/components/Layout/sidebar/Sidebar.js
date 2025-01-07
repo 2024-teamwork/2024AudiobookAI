@@ -88,7 +88,7 @@ const Sidebar = ({ onFilesSelected }) => {
    
   return (
     <div className="sidebar">
-      <FileChooser/>
+      <FileChooser onFileSelect={onFilesSelected} />
       <div className="FileList-container">
         <FileList
           fileList={fileList}

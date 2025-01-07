@@ -15,7 +15,10 @@ const AIAudioBook = ({ selectedFiles = [] }) => {
     styleSelect: "Fantasy",
     ambientSound: "On",
   });
+
   const [isFormVisible, setIsFormVisible] = useState(true);
+
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -78,14 +81,12 @@ const AIAudioBook = ({ selectedFiles = [] }) => {
             />
           </div>
           <div className="form-group">
-            <label>File URL</label>
-            <input
-              type="url"
-              name="fileUrl"
-              placeholder="Enter file URL"
-              value={formData.fileUrl}
-              onChange={handleInputChange}
-            />
+            <label>Selected Files</label>
+            <ul>
+              {selectedFiles.map((file, index) => (
+                <li key={index}>{file.fileName}</li>
+              ))}
+            </ul>
           </div>
           
 	<div className="form-group-row">

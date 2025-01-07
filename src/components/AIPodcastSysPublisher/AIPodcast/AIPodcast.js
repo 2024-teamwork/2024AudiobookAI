@@ -58,7 +58,13 @@ const AIPodcast = ({ selectedFiles = [] }) => {
     // Build AIJobRequest payload
     const requestPayload = {
       topic: formData.topic,
-      text: formData.text,
+      text: formData.text +  `Following information is requirements to the audio, not part of the audio:
+      Language: ${formData.language};
+      Voice: ${formData.voice};
+      Character: ${formData.character};
+      Speed: ${formData.speed};
+      Style: ${formData.styleSelect};
+      Ambient Sound: ${formData.ambientSound}.`,
       file_urls: prepareFileUrls(),
     };
 
@@ -126,7 +132,6 @@ const AIPodcast = ({ selectedFiles = [] }) => {
             ))}
           </ul>
         </div>
-
 
         <div className="form-group">
           <label>Script</label>
@@ -263,3 +268,5 @@ const AIPodcast = ({ selectedFiles = [] }) => {
 };
 
 export default AIPodcast;
+
+git 
