@@ -45,7 +45,7 @@ const AIPodcast = ({ selectedFiles = [] }) => {
       cosUrl: file.cosUrl,
     }));
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -58,13 +58,7 @@ const AIPodcast = ({ selectedFiles = [] }) => {
     // Build AIJobRequest payload
     const requestPayload = {
       topic: formData.topic,
-      text: formData.text +  `Following information is requirements to the audio, not part of the audio:
-      Language: ${formData.language};
-      Voice: ${formData.voice};
-      Character: ${formData.character};
-      Speed: ${formData.speed};
-      Style: ${formData.styleSelect};
-      Ambient Sound: ${formData.ambientSound}.`,
+      text: formData.text,
       file_urls: prepareFileUrls(),
     };
 
@@ -73,7 +67,7 @@ const AIPodcast = ({ selectedFiles = [] }) => {
       ...formData,
       file_urls: prepareFileUrls(),
     };
-    
+
     console.log("Submitting Payload:", requestPayload);
     console.log("Podcast Selections:", podcastSelections);
 
@@ -133,6 +127,7 @@ const AIPodcast = ({ selectedFiles = [] }) => {
           </ul>
         </div>
 
+
         <div className="form-group">
           <label>Script</label>
           <textarea
@@ -160,7 +155,7 @@ const AIPodcast = ({ selectedFiles = [] }) => {
               </select>
             </div>
           </div>
-          
+
           <div className="form-column">
             <div className="form-group">
               <label>Speed</label>
@@ -198,7 +193,7 @@ const AIPodcast = ({ selectedFiles = [] }) => {
               </select>
             </div>
           </div>
-          
+
           <div className="form-column">
             <div className="form-group">
               <label>Topic</label>
@@ -268,5 +263,3 @@ const AIPodcast = ({ selectedFiles = [] }) => {
 };
 
 export default AIPodcast;
-
-git 

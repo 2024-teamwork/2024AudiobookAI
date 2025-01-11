@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import "./RegisterPage.css";
+import { Link } from "react-router-dom";
+import "./RegisterPage.css"; 
+import "../../LoginRegister/LoginRegister.css";
+import appleLogo from '../../../images/icon/apple.png';
+import googleLogo from '../../../images/icon/google.png';
+import emailIcon from '../../../images/icon/email.png';
+import passwordIcon from '../../../images/icon/password.png';
 
 const RegisterPage = ({ onNavigate }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
     role: "customer", // Default role
   });
 
@@ -18,10 +24,10 @@ const RegisterPage = ({ onNavigate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email, password, role } = formData;
+    const { email, password, confirmPassword, role } = formData;
 
-    if (!email || !password) {
-      setMessage("Please fill in all fields.");
+    if (!email || !password || password !== confirmPassword) {
+      setMessage("Please fill in all fields and make sure passwords match.");
       return;
     }
 
@@ -47,57 +53,72 @@ const RegisterPage = ({ onNavigate }) => {
 
   return (
     <div className="register-container">
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            required
-          />
+      <div className="auth-container">
+     
+        <div className="login-register-nav">
+            <button className="sign-in-nav-button">Sign in</button>
+            <button className="sign-in-nav-button">Create account</button>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            required
-          />
+
+        <div className="oauth-buttons">
+          <button className="google-btn">
+            <img src={googleLogo} alt="Google" className="oauth-icon" />
+            Continue with Google
+          </button>
+          <button className="apple-btn">
+            <img src={appleLogo} alt="Apple" className="oauth-icon" />
+            Continue with Apple
+          </button>
         </div>
-        <div className="form-group">
-          <label htmlFor="role">Select Role:</label>
-          <select
-            id="role"
-            name="role"
-            value={formData.role}
-            onChange={handleInputChange}
-          >
-            <option value="customer">Customer</option>
-            <option value="publisher">Publisher</option>
-            <option value="admin">Admin</option>
-          </select>
+
+        <div className="split-line">
+          <hr />
+          <span>OR</span>
+          <hr />
         </div>
-        <button type="submit">Register</button>
-      </form>
-      {message && <p className="message">{message}</p>}
-      <div className="nav-link">
+
+        <form onSubmit={handleSubmit}>
+          <div className="input-container">
+            <img src={emailIcon} alt="Email" className="input-icon" />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              placeholder="Email"
+            />
+          </div>
+          <div className="input-container">
+            <img src={passwordIcon} alt="Password" className="input-icon" />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              placeholder="Password"
+            />
+          </div>
+          <div className="input-container">
+            <img src={passwordIcon} alt="Password" className="input-icon" />
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleInputChange}
+              placeholder="Confirm Password"
+            />
+          </div>
+          <button type="submit" className="register-btn">Register Soundwave Account</button>
+        </form>
+
+        <div className="nav-link">
           <p>
-          Already registered? <Link to="/login">Login</Link>
+            Already registered? <Link to="/login">Login</Link>
           </p>
-      </div>
-      <div className="oauth-buttons">
-        <p>Or register using:</p>
-        <button className="google-btn">Google</button>
-        <button className="github-btn">GitHub</button>
-        <button className="alipay-btn">Alipay</button>
-        <button className="wechat-btn">WeChat</button>
+        </div>
       </div>
     </div>
   );

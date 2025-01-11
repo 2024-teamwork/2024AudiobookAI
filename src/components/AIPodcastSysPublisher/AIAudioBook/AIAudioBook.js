@@ -25,9 +25,18 @@ const AIAudioBook = ({ selectedFiles = [] }) => {
     setFormData({ ...formData, [name]: value });
   };
 
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsFormVisible(false);
+    const audiobookSelectText = `\nFollowing information is requirements to the audio, not part of the audio:
+    Language: ${formData.language};
+    Voice: ${formData.voice};
+    Character: ${formData.character};
+    Speed: ${formData.speed};
+    Style: ${formData.styleSelect};
+    Ambient Sound: ${formData.ambientSound}.`;
 
     if (!formData.text && !formData.fileUrl) {
       alert("Please provide text or a file URL.");
@@ -35,9 +44,9 @@ const AIAudioBook = ({ selectedFiles = [] }) => {
     }
 
     const payload = formData.text
-      ? { text: formData.text }
+      ? { text: formData.text+audiobookSelectText}
       : { file_url: formData.fileUrl };
-
+    console.log("AIAudiobook Payload: ",payload)
     try {
       const response = await axios.post(
         "https://audioai.alphalio.cn/api/v1/jobs/submit/env_sound",

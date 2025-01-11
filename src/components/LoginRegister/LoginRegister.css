@@ -1,0 +1,310 @@
+body {
+    background-color: white;
+  }
+  
+  .auth-container {
+    width: 70%;
+   
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+  }
+  
+  .input-container {
+    width: 667px;
+    height: 52px;
+  }
+  
+  .auth-container input {
+    width: 100%;
+    height: 100%;
+    padding-left: 40px;
+    font-size: 14px;
+    border-radius: 12px;
+    background-color: #f3f5f7;
+    margin-left: 5px;
+  }
+  
+  input::placeholder {
+    color: #6c7275;
+  }
+  
+  .forgot-password {
+    position: absolute;
+    left: 15px;
+    top: 8px;
+    color: #7288fa;
+    font-size: 12px;
+  }
+  
+  .auth-container button {
+    width: 667px;
+    height: 52px;
+    font-size: 14px;
+    border-radius: 12px;
+    padding: 8px;
+  }
+  
+  .sign-in-btn {
+    background-color: #7879f1;
+    color: white;
+  }
+  
+  .register-container .register-btn {
+    height: 52px;
+    width: 667px;
+    color: white;
+    background-color: #7879F1;
+  }
+  
+  .oauth-buttons button {
+    width: 667px;
+    height: 52px;
+    margin-bottom: 20px;
+  }
+  
+  .oauth-buttons img {
+    margin-right: 10px;
+  }
+  
+  .split-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .split-line span {
+    font-size: 12px;
+    font-weight: 500;
+    color: #6c7275;
+  }
+  
+  .split-line::before, .split-line::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: #6c7275;
+  }
+  
+  .auth-container .nav-link p {
+    text-align: center;
+  }
+  
+  .auth-container .nav-link a {
+    color: #7288fa;
+  }
+  .auth-container .input-container {
+    width: 667px;
+    height: 52px;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .input-icon {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .auth-container input {
+    width: 100%;
+    height: 100%;
+    padding-left: 40px; /* Adjust padding to accommodate icon */
+    font-size: 14px;
+    border-radius: 12px;
+    background-color: #f3f5f7;
+    border: none;
+  }
+  
+  .auth-container input::placeholder {
+    color: #6c7275;
+  }
+  
+  .auth-container .oauth-buttons button {
+    width: 667px;
+    height: 52px;
+    background-color: white;
+    border: 2px solid #E8ECEF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    margin-bottom: 16px;
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .auth-container .oauth-buttons button:hover{
+    background-color: rgb(241, 241, 241);
+  }
+
+  .auth-container .oauth-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+  }
+  
+  .auth-container .sign-in-btn, .register-btn {
+    width: 667px;
+    height: 52px;
+    background-color: #7879f1;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 12px;
+    min-width: 667px;
+  }
+  
+  .register-container .sign-in-nav-button{
+    height: 40px;
+  }
+
+  .auth-container .login-container {
+    height: 100vh;  /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;  /* Centers the .auth-container */
+  }
+
+  .auth-container .register-container{
+    height: 100vh;  /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;  /* Centers the .auth-container */
+  }
+
+  .auth-container .login-register-nav{
+    margin-top: 120px;
+    height: 48px;
+    width: 667px;
+    display: flex;
+    margin-bottom: 40px;
+    background-color: #F3F5F7;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    padding: 4px;
+  }
+
+  .sign-in-nav-button{
+    height: 40px;
+    width: 329.5px;
+    color: black;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 8px;
+    gap: 8px;
+    font-size: 14px;
+    background-color: white;
+  }
+
+  .sign-in-nav-button:first-child{
+    background-color: #F3F5F7;
+  }
+
+  .sign-in-nav-button:hover{
+    background-color: #f8fafc;
+  }
+
+  /* sign-in-nav-button styles */
+  .login-container .sign-in-nav-button {
+    height: 40px;
+    width: 329.5px;
+    color: black;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 8px;
+    gap: 8px;
+    font-size: 14px;
+    background-color: #F3F5F7;
+  }
+  
+  /* Style for the first child button */
+  .login-container .sign-in-nav-button:first-child {
+    background-color: white;
+  }
+  
+  /* Hover effect for sign-in-nav-button */
+  .login-container .sign-in-nav-button:hover {
+    background-color: #f8fafc;
+  }
+  
+  /* Additional styles (if needed for the other parts of the page) */
+  .input-container {
+    display: flex;
+    align-items: center;
+    width: 667px;
+    height: 52px;
+    background-color: #F3F5F7;
+    border-radius: 12px;
+    margin-bottom: 15px;
+  }
+  
+  .input-container input {
+    flex: 1;
+    padding-left: 40px;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+  }
+  
+  .input-icon {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    left: 12px;
+  }
+  
+  .sign-in-btn {
+    width: 667px;
+    height: 52px;
+    background-color: #7879F1;
+    color: white;
+    font-size: 16px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .split-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .split-line hr {
+    border: 0;
+    border-top: 1px solid #000;
+    flex-grow: 1;
+    margin: 0 10px;
+    width: 305px;
+    color: #6C727580;
+  }
+  
+  
+  .forgot-password {
+    margin-top: 45px;
+    position: absolute;
+    left: 12px;
+    font-size: 14px;
+    color: #7288FA;
+  }
+  
+  .nav-link p {
+    text-align: center;
+  }
+
+  .login-register-nav{
+    margin-top: 120px;
+  }
