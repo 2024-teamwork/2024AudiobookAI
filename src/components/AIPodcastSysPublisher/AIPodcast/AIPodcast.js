@@ -76,13 +76,13 @@ const AIPodcast = ({ selectedFiles = [] }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:9002/api/ai/submit-job",
+        `${process.env.REACT_APP_BACKEND_HOST_URL}:8002/api/ai/submit-job`,
         requestPayload,
         { headers: { "Content-Type": "application/json" } }
       );
 
       setResponseMessage(`Job submitted successfully! Job ID: ${response.data.task_id}`);
-      // setJobId(response.data.task_id);
+      setJobId(response.data.task_id);
       console.log("Response:", response);
     } catch (error) {
       console.error("Submission Error:", error.response);

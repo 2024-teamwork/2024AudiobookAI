@@ -19,7 +19,7 @@ const FileSubmitter = ({ selectedFiles, onUploadSuccess }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:9001/api/cos/upload/pdf",
+        `${process.env.REACT_APP_BACKEND_HOST_URL}:8001/api/cos/upload/pdf`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
