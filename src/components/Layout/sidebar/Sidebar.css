@@ -1,11 +1,11 @@
 .sidebar {
-  margin-top: 5px;
+  margin-top: 0px;
   width: 100%;
-  height: 100vh;
-  overflow-y: hidden;
-  overflow-x: auto;
   background-color: white;
-  padding: 10px;
+  padding: 15px;
+  margin-left: 5px;
+  width: 350px;
+  position: fixed;
 }
 
 .sidebar-title {
@@ -34,8 +34,42 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 10px;
   background-color: white;
+  border: dashed 2px #7287f9;
+  padding: 10px;
+  border-radius: 20px;
+  margin-top: -10px;
+  height:120px;
+}
+
+.file-submit-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 0 0;
+}
+
+.custom-file-submit{
+    display: inline-block;
+    padding: 5px 10px;
+    color: #242634;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 12px;
+    background-color: white;
+    font-weight: 600;
+    width: auto;
+    border: none;
+    border: solid 1.5px #cdd3d8;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.file-submit-wrapper .custom-file-submit:hover{
+  background-color: #eeeff0;
 }
 
 .custom-file-upload {
@@ -53,6 +87,7 @@
   font-weight: 600;
   width: 150px;
   height: 40px;
+  margin-top: 15px;
 }
 
 .custom-file-upload:hover {
@@ -75,58 +110,6 @@
 
 .file-container {
   width: 100%;
-}
-
-.notification {
-  color: red;
-  font-size: 0.9rem;
-  margin-top: 5px;
-}
-
-.pdf-list {
-  padding: 15px;
-  margin-top: 15px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
-
-.pdf-item {
-  padding: 8px 10px;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-  border-radius: 10px;
-  transition: background-color 0.2s ease;
-}
-
-.pdf-item:hover {
-  background-color: #e0e0e0;
-}
-
-input[type="checkbox"] {
-  margin-right: 5px;
-  flex-shrink: 0;
-  max-width: 10px;
-}
-
-.pdf-name {
-  flex-grow: 1;
-  margin-left: 0px;
-  max-width: 60%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-a {
-  margin-left: 5px;
-  text-decoration: none;
-  color: #007bff;
-  flex-shrink: 0;
-}
-
-a:hover {
-  text-decoration: underline;
 }
 
 .delete-button {
@@ -166,62 +149,135 @@ a:hover {
   margin-top: 5px;
 }
 
-/* Loading text */
+.pdf-list {
+  position: relative;
+  margin-top: 15px;
+  background-color: white;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+  max-height: 49vh;
+  overflow-y: auto;
+}
+
+.pdf-list-content {
+  padding: 0 5px 0 5px;
+}
+
+.list-item-title {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1;
+  padding: 7px 15px;
+  font-weight: bold;
+  border-bottom: 1px solid #EBEFF2;
+  font-size: 18px;
+}
+
+.pdf-item:hover {
+  background-color: #e0e0e0;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+  flex-shrink: 0;
+  max-width: 10px;
+}
+
 .pdf-list p {
   font-size: 1rem;
   color: #555;
 }
 
-/* File item */
 .pdf-item {
+  height: 68px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
-}
-.pdf-item {
-  display: flex;
-  align-items: center;
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
+  align-items: flex-start; /* Align items to the top */
+  border-top: 1px solid #EBEFF2;
+  margin-bottom: 0;
+  width: 100%;
+  padding: 10px 0px 12px 10px;
+  border-radius: 10px;
+  position: relative; /* Necessary for absolute positioning of checkbox */
 }
 
 .pdf-item input[type="checkbox"] {
-  margin-right: 10px;
+  margin-right: 15px;
   cursor: pointer;
-}
-
-.pdf-item:last-child {
-  border-bottom: none;
-}
-
-.pdf-item:last-child {
-  border-bottom: none;
+  position: absolute; /* To position it top left */
+  top: 10px;
+  left: 15px;
 }
 
 .pdf-name {
-  max-width: 200px;
+  font-weight: 500;
+  font-size: 14px;
+  max-width: 210px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal; /* Allow wrapping */
+  word-break: break-word; /* Break long words */
+  line-height: 1.2; /* Fixed line height for file name */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to two lines */
+  -webkit-box-orient: vertical;
+  margin-left: 32px;
+  margin-bottom: -5px;
 }
 
-a {
+.pdf-upload-time {
+  margin-top: 0px;
+  font-size: 0.9rem;
+  margin-left: 32px;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.more-icon {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%); /* Vertically center the icon */
+  cursor: pointer;
+  height: 35px;
+  width: 35px;
+  margin-left: auto;
+  padding: 9px;
+  border-radius: 50%;
+}
+
+.more-icon:hover{
+  background-color: rgb(184, 184, 184);
+}
+
+.popup-actions a {
+  padding: 5px 10px;
   color: #7287f9;
-  text-decoration: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 12px;
+  background-color: white;
+  font-weight: 600;
+  width: auto;
+  border: none;
+  margin-left: 5px;
+  border: solid 1.5px #c8d0ff;
+  flex-shrink: 0;
 }
 
-a:hover {
-  text-decoration: underline;
-  color: #6e44ff;
+.popup-actions a:hover {
+  text-decoration: none;
+  background-color: #f1f4ff;
+  color: #7287f9;
 }
 
 .delete-button {
   background-color: #ff4d4f;
   color: white;
   border: none;
-  padding: 5px 10px;
+  padding: 5px 5px;
   margin-left: 10px;
   cursor: pointer;
   border-radius: 4px;
@@ -230,4 +286,72 @@ a:hover {
 
 .delete-button:hover {
   background-color: #d9363e;
+}
+
+.sync-message-container{
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.synced-icon{
+  height: 16px;
+  margin-left: 12px;
+  margin-right: 8px;
+}
+
+.sync-text{
+  font-size: 13px;
+}
+
+.file-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 99;
+
+}
+
+.popup-content {
+  position: fixed;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 5px 4px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  font-size: 14px;
+  width: 280px;
+  z-index: 100;
+}
+
+.popup-file-name{
+  font-size: 16px;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.popup-actions > :last-child {
+  border-radius: 12px;
+  background-color: #7287f9;
+  font-weight: 600;
+
+}
+
+.popup-actions > :last-child:hover {
+  background-color: #7287f9;
+  opacity: 0.7;
 }

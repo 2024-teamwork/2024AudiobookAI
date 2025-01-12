@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./LoginPage.css";
+import "./LoginPage.css"; // Add your styles here
+import "../../LoginRegister/LoginRegister.css";
+import appleLogo from '../../../images/icon/apple.png';
+import googleLogo from '../../../images/icon/google.png';
+import emailIcon from '../../../images/icon/email.png';
+import passwordIcon from '../../../images/icon/password.png';
 
 const LoginPage = ({ onNavigate }) => {
   const [formData, setFormData] = useState({
@@ -38,7 +43,6 @@ const LoginPage = ({ onNavigate }) => {
         const data = await response.json();
         setMessage("Login successful!");
         sessionStorage.setItem("access_token", data.access_token);
-//         console.log("Token:", data.access_token);
       } else {
         const errorData = await response.json();
         setMessage(errorData.message || "Login failed.");
@@ -50,57 +54,61 @@ const LoginPage = ({ onNavigate }) => {
 
   return (
     <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleInputChange}
-            required
-          />
+      <div className="auth-container">
+        <div className="login-register-nav">
+          <button className="sign-in-nav-button">Sign in</button>
+          <button className="sign-in-nav-button">Create account</button>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            required
-          />
+
+        <div className="oauth-buttons">
+          <button className="google-btn">
+            <img src={googleLogo} alt="Google" className="oauth-icon" />
+            Continue with Google
+          </button>
+          <button className="apple-btn">
+            <img src={appleLogo} alt="Apple" className="oauth-icon" />
+            Continue with Apple
+          </button>
         </div>
-        <div className="form-group">
-          <label htmlFor="role">Select Role:</label>
-          <select
-            id="role"
-            name="role"
-            value={formData.role}
-            onChange={handleInputChange}
-          >
-            <option value="customer">Customer</option>
-            <option value="publisher">Publisher</option>
-            <option value="admin">Admin</option>
-          </select>
+        
+        <div className="split-line">
+          <hr />
+          <span>OR</span>
+          <hr />
         </div>
-        <button type="submit">Login</button>
-      </form>
-      {message && <p className="message">{message}</p>}
-      <div className="nav-link">
+
+        <form onSubmit={handleSubmit}>
+          <div className="input-container">
+            <img src={emailIcon} alt="Email" className="input-icon" />
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleInputChange}
+              placeholder="Username or email"
+            />
+          </div>
+          <div className="input-container">
+            <img src={passwordIcon} alt="Password" className="input-icon" />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              placeholder="Password"
+            />
+            <Link to="/forgot-password" className="forgot-password">Forgot password?</Link>
+          </div>
+          <button type="submit" className="sign-in-btn">Sign in with Soundwave</button>
+        </form>
+
+        <div className="nav-link">
           <p>
-          Not registered yet? <Link to="/register">Register</Link>
+            Not registered yet? <Link to="/register">Register</Link>
           </p>
-      </div>
-      <div className="oauth-buttons">
-        <p>Or login using:</p>
-        <button className="google-btn">Google</button>
-        <button className="github-btn">GitHub</button>
-        <button className="alipay-btn">Alipay</button>
-        <button className="wechat-btn">WeChat</button>
+        </div>
       </div>
     </div>
   );
