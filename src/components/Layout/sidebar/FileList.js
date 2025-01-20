@@ -123,18 +123,6 @@ const sampleFiles = [
     uploadTime: "5 minutes ago"
   },
   {
-    fileId: 2,
-    fileName: "Generative Artificial Intelligence: A Systematic Review and Applications",
-    cosUrl: "https://arxiv.org/html/2405.11029v1",
-    uploadTime: "2 hours ago"
-  },
-  {
-    fileId: 3,
-    fileName: "The Rapid Adoption of Generative AI",
-    cosUrl: "https://www.nber.org/papers/w32966",
-    uploadTime: "1 day ago"
-  },
-  {
     fileId: 7,
     fileName: "经济学原理.txt",
     cosUrl: "https://pdf-store-1257970690.cos.ap-shanghai.myqcloud.com/uploads/1734492745419_134e46db-e59b-4280-9b6d-8c399a7f8c14_%E7%BB%8F%E6%B5%8E%E5%AD%A6%E5%8E%9F%E7%90%86.txt?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDEKDtMcfU6WjiV5SREoBMRJxOcdRAnESS%26q-sign-time%3D1734492747%3B1993692747%26q-key-time%3D1734492747%3B1993692747%26q-header-list%3Dhost%26q-url-param-list%3D%26q-signature%3D8eff3ea975975e0cb719675f0d46dcea62c6a170",
