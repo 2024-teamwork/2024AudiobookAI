@@ -11,6 +11,7 @@ import RegisterPage from './components/LoginRegister/Register/RegisterPage';
 import AIPodcast from './components/AIPodcastSysPublisher/AIPodcast/AIPodcast';
 import PublisherAIPodcastLayout from './components/Layout/PublisherAIPodcastLayout/PublisherAIPodcastLayout';
 import PodcastPlayer from './components/AIPodcastSysPublisher/AIPodcast/PodcastPlayer/PodcastPlayer';
+import AboutPage from './components/PublisherMgmtSys/AboutPage/AboutPage'; 
 
 const App = () => {
   const [pdfFiles, setPdfFiles] = useState([
@@ -73,6 +74,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/podcast" element={<AIPodcast />} />
+        <Route path="/about" element={<AboutPage />} /> 
 
         <Route
           path="/"

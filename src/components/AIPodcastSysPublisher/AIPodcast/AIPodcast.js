@@ -76,11 +76,16 @@ const AIPodcast = ({ selectedFiles = [] }) => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_HOST_URL}:8002/api/ai/submit-job`,
+        "https://audioai.alphalio.cn/api/v1/jobs/submit/podcast",
         requestPayload,
-        { headers: { "Content-Type": "application/json" } }
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
+          },
+        }
       );
-
+  
       setResponseMessage(`Job submitted successfully! Job ID: ${response.data.task_id}`);
       setJobId(response.data.task_id);
       console.log("Response:", response);

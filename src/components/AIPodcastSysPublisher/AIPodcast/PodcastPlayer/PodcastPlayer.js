@@ -42,8 +42,7 @@ const PodcastPlayer = ({ jobId }) => {
         `https://audioai.alphalio.cn/api/v1/jobs/download?task_id=${jobId}&result_type=transcript`,
         {
           headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3MzcwNjk2NDJ9.uKR7IA1j5n9i0xBlksTZMNPl-gnbu_3qyG6znRzE5Xc",
+            Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
           },
         }
       );

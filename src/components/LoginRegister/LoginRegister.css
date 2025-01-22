@@ -55,6 +55,7 @@ body {
     background-color: #7879f1;
     color: white;
   }
+
   
   .register-container .register-btn {
     height: 52px;
@@ -92,6 +93,13 @@ body {
     background-color: #6c7275;
   }
   
+  .sign-in-nav-button:active{
+    background-color: white;
+  }
+
+  
+
+
   .auth-container .nav-link p {
     text-align: center;
   }
@@ -152,8 +160,14 @@ body {
     height: 24px;
     margin-right: 12px;
   }
+
+  .oauth-icon-smaller{
+    width: 21px;
+    height: 21px;
+    margin-right: 12px;
+  }
   
-  .auth-container .sign-in-btn, .register-btn {
+  .login-container .sign-in-btn{
     width: 667px;
     height: 52px;
     background-color: #7879f1;
@@ -162,12 +176,43 @@ body {
     font-size: 16px;
     font-weight: bold;
     border-radius: 12px;
-    min-width: 667px;
+    width: 667px;
+    margin-top: 28px;
   }
+
+  .register-container .register-btn{
+    width: 667px;
+    height: 52px;
+    background-color: #7879f1;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 12px;
+    width: 667px;
+  }
+
+
   
   .register-container .sign-in-nav-button{
     height: 40px;
+    text-align: center;
   }
+
+  .register-container .sign-in-nav-button:active{
+    background-color: white;
+  }
+
+  .login-container .sign-in-nav-button:active{
+    background-color: white;
+  }
+
+
+  .register-container .sign-in-nav-button:last-child{
+    box-shadow: 0px 2px 2px 0px #00000012;
+  }
+  
+  
 
   .auth-container .login-container {
     height: 100vh;  /* Full viewport height */
@@ -212,8 +257,8 @@ body {
     background-color: #F3F5F7;
   }
 
-  .sign-in-nav-button:hover{
-    background-color: #f8fafc;
+  .sign-in-nav-button:active{
+    background-color: white;
   }
 
   /* sign-in-nav-button styles */
@@ -227,16 +272,19 @@ body {
     gap: 8px;
     font-size: 14px;
     background-color: #F3F5F7;
+    text-align: center;
   }
   
   /* Style for the first child button */
   .login-container .sign-in-nav-button:first-child {
     background-color: white;
+    box-shadow: 0px 2px 2px 0px #00000012;
   }
+
   
   /* Hover effect for sign-in-nav-button */
-  .login-container .sign-in-nav-button:hover {
-    background-color: #f8fafc;
+.sign-in-nav-button:hover {
+    color:#7879F1;
   }
   
   /* Additional styles (if needed for the other parts of the page) */
@@ -264,40 +312,38 @@ body {
     height: 16px;
     position: absolute;
     left: 12px;
-  }
-  
-  .sign-in-btn {
-    width: 667px;
-    height: 52px;
-    background-color: #7879F1;
-    color: white;
-    font-size: 16px;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
+    margin-top: 2px;
   }
   
   .split-line {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #6C727580;
+    opacity: 70%;
   }
   
   .split-line hr {
-    border: 0;
+    border: none;
     border-top: 1px solid #000;
     flex-grow: 1;
     margin: 0 10px;
     width: 305px;
-    color: #6C727580;
+    background-color: #6C727580; 
+    opacity: 70%;
   }
   
-  
   .forgot-password {
-    margin-top: 45px;
+    margin-top: 52px;
     position: absolute;
-    left: 12px;
+    left: 0px;
     font-size: 14px;
+    color: #7288FA;
+    font-weight: 500;
+  }
+
+  .forgot-password:hover{
+    text-decoration: underline;
     color: #7288FA;
   }
   
