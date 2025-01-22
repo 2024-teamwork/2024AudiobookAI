@@ -25,8 +25,6 @@ const AIAudioBook = ({ selectedFiles = [] }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsFormVisible(false);
@@ -53,9 +51,7 @@ const AIAudioBook = ({ selectedFiles = [] }) => {
         payload,
         {
           headers: {
-            "Content-Type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3MzcwNjk2NDJ9.uKR7IA1j5n9i0xBlksTZMNPl-gnbu_3qyG6znRzE5Xc",
+            Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
           },
         }
       );
