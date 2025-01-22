@@ -77,7 +77,7 @@ const Navigation = () => {
         
           <div className="dropdown">
             <Link to="/user-center">User Center</Link>
-            <Link to="/logout">Log Out</Link>
+            <Link to="/login">Log Out</Link>
           </div>
         
       </div>

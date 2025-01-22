@@ -4,6 +4,7 @@ import "./LoginPage.css"; // Add your styles here
 import "../../LoginRegister/LoginRegister.css";
 import appleLogo from '../../../images/icon/apple.png';
 import googleLogo from '../../../images/icon/google.png';
+import microsoftLogo from '../../../images/icon/microsoft.png';
 import emailIcon from '../../../images/icon/email.png';
 import passwordIcon from '../../../images/icon/password.png';
 
@@ -13,6 +14,20 @@ const LoginPage = ({ onNavigate }) => {
     password: "kytestaudioai",
     role: "customer", // Default role
   });
+
+  const googleLogin = () => {
+    console.log("Google Login clicked");
+  };
+  
+  const appleLogin = () => {
+    console.log("Apple Login clicked");
+  };
+  
+  const microsoftLogin = () => {
+    console.log("Microsoft Login clicked");
+  };
+  
+  
 
   const [message, setMessage] = useState("");
 
@@ -55,21 +70,31 @@ const LoginPage = ({ onNavigate }) => {
   return (
     <div className="login-container">
       <div className="auth-container">
-        <div className="login-register-nav">
-          <button className="sign-in-nav-button">Sign in</button>
-          <button className="sign-in-nav-button">Create account</button>
-        </div>
 
-        <div className="oauth-buttons">
-          <button className="google-btn">
-            <img src={googleLogo} alt="Google" className="oauth-icon" />
-            Continue with Google
-          </button>
-          <button className="apple-btn">
-            <img src={appleLogo} alt="Apple" className="oauth-icon" />
-            Continue with Apple
-          </button>
-        </div>
+      <div className="login-register-nav">
+        <Link to="/login" className="sign-in-nav-button">
+          Sign in
+        </Link>
+        <Link to="/register" className="sign-in-nav-button">
+          Create Account
+        </Link>
+      </div>
+
+      <div className="oauth-buttons">
+        <button className="google-btn" onClick={googleLogin}>
+          <img src={googleLogo} alt="Google" className="oauth-icon" />
+          Continue with Google
+        </button>
+        <button className="apple-btn" onClick={appleLogin}>
+          <img src={appleLogo} alt="Apple" className="oauth-icon" />
+          Continue with Apple
+        </button>
+        <button className="microsoft-btn" onClick={microsoftLogin}>
+          <img src={microsoftLogo} alt="Microsoft" className="oauth-icon-smaller" />
+          Continue with Microsoft
+        </button>
+      </div>
+
         
         <div className="split-line">
           <hr />
@@ -104,11 +129,6 @@ const LoginPage = ({ onNavigate }) => {
           <button type="submit" className="sign-in-btn">Sign in with Soundwave</button>
         </form>
 
-        <div className="nav-link">
-          <p>
-            Not registered yet? <Link to="/register">Register</Link>
-          </p>
-        </div>
       </div>
     </div>
   );

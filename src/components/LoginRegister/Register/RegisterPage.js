@@ -4,6 +4,7 @@ import "./RegisterPage.css";
 import "../../LoginRegister/LoginRegister.css";
 import appleLogo from '../../../images/icon/apple.png';
 import googleLogo from '../../../images/icon/google.png';
+import microsoftLogo from '../../../images/icon/microsoft.png';
 import emailIcon from '../../../images/icon/email.png';
 import passwordIcon from '../../../images/icon/password.png';
 
@@ -14,6 +15,18 @@ const RegisterPage = ({ onNavigate }) => {
     confirmPassword: "",
     role: "customer", // Default role
   });
+
+  const googleRegister = () => {
+    console.log("Google Register clicked");
+  };
+  
+  const appleRegister = () => {
+    console.log("Apple Register clicked");
+  };
+  
+  const microsoftRegister = () => {
+    console.log("Microsoft Register clicked");
+  };
 
   const [message, setMessage] = useState("");
 
@@ -54,20 +67,28 @@ const RegisterPage = ({ onNavigate }) => {
   return (
     <div className="register-container">
       <div className="auth-container">
-     
+
         <div className="login-register-nav">
-            <button className="sign-in-nav-button">Sign in</button>
-            <button className="sign-in-nav-button">Create account</button>
+          <Link to="/login" className="sign-in-nav-button">
+            Sign in
+          </Link>
+          <Link to="/register" className="sign-in-nav-button">
+            Create Account
+          </Link>
         </div>
 
         <div className="oauth-buttons">
-          <button className="google-btn">
+          <button className="google-btn" onClick={googleRegister}>
             <img src={googleLogo} alt="Google" className="oauth-icon" />
             Continue with Google
           </button>
-          <button className="apple-btn">
+          <button className="apple-btn" onClick={appleRegister}>
             <img src={appleLogo} alt="Apple" className="oauth-icon" />
             Continue with Apple
+          </button>
+          <button className="microsoft-btn" onClick={microsoftRegister}>
+            <img src={microsoftLogo} alt="Microsoft" className="oauth-icon-smaller" />
+            Continue with Microsoft
           </button>
         </div>
 
@@ -114,11 +135,6 @@ const RegisterPage = ({ onNavigate }) => {
           <button type="submit" className="register-btn">Register Soundwave Account</button>
         </form>
 
-        <div className="nav-link">
-          <p>
-            Already registered? <Link to="/login">Login</Link>
-          </p>
-        </div>
       </div>
     </div>
   );
