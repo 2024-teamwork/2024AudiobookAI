@@ -37,7 +37,7 @@ const Sidebar = ({ onFilesSelected }) => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_HOST_URL}:8001/api/cos/get-pdf/user`
+        `http://audioai.alphalio.cn:8001/api/cos/get-pdf/user`
       );
       setFileList(response.data);
     } catch (error) {
