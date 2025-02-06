@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import FileSubmitter from "./FileSubmitter";
-import FileChooser from "./FileChooser"
+//import FileSubmitter from "./FileSubmitter";
+//import FileChooser from "./FileChooser"
+import FileUploader from "./FileUploader"
 import FileList from "./FileList";
 import axios from "axios";
 import "./Sidebar.css";
@@ -89,7 +90,7 @@ const Sidebar = ({ onFilesSelected }) => {
    
   return (
     <div className="sidebar">
-      <FileChooser onFileSelect={onFilesSelected} />
+      <FileUploader onFileSelect={onFilesSelected} />
       <div className="FileList-container">
         <FileList
           fileList={fileList}
@@ -99,7 +100,6 @@ const Sidebar = ({ onFilesSelected }) => {
           selectedFiles={selectedFiles}
         />
       </div>
-      <FileSubmitter  onUploadSuccess={handleUploadSuccess} />
       <div className="sync-message-container">
         <img src={syncedIcon} className="synced-icon"></img>
         <p className="sync-text">Last synced: {latestSyncTime}</p>

@@ -1,119 +1,138 @@
-/* Subscription Page - Full height with flexbox */
-.subscription-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Ensure footer is positioned correctly */
-  min-height: 100vh;
-  background-color: #f9fafc; /* Soft background for better readability */
-  padding: 0 0; /* Responsive padding */
-  box-sizing: border-box;
+.subscription-container {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 40px;
+  background-color: #f9f9f9;
 }
 
-/* Title Styling */
-.title {
-  font-size: 3rem;
+.headphone-icon {
+  width: 60px;
+  height: 60px;
+  display: block;
+  margin: -20px auto 10px;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: bold;
   color: #333;
   text-align: center;
-  margin: 40px 0;
-  font-weight: 700; /* More emphasis on the title */
+  margin-top: -5px;
 }
 
-/* Container for Subscription Plans */
-.plans-container {
+.subtext {
+  font-size: 18px;
+  color: #4c525c;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: -10px;
+}
+
+.plans {
   display: flex;
-  justify-content: space-evenly; /* Even spacing for better alignment */
-  flex-wrap: wrap;
-  gap: 30px; /* Better spacing between cards */
-  padding-bottom: 30px;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 20px;
 }
 
-/* Plan Cards */
 .plan-card {
-  background-color: white;
+  width: 360px;
+  height: 480px;
+  padding: 30px;
+  border: 2px solid rgb(235, 235, 235);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer shadow for a cleaner look */
-  width: 320px; /* Wider card */
-  padding: 20px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.plan-card:hover {
-  transform: translateY(-10px); /* Slight elevation effect on hover */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-}
-
-/* Plan Name Styling */
-.plan-name {
-  font-size: 1.8rem;
-  color: #007bff;
-  margin-bottom: 15px;
-  font-weight: bold;
-}
-
-/* Price Styling */
-.plan-price {
-  font-size: 2.5rem;
-  color: #28a745;
-  margin-bottom: 20px;
-  font-weight: bold;
-}
-
-/* Features List */
-.plan-features {
-  list-style-type: none;
-  padding: 0;
-  margin-bottom: 20px;
-}
-
-.plan-features li {
-  font-size: 1rem;
-  color: #666;
-  margin: 8px 0;
-}
-
-/* Subscribe Button Styling */
-.subscribe-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease-in-out;
+  background-color: white;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin-top: 10px;
 }
 
-.subscribe-button:hover {
-  background-color: #0056b3;
+.plan-card.selected {
+  border: 2px solid #7287f9;
+  transform: scale(1.03);
 }
 
-/* Footer */
-.main-footer {
-  background-color: #f0f0f0;
-  padding: 20px;
-  text-align: center;
-  margin-top: auto;
+.plan-header {
+  display: flex;
+  justify-content: left;
+  height: 40px;
 }
 
-.main-footer p {
-  color: #555;
-  font-size: 1rem;
+.plan-icon {
+  width: 32px;
+  height: 32px;
+  margin-right: 3px;
+}
+
+.plan-header h3 {
+  font-size: 20px;
+  font-weight: bold;
   margin: 0;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .plans-container {
-    flex-direction: column;
-    align-items: center;
-  }
+.description {
+  font-size: 15px;
+  color: #4c525c;
+  margin-top: -5px;
+}
 
-  .plan-card {
-    width: 90%;
-  }
+.plan-card h4 {
+  font-size: 35px;
+  font-weight: bold;
+  color: black;
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
 
-  .title {
-    font-size: 2.2rem;
-  }
+.per-month {
+  font-size: 18px;
+  color: #6f7076;
+  font-weight: 400;
+}
+
+.plan-card ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: left;
+  font-size: 16px;
+  color: #4f545e;
+  width: 100%;
+  font-weight: 500;
+}
+
+.plan-card ul li {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.check-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.plan-card button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 6px;
+  background-color: #f2f4f5;
+  color: #3c4352;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: auto;
+}
+
+.plan-card button:hover {
+  background-color: #7287f9;
+  color: white;
 }
