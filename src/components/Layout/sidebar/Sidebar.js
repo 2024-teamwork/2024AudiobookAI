@@ -1,33 +1,12 @@
 import React, { useState, useEffect } from "react";
-import FileSubmitter from "./FileSubmitter";
-import FileChooser from "./FileChooser"
+import FileUploader from "./FileUploader";
 import FileList from "./FileList";
 import axios from "axios";
 import "./Sidebar.css";
-import syncedIcon from '../../../images/icon/synced.png';
-
-//latest sync time
-const syncRecordInMinutes = 660;
-function formatTime(minutes) { //sync time process
-  if (minutes < 1) {
-      return "less than a minute ago";
-  } else if (minutes < 60) {
-      return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
-  } else if (minutes < 1440) {
-      const hours = Math.floor(minutes / 60);
-      return `${hours} hour${hours === 1 ? '' : 's'} ago`;
-  } else if (minutes < 43200) {
-      const days = Math.floor(minutes / 1440);
-      return `${days} day${days === 1 ? '' : 's'} ago`;
-  } else {
-      return "over 1 month ago";
-  }
-}
-
-const latestSyncTime = formatTime(syncRecordInMinutes);
 
 
 const Sidebar = ({ onFilesSelected }) => {
+
   const [fileList, setFileList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -37,7 +16,7 @@ const Sidebar = ({ onFilesSelected }) => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://audioai.alphalio.cn:8001/api/cos/get-pdf/user`
+        "http://localhost:8001/api/cos/get-pdf/user"
       );
       setFileList(response.data);
     } catch (error) {
@@ -55,8 +34,7 @@ const Sidebar = ({ onFilesSelected }) => {
     const updatedSelection = selectedFiles.find((selected) => selected.cosUrl === file.cosUrl)
       ? selectedFiles.filter((selected) => selected.cosUrl !== file.cosUrl) // Remove file if already selected
       : [...selectedFiles, file]; // Add file if not selected
-      
-    console.log(file);
+    
     setSelectedFiles(updatedSelection);
     onFilesSelected(updatedSelection); // Notify parent with the updated file objects
   };
@@ -75,8 +53,7 @@ const Sidebar = ({ onFilesSelected }) => {
 
   const handleDeleteFile = async (fileId) => {
     try {
-      await axios.delete(
-        `${process.env.REACT_APP_BACKEND_HOST_URL}:8001/api/cos/delete-pdf/${fileId}`); // Use fileId in the API endpoint
+      await axios.delete(`http://localhost:8001/api/cos/delete-pdf/${fileId}`); // Use fileId in the API endpoint
       setFileList((prev) => prev.filter((file) => file.fileId !== fileId)); // Remove deleted file from state
       if (selectedFiles?.fileId === fileId) {
         setSelectedFiles(null); // Clear selected file if it's deleted
@@ -89,21 +66,15 @@ const Sidebar = ({ onFilesSelected }) => {
    
   return (
     <div className="sidebar">
-      <FileChooser onFileSelect={onFilesSelected} />
-      <div className="FileList-container">
-        <FileList
-          fileList={fileList}
-          loading={loading}
-          onFileToggle={toggleFileSelection}
-          onDeleteFile={handleDeleteFile} // Pass the delete handler
-          selectedFiles={selectedFiles}
-        />
-      </div>
-      <FileSubmitter  onUploadSuccess={handleUploadSuccess} />
-      <div className="sync-message-container">
-        <img src={syncedIcon} className="synced-icon"></img>
-        <p className="sync-text">Last synced: {latestSyncTime}</p>
-      </div>
+      <FileUploader onUploadSuccess={handleUploadSuccess} />
+
+      <FileList
+        fileList={fileList}
+        loading={loading}
+        onFileToggle={toggleFileSelection}
+        onDeleteFile={handleDeleteFile} // Pass the delete handler
+        selectedFiles={selectedFiles}
+      />
     </div>
   );
 };

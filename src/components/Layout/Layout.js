@@ -15,8 +15,14 @@ const Layout = ({ children }) => {
 
   return (
     <div className="app-container">
+       {/* Pass handler */}
+      {/* <Sidebar onFilesSelected={handleFilesSelected} /> */}
+      {/* Main content */}
       <div className="main-content">
         <Navigation />
+        {/* <div className="content-area">
+          <AIPodcast selectedFiles={selectedFiles} />
+        </div> */}
 
         {/* MainContentLayout handles the dynamic content switching */}
         {/* <MainContentLayout selectedFiles={selectedFiles} /> */}
