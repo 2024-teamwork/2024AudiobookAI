@@ -60,14 +60,14 @@ const FileUploader = ({ onUploadSuccess }) => {
         <div className="file-count">
           {selectedFiles.length > 0
             ? `${selectedFiles.length} files selected`
-            : "No files selected"}
+            : "No file selected"}
         </div>
         <button
           onClick={handleUpload}
-          className="custom-file-submit"
+          className="custom-file-upload"
           disabled={uploading}
         >
-          {uploading ? "Uploading..." : "Upload to cloud"}
+          {uploading ? "Uploading..." : "Submit"}
         </button>
         <ErrorPopup message={errorMessage} onClose={handleCloseError} />
       </div>
