@@ -64,7 +64,7 @@ const FileUploader = ({ onUploadSuccess }) => {
         </div>
         <button
           onClick={handleUpload}
-          className="custom-file-submit"
+          className="custom-file-upload"
           disabled={uploading}
         >
           {uploading ? "Uploading..." : "Submit"}
