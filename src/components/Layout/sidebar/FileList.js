@@ -69,24 +69,29 @@ const FileList = ({ fileList = [], loading, onFileToggle, onDeleteFile, selected
           <p>Loading files...</p>
         ) : combinedFiles.length > 0 ? (
           combinedFiles.map((file, index) => (
-            <div key={file.fileId} className="pdf-item">
-              <input
-                type="checkbox"
-                checked={selectedFiles.some((selected) => selected.fileId === file.fileId)}
-                onChange={() => onFileToggle(file)}
-              />
-              <div className="pdf-info-preview">
-                <span className="pdf-name">{file.fileName}</span>
-                <span className="pdf-upload-time">{file.uploadTime}</span>
-              </div>
-              <img
-                src={moreIcon}
-                alt="More options"
-                className="more-icon"
-                onClick={(event) => handleMoreClick(file, event)}
-                ref={moreIconRef}
-              />
-            </div>
+            <div>
+
+      <div key={index} className="pdf-item">
+          <input
+            type="checkbox"
+            checked={selectedFiles.fileName}
+            onChange={() => onFileToggle(file)} // Pass the entire file object to parent
+          />
+        <div className="pdf-info-preview">
+          <span className="pdf-name">{file.fileName}</span>
+          <span className="pdf-upload-time">{file.uploadTime}</span>
+        </div>  
+          <img
+              src={moreIcon}
+              alt="More options"
+              className="more-icon"
+              onClick={(event) => handleMoreClick(file, event)}
+              ref={moreIconRef}
+          />
+      </div>
+        
+              
+        </div>
           ))
         ) : (
           <p>No files uploaded yet.</p>

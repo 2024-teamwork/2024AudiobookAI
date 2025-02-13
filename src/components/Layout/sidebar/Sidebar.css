@@ -148,9 +148,6 @@
   background-color: #e0e0e0; /* Darken background on hover or active */
 }
 
-.pdf-item:last-child {
-  border-bottom: none;
-}
 
 .pdf-icon {
   margin-right: 10px;
@@ -179,6 +176,8 @@
   top: 10px;
   left: 15px;
 }
+
+
 
 .delete-button {
   background: none;
@@ -282,6 +281,7 @@ a:hover {
   display: flex;
   align-items: center;
   height: 40px;
+  border-top: 1px solid #EBEFF2;
 }
 
 .synced-icon{
@@ -387,7 +387,6 @@ a:hover {
   height: 25px;
   overflow-y: auto;
 }
-
 
 .pdf-upload-time {
   margin-top: 0px;
