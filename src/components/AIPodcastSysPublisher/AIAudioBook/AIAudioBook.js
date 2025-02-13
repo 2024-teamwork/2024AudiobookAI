@@ -51,7 +51,7 @@ const AIAudioBook = ({ selectedFiles = [] }) => {
         payload,
         {
           headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3NDIwNzI3NTN9.EzyRzIDKR-5yIlCeqtQd_rWj1xaPjs-1n0WWgDoYQtY`
           },
         }
       );

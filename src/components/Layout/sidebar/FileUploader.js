@@ -25,7 +25,7 @@ const FileUploader = ({ onUploadSuccess }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8001/api/cos/upload/pdf",
+        "http://audioai.alphalio.cn:8001/api/cos/upload/pdf",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
