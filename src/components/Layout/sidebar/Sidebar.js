@@ -16,7 +16,7 @@ const Sidebar = ({ onFilesSelected }) => {
     try {
       setLoading(true);
       const response = await axios.get(
-        "http://localhost:8001/api/cos/get-pdf/user"
+        "http://audioai.alphalio.cn:8001/api/cos/get-pdf/user"
       );
       setFileList(response.data);
     } catch (error) {
@@ -53,7 +53,7 @@ const Sidebar = ({ onFilesSelected }) => {
 
   const handleDeleteFile = async (fileId) => {
     try {
-      await axios.delete(`http://localhost:8001/api/cos/delete-pdf/${fileId}`); // Use fileId in the API endpoint
+      await axios.delete(`http://audioai.alphalio.cn:8001/api/cos/delete-pdf/${fileId}`); // Use fileId in the API endpoint
       setFileList((prev) => prev.filter((file) => file.fileId !== fileId)); // Remove deleted file from state
       if (selectedFiles?.fileId === fileId) {
         setSelectedFiles(null); // Clear selected file if it's deleted
