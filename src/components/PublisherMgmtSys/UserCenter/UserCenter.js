@@ -1,204 +1,193 @@
-import React, { useState } from 'react';
-import './UserCenter.css';
+import React, { useState } from "react";
+import "./UserCenter.css";
+import userCenterAvatar from "../../../images/userCenterAvatar.png";
+import camera from "../../../images/camera.png";
+import Navigation from "../../Layout/navigation/Navigation";
 
-import playIcon from '../../../images/icon/play.png';
-import binIcon from '../../../images/icon/bin.png';
-import downloadIcon from '../../../images/icon/download.png';
-import plusIcon from '../../../images/icon/plus.png';
+const countryOptions = [
+  "China", "United States", "United Kingdom", "Germany", "France", "Canada", "Australia", "Japan",
+  "South Korea", "India", "Brazil", "Russia", "Mexico", "Italy", "Spain", "Netherlands", "Sweden",
+  "Switzerland", "Singapore", "United Arab Emirates", "Saudi Arabia", "South Africa"
+];
 
-import testAudio1 from '../../../audio/testAudio1.mp3';
-import testAudio2 from '../../../audio/testAudio2.mp3';
-import testAudio3 from '../../../audio/testAudio3.mp3';
-import testAudio4 from '../../../audio/testAudio4.mp3';
-import testAudio5 from '../../../audio/testAudio5.mp3';
-import testAudio6 from '../../../audio/testAudio6.mp3';
-import testAudio7 from '../../../audio/testAudio7.mp3';
-import testAudio8 from '../../../audio/testAudio8.mp3';
-import testAudio9 from '../../../audio/testAudio9.mp3';
-
-
-const ProductPage = () => {
-  const fakeAudioData = [
-    {
-      audioId: '1',
-      userId: '1432',
-      title: 'Apple',
-      date: '2024-12-01',
-      author: 'Mary Shahi',
-      type: 'Podcast',
-      source: testAudio1,
-    },
-    {
-      audioId: '2',
-      userId: '1432',
-      title: 'Pear',
-      date: '2024-11-20',
-      author: 'Jason Lin',
-      type: 'Music',
-      source: testAudio2,
-    },
-    {
-      audioId: '3',
-      userId: '1432',
-      title: 'Banana',
-      date: '2024-10-15',
-      author: 'Alice Acker',
-      type: 'Audiobook',
-      source: testAudio3,
-    },
-    {
-      audioId: '4',
-      userId: '1432',
-      title: 'Grape',
-      date: '2024-09-05',
-      author: 'Chris Yoon',
-      type: 'Podcast',
-      source: testAudio4,
-    },
-    {
-      audioId: '5',
-      userId: '1432',
-      title: 'Orange',
-      date: '2024-08-18',
-      author: 'Natalie King',
-      type: 'Music',
-      source: testAudio5,
-    },
-    {
-      audioId: '6',
-      userId: '1432',
-      title: 'Pineapple',
-      date: '2024-07-10',
-      author: 'Victor Zhou',
-      type: 'Audiobook',
-      source: testAudio6,
-    },
-    {
-      audioId: '7',
-      userId: '1432',
-      title: 'Mango',
-      date: '2024-06-22',
-      author: 'Sophia Lee',
-      type: 'Podcast',
-      source: testAudio7,
-    },
-    {
-      audioId: '8',
-      userId: '1432',
-      title: 'Strawberry',
-      date: '2024-05-13',
-      author: 'Daniel Chen',
-      type: 'Music',
-      source: testAudio8,
-    },
-    {
-      audioId: '9',
-      userId: '1432',
-      title: 'Blueberry',
-      date: '2024-04-02',
-      author: 'Ella Park',
-      type: 'Audiobook',
-      source: testAudio9,
-    },
-  ];
-  
-
-  const [searchTerm, setSearchTerm] = useState('');
-  const [audioData] = useState(fakeAudioData);
-
-  const filteredData = audioData.filter(
-    (audio) =>
-      audio.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      audio.author.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const handlePlay = (source) => {
-    const audio = new Audio(source);
-    audio.play();
+const UserCenter = () => {
+  const initialUserData = {
+    name: "Alphalio",
+    email: "Alphalio@163.com",
+    phone: "00000000000",
+    gender: "female",
+    country: "China",
+    address: "xxx",
   };
 
-  const handleDownload = (source, title) => {
-    const link = document.createElement('a');
-    link.href = source;
-    link.download = `${title}.mp3`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const [userData, setUserData] = useState(initialUserData);
+  const [editMode, setEditMode] = useState(false);
+  const [tempData, setTempData] = useState(initialUserData);
+  const [hasChanges, setHasChanges] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const updateAvatar = () => {
+    // TODO: Implement image upload to cloud
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = "image/*";
+    fileInput.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        console.log("Selected file:", file); // Debugging log
+      }
+    };
+    fileInput.click();
   };
 
-  const handleDelete = (source, title, audioId, userId) => {
-    alert("Uncomplete Function\nUser wants to delete audio",title," with audioId ",audioId);
-    console.log("delete action: {\nsource: ",source,"\ntitle:", title,"\naudioId: ",audioId,"\nuserId: ",userId,"}");
-  }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    const updatedData = { ...tempData, [name]: value };
+    setTempData(updatedData);
+    setHasChanges(JSON.stringify(updatedData) !== JSON.stringify(userData));
+  };
+
+  const handleEdit = () => {
+    setEditMode(true);
+  };
+
+  const handleCancel = () => {
+    if (hasChanges) {
+      setShowPopup(true);
+    } else {
+      setEditMode(false);
+    }
+  };
+
+  const confirmCancel = () => {
+    setEditMode(false);
+    setTempData(userData);
+    setHasChanges(false);
+    setShowPopup(false);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
+  const handleUpdate = () => {
+    setUserData(tempData);
+    setEditMode(false);
+    setHasChanges(false);
+  };
 
   return (
-    <div className="product-page-container">
-      {/* Header Section */}
-      <header className="product-page-header">
-        <h1 className="product-page-title">My Product</h1>
-        <button
-          onClick={() => (window.location.href = '/')}
-          className="new-project-button"
-        >
-          <img src={plusIcon} alt="New Project" className="plus-icon" />
-          New Project
-        </button>
-      </header>
-
-      {/* Search Input */}
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Search by name or author..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
-        />
+    <div className="user-center-page">
+    <Navigation/>
+    <div className="user-center">
+      <h2>Account Setting</h2>
+      <div className="profile">
+      <img src={userCenterAvatar} alt="Avatar" className="avatar" />
+      <div className="camera-icon" onClick={updateAvatar}>
+        <img src={camera} alt="Camera Icon" />
       </div>
+    </div>
 
-      {/* Audio Project Cards */}
-      <div className="audio-cards-grid">
-        {filteredData
-          .sort((a, b) => new Date(b.date) - new Date(a.date))
-          .map((project) => (
-            <div key={project.id} className="audio-card">
-              <div className="audio-card-title">{project.title}</div>
-              <div className="audio-card-date">{project.date}</div>
-              <hr className="audio-card-divider" />
-              <div className="audio-card-info">
-                <span className="audio-type">{project.type}</span>
-                <span className="separator">•</span>
-                <span className="audio-author">{project.author}</span>
-              </div>
-              <div className="audio-card-actions">
-                <div
-                  className="audio-icon-wrapper"
-                  onClick={() => handlePlay(project.source)}
-                >
-                  <img src={playIcon} alt="Play" className="audio-card-icon" />
+      <div className={`form ${editMode ? "edit-mode" : "view-mode"}`}>
+        <div className="row">
+          <div className="input-box">
+            <label>Name</label>
+            {editMode ? (
+              <input className="input-field" type="text" name="name" value={tempData.name} onChange={handleInputChange} />
+            ) : (
+              <p>{userData.name}</p>
+            )}
+          </div>
+          <div className="input-box">
+            <label>Email</label>
+            {editMode ? (
+              <input className="input-field" type="email" name="email" value={tempData.email} onChange={handleInputChange} />
+            ) : (
+              <p>{userData.email}</p>
+            )}
+          </div>
+        </div>
+        <div className="row">
+          <div className="input-box">
+            <label>Phone Number</label>
+            {editMode ? (
+              <input className="input-field" type="text" name="phone" value={tempData.phone} onChange={handleInputChange} />
+            ) : (
+              <p>{userData.phone}</p>
+            )}
+          </div>
+          <div className="input-box">
+            <label>Gender:</label>
+            {editMode ? (
+                <div className="radio-group">
+                <label>
+                    <input type="radio" name="gender" value="female" checked={tempData.gender === "female"} onChange={handleInputChange} />
+                    Female
+                </label>
+                <label>
+                    <input type="radio" name="gender" value="male" checked={tempData.gender === "male"} onChange={handleInputChange} />
+                    Male
+                </label>
+                <label>
+                    <input type="radio" name="gender" value="non-binary" checked={tempData.gender === "non-binary"} onChange={handleInputChange} />
+                    Non-binary
+                </label>
                 </div>
-                <div
-                  className="audio-icon-wrapper"
-                  onClick={() => handleDownload(project.source, project.title)}
-                >
-                  <img
-                    src={downloadIcon}
-                    alt="Download"
-                    className="audio-card-icon"
-                  />
-                </div>
-                <div
-                  className="audio-icon-wrapper"
-                  onClick={() => handleDelete(project.source, project.title, project.audioId, project.userId)}
-                >
-                  <img src={binIcon} alt="Delete" className="audio-card-icon" />
-                </div>
-              </div>
+            ) : (
+                <p>{userData.gender === "female" ? "Female" : userData.gender === "male" ? "Male" : "Non-binary"}</p>
+            )}
             </div>
-          ))}
+        </div>
+        <div className="row">
+          <div className="input-box">
+            <label>Country/Region</label>
+            <div className="dropdown-container">
+              {editMode ? (
+                <select className="input-field" name="country" value={tempData.country} onChange={handleInputChange}>
+                  {countryOptions.map((country) => (
+                    <option key={country} value={country}>{country}</option>
+                  ))}
+                </select>
+              ) : (
+                <p>{userData.country}</p>
+              )}
+            </div>
+          </div>
+          <div className="input-box">
+            <label>Address</label>
+            {editMode ? (
+              <input className="input-field" type="text" name="address" value={tempData.address} onChange={handleInputChange} />
+            ) : (
+              <p>{userData.address}</p>
+            )}
+          </div>
+        </div>
       </div>
+      <div className="buttons">
+        {editMode ? (
+          <>
+            <button onClick={handleUpdate} disabled={!hasChanges} className="update-btn">Update</button>
+            <button onClick={handleCancel} className="cancel-btn">Cancel</button>
+          </>
+        ) : (
+          <button onClick={handleEdit} className="edit-btn">Edit</button>
+        )}
+      </div>
+
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <p>You have unsaved changes. Do you want to discard them?</p>
+            <div className="popup-button-container">
+              <button onClick={confirmCancel} className="confirm-btn">Yes</button>
+              <button onClick={closePopup} className="close-btn">No</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
     </div>
   );
 };
 
-export default ProductPage;
+export default UserCenter;

@@ -28,7 +28,7 @@ const sampleFiles = [
     fileId: 1,
     fileName: "Generative AI",
     cosUrl: "https://arxiv.org/pdf/2309.07930",
-  },
+  }/*,
   {
     fileId: 2,
     fileName: "Generative Artificial Intelligence: A Systematic Review and Applications",
@@ -53,7 +53,7 @@ const sampleFiles = [
     fileId: 4,
     fileName: "The Cue-of-the-Cloud Effec - When Reminders of Online Information Availability Increase Purchase Intentions and Choice.pdf",
     cosUrl: "https://pdf-store-1257970690.cos.ap-shanghai.myqcloud.com/uploads/1734407756859_2003d6bc-90ac-4591-8fa7-831dc302256f_The%20Cue-of-the-Cloud%20Effec%20-%20When%20Reminders%20of%20Online%20Information%20Availability%20Increase%20Purchase%20Intentions%20and%20Choice.pdf?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDEKDtMcfU6WjiV5SREoBMRJxOcdRAnESS%26q-sign-time%3D1734407757%3B1993607757%26q-key-time%3D1734407757%3B1993607757%26q-header-list%3Dhost%26q-url-param-list%3D%26q-signature%3D5a4a01e0f14116f17c12029dba9eaf7aa38cc542",
-  },
+  },*/
 ];
 
 const FileList = ({ fileList = [], loading, onFileToggle, onDeleteFile, selectedFiles = [] }) => {
@@ -84,6 +84,7 @@ const FileList = ({ fileList = [], loading, onFileToggle, onDeleteFile, selected
   };
 
   return (
+    <div>
     <div className="pdf-list">
       <h3 className="list-item-title">Uploaded Files</h3>
       <div className="pdf-list-content">
@@ -117,10 +118,12 @@ const FileList = ({ fileList = [], loading, onFileToggle, onDeleteFile, selected
         ) : (
           <p>No files uploaded yet.</p>
         )}
-        <div className="sync-message-container">
+        
+      </div>
+      <div className="sync-message-container">
           <img src={syncedIcon} className="synced-icon"></img>
           <p className="sync-text">Last synced: {latestSyncTime}</p>
-        </div>
+      </div>
       </div>
 
       {popupFile && (
@@ -141,7 +144,15 @@ const FileList = ({ fileList = [], loading, onFileToggle, onDeleteFile, selected
               <a href={popupFile.cosUrl} target="_blank" rel="noopener noreferrer" className="popup-view-button">
                 View File
               </a>
-              <button onClick={() => popupFile && onDeleteFile(popupFile.fileId)} className="popup-remove-button">
+              <button
+                onClick={() => {
+                  if (popupFile) {
+                    onDeleteFile(popupFile.fileId); // Delete the file
+                    setPopupFile(null);
+                  }
+                }}
+                className="popup-remove-button"
+              >
                 Remove File
               </button>
             </div>

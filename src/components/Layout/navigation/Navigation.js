@@ -40,10 +40,10 @@ const Navigation = () => {
           Home
         </Link>
         <Link 
-          to="/audio-product" 
-          className={location.pathname === "/audio-product" ? "selected" : ""}
+          to="/myAudioProduct" 
+          className={location.pathname === "/myAudioProduct" ? "selected" : ""}
         >
-          Audio Product
+          My Audio Product
         </Link>
         <Link 
           to="/about" 

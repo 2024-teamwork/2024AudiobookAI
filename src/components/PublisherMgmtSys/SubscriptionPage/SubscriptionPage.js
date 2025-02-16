@@ -1,61 +1,103 @@
-import React from "react";
-import "./SubscriptionPage.css"; // CSS file for styling
+import React, { useState } from "react";
 import Footer from "../../Layout/footer/Footer";
 import Navigation from "../../Layout/navigation/Navigation";
+import "./SubscriptionPage.css";
+import basicIcon from "../../../images/basic.jpg";
+import checkIcon from "../../../images/check.jpg";
+import earphoneIcon from "../../../images/earphone.jpg";
+import enterpriseIcon from "../../../images/enterprise.jpg";
+import proIcon from "../../../images/pro.jpg";
 
 const SubscriptionPage = () => {
-  const subscriptionPlans = [
+  const [selectedPlan, setSelectedPlan] = useState("Pro");
+
+  const subscribeToPlan = (planType) => {
+    console.log(`Subscribed to ${planType} plan`);
+  };
+
+  const plans = [
     {
-      name: "Basic",
-      price: "$9.99/month",
+      type: "Basic",
+      price: "$19.99",
+      description: "Perfect for beginners and hobbyists",
+      icon: basicIcon,
       features: [
-        "10 hours of audio processing",
-        "Standard quality",
-        "Email support",
+        "AI-powered audio enhancement",
+        "Basic noise reduction",
+        "5 hours of processing per month",
+        "Standard support",
+        "720p export quality",
       ],
     },
     {
-      name: "Pro",
-      price: "$19.99/month",
+      type: "Pro",
+      price: "$29.99",
+      description: "Ideal for content creators",
+      icon: proIcon,
       features: [
-        "50 hours of audio processing",
-        "High quality",
+        "Everything in Basic",
+        "Advanced noise reduction",
+        "20 hours of processing per month",
         "Priority support",
+        "4K export quality",
+        "Custom AI voice cloning",
       ],
     },
     {
-      name: "Enterprise",
-      price: "$49.99/month",
+      type: "Enterprise",
+      price: "$59.99",
+      description: "For professional studios",
+      icon: enterpriseIcon,
       features: [
-        "Unlimited hours of audio processing",
-        "Premium quality",
-        "Dedicated support",
-        "Custom solutions",
+        "Everything in Pro",
+        "Unlimited processing",
+        "24/7 dedicated support",
+        "8K export quality",
+        "Multiple AI voice profiles",
+        "API access",
+        "Custom integration support",
       ],
     },
   ];
 
   return (
-    <div className="subscription-page">
-          <Navigation />
-      <h1 className="title">Choose Your AudioAI Subscription Plan</h1>
-      <div className="plans-container">
-        {subscriptionPlans.map((plan, index) => (
-          <div key={index} className="plan-card">
-            <h2 className="plan-name">{plan.name}</h2>
-            <p className="plan-price">{plan.price}</p>
-            <ul className="plan-features">
-              {plan.features.map((feature, idx) => (
-                <li key={idx}>{feature}</li>
-              ))}
-            </ul>
-            <button className="subscribe-button">Subscribe</button>
-          </div>
-        ))}
+    <>
+      <Navigation />
+      <div className="subscription-container">
+        <img src={earphoneIcon} alt="Headphone Icon" className="headphone-icon" />
+        <h2>Choose Your AudioAI Plan</h2>
+        <p className="subtext">
+          Transform your audio experience with cutting-edge AI technology.
+        </p>
+        <div className="plans">
+          {plans.map((plan) => (
+            <div
+              key={plan.type}
+              className={`plan-card ${selectedPlan === plan.type ? "selected" : ""}`}
+              onClick={() => setSelectedPlan(plan.type)}
+            >
+              <div className="plan-header">
+                <img src={plan.icon} alt={`${plan.type} Icon`} className="plan-icon" />
+                <h3>{plan.type}</h3>
+              </div>
+              <p className="description">{plan.description}</p>
+              <h4>
+                {plan.price} <span className="per-month">/month</span>
+              </h4>
+              <ul>
+                {plan.features.map((feature, index) => (
+                  <li key={index}>
+                    <img src={checkIcon} alt="Check" className="check-icon" /> {feature}
+                  </li>
+                ))}
+              </ul>
+              <button onClick={() => subscribeToPlan(plan.type)}>Get Started</button>
+            </div>
+          ))}
+        </div>
       </div>
-
       <Footer />
-    </div>
+    </>
   );
 };
 

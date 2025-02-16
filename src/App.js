@@ -5,13 +5,15 @@ import EditContent from './components/PublisherMgmtSys/EditContent/EditContent';
 import AudioProductDetails from './components/PublisherMgmtSys/AudioProductDetails/AudioProductDetails';
 import MainContentLayout from './components/Layout/mainContentLayout/MainContentLayout';
 import SubscriptionPage from './components/PublisherMgmtSys/SubscriptionPage/SubscriptionPage';
-import UserCenter from './components/PublisherMgmtSys/UserCenter/UserCenter';
+import MyAudioProduct from './components/PublisherMgmtSys/MyAudioProduct/MyAudioProduct';
 import LoginPage from './components/LoginRegister/Login/LoginPage';
 import RegisterPage from './components/LoginRegister/Register/RegisterPage';
 import AIPodcast from './components/AIPodcastSysPublisher/AIPodcast/AIPodcast';
 import PublisherAIPodcastLayout from './components/Layout/PublisherAIPodcastLayout/PublisherAIPodcastLayout';
 import PodcastPlayer from './components/AIPodcastSysPublisher/AIPodcast/PodcastPlayer/PodcastPlayer';
 import AboutPage from './components/PublisherMgmtSys/AboutPage/AboutPage'; 
+import ContactForm from './components/Layout/contact/contact'; 
+import UserCenter from './components/PublisherMgmtSys/UserCenter/UserCenter';
 
 const App = () => {
   const [pdfFiles, setPdfFiles] = useState([
@@ -69,13 +71,13 @@ const App = () => {
 
         {/* Route for other Pages */}
         <Route path="/subscription" element={<SubscriptionPage />} />
+        <Route path="/myAudioProduct" element={<MyAudioProduct />} />
         <Route path="/user-center" element={<UserCenter />} />
-
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/podcast" element={<AIPodcast />} />
         <Route path="/about" element={<AboutPage />} /> 
-
+        <Route path="/contact" element={<ContactForm />} /> 
         <Route
           path="/"
           element={
