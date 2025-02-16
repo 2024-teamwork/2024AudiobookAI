@@ -169,15 +169,14 @@
   margin-bottom: -5px;
 }
 
-.pdf-item input[type="checkbox"] {
+.sidebar .pdf-item input[type="checkbox"] {
   margin-right: 15px;
   cursor: pointer;
   position: absolute;
   top: 10px;
-  left: 15px;
+  left: -135px;
+
 }
-
-
 
 .delete-button {
   background: none;

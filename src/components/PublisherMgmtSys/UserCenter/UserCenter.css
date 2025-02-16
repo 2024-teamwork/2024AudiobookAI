@@ -13,7 +13,7 @@
     height: 100%;
   }
   
-  h2 {
+  .user-center h2 {
     font-size: 46px;
     color: #333;
     text-align: left;
@@ -21,38 +21,38 @@
     margin-top: 10px;
   }
   
-  .profile {
+  .user-center .profile {
     position: relative;
     display: inline-block;
     margin-bottom: 20px;
     margin-top: 50px;
   }
   
-  .avatar {
+  .user-center .avatar {
     width: 132px;
     height: 132px;
     border-radius: 50%;
   }
   
-  .camera-icon{
+  .user-center .camera-icon{
     width: 76px;
     margin-left: -55px;
     margin-top: 75px;
 }
 
-  .form {
+.user-center .form {
     display: flex;
     flex-direction: column;
     gap: 15px;
   }
   
-  .row {
+  .user-center .row {
     display: flex;
     justify-content: space-between;
     gap: 20px;
   }
   
-  .input-box {
+  .user-center .input-box {
     flex: 1;
     text-align: left;
     background-color: white;
@@ -62,7 +62,7 @@
     width: 400px;
   }
   
-  label {
+  .user-center label {
     display: block;
     font-size: 14px;
     color: #666;
@@ -71,7 +71,7 @@
     margin-left: 8px;
   }
   
-  p, input, select {
+  .user-center p, input, select {
     width: 100%;
     padding: 10px;
     border-radius: 8px;
@@ -81,7 +81,7 @@
   }
   
   /* Unified Frame Style */
-  p {
+  .user-center p {
     font-weight: 500;
     margin-top: 10px;
   }
@@ -89,11 +89,11 @@
 
   
   /* Improved Dropdown */
-  .dropdown-container {
+  .user-center .dropdown-container {
     position: relative;
   }
   
-  select {
+  .user-center  select {
     appearance: none;
     background: url("../../../images/icon/dropdown-arrow.png") no-repeat right 10px center;
     background-size: 14px;
@@ -102,14 +102,14 @@
   }
   
   /* Buttons */
-  .buttons {
+  .user-center .buttons {
     margin-top: 20px;
     display: flex;
     justify-content: center;
     gap: 10px;
   }
   
-  button {
+  .user-center button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -117,17 +117,17 @@
     font-size: 14px;
   }
   
-  .edit-btn {
+  .user-center .edit-btn {
     background: #3498db;
     color: white;
   }
   
-  .update-btn {
+  .user-center .update-btn {
     background: #2ecc71;
     color: white;
   }
   
-  .cancel-btn {
+  .user-center .cancel-btn {
     background: #e74c3c;
     color: white;
   }
@@ -144,7 +144,7 @@
     align-items: center;
   }
   
-  .popup-content {
+  .user-center .popup-content {
     position: relative;
     background: #fff;
     border-radius: 15px;
@@ -157,12 +157,12 @@
     animation: fadeIn 0.3s ease-in-out;
   }
 
-  .popup-content p{
+  .user-center .popup-content p{
     font-size: 1rem;
     margin-top: 22px;
   }
   
-  .popup-content .confirm-btn, .popup-content .close-btn {
+  .user-center .popup-content .confirm-btn, .popup-content .close-btn {
     padding: 10px 15px;
     margin: 10px;
     border: none;
@@ -172,13 +172,13 @@
     width: 60px;
   }
   
-  .popup-button-container{
+  .user-center .popup-button-container{
     display: flex;
     flex-direction: row;
     justify-content: center;
   }
 
-  .confirm-btn {
+  .user-center .confirm-btn {
     background: rgb(131, 131, 131);
     color: white;
     display: flex;
@@ -186,7 +186,7 @@
     align-items: center;
   }
   
-  .close-btn {
+  .user-center .close-btn {
     background-color: #7287f9;
     color: white;
     display: flex;
@@ -213,30 +213,30 @@
     background-color: #afbaf9;
     }
   
-  .edit-btn {
+    .user-center .edit-btn {
     background: #7287f9;
     color: white;
   }
   
-  .update-btn {
+  .user-center .update-btn {
     background: #7287f9;
     color: white;
 
   }
   
-  .cancel-btn {
+  .user-center .cancel-btn {
     background-color: white;
     color: black;
   }
   
-  .radio-group {
+  .user-center .radio-group {
     display: flex;
     gap: 65px;
     align-items: center;
     margin-top: 0px;
   }
   
-  .radio-group label {
+  .user-center .radio-group label {
     display: flex;
     align-items: center;
     gap: 5px;
@@ -244,11 +244,11 @@
     width: 80px;
   }
   
-  .radio-group input {
+  .user-center .radio-group input {
     margin: 0;
   }
 
-  .input-field {
+  .user-center .input-field {
     height: 35px;
     position: relative;
     border: 1px solid #cccccc;
@@ -258,7 +258,7 @@
     margin-top: 5px;
   }
   
-.profile{
+  .user-center .profile{
     display: flex;
     flex-direction: row;
 }
