@@ -2,11 +2,11 @@ import React from "react";
 import "./Sidebar.css";
 
 const sampleFiles = [
-  {
-    fileId: 1,
-    fileName: "Generative AI",
-    cosUrl: "https://arxiv.org/pdf/2309.07930",
-  },
+  // {
+  //   fileId: 1,
+  //   fileName: "Generative AI",
+  //   cosUrl: "https://arxiv.org/pdf/2309.07930",
+  // },
   // {
   //   fileId: 2,
   //   fileName: "Generative Artificial Intelligence: A Systematic Review and Applications",
