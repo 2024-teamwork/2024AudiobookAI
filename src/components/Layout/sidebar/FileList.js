@@ -63,8 +63,8 @@ const FileList = ({ fileList = [], loading, onFileToggle, onDeleteFile, selected
           <p>Loading files...</p>
         ) : fileList.length > 0 ? (
           fileList.map((file, index) => (
-          <div>
-            <div key={index} className="pdf-item">
+          <div  key={index}>
+            <div className="pdf-item">
                 <input
                   type="checkbox"
                   checked={selectedFiles.fileName}
