@@ -25,7 +25,7 @@ const FileUploader = ({ onUploadSuccess }) => {
 
     try {
       const response = await axios.post(
-        "https://audioai.alphalio.cn/api/cos/get-pdf/user",
+        "https://audioai.alphalio.cn/api/cos/upload/pdf",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -64,7 +64,7 @@ const FileUploader = ({ onUploadSuccess }) => {
         </div>
         <button
           onClick={handleUpload}
-          className="custom-file-submit"
+          className="custom-file-upload"
           disabled={uploading}
         >
           {uploading ? "Uploading..." : "Submit"}
