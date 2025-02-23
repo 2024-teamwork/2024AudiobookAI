@@ -81,13 +81,15 @@ const AIPodcast = ({ selectedFiles = [] }) => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3NDI2Nzk4MTR9.T8rmAYHaVD_fHRfw1PUDcee2-UwLJ3ausGE-_63w3kw`
           },
         }
       );
   
       setResponseMessage(`Job submitted successfully! Job ID: ${response.data.task_id}`);
       setJobId(response.data.task_id);
+      // setJobId('c9c305bc-4223-4fbb-a50b-a4fcd99767a2');
+
       console.log("Response:", response);
     } catch (error) {
       console.error("Submission Error:", error.response);
