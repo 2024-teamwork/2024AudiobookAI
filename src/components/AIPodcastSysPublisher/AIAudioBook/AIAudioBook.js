@@ -55,7 +55,8 @@ const AIAudioBook = ({ selectedFiles = [] }) => {
           },
         }
       );
-      setJobId(response.data.task_id);
+      // setJobId(response.data.task_id);
+      setJobId('93f71ef1-4c94-4aa7-9bdb-84331a28b47a')
     } catch (error) {
       console.error("Submission Error:", error);
       alert(`Error: ${error.response?.data || "Server error"}`);
@@ -71,7 +72,8 @@ const AIAudioBook = ({ selectedFiles = [] }) => {
         </div>
       ) : (
         <div>
-          {jobId && <AudioBookPlayer jobId={jobId} audiobookText={formData.text} />}
+          {/* {jobId && <AudioBookPlayer jobId={jobId} audiobookText={formData.text} />} */}
+         <AudioBookPlayer jobId={jobId} audiobookText={formData.text} />
         </div>
       )}
       {isFormVisible && (
