@@ -264,7 +264,7 @@ const AIPodcast = ({ selectedFiles = [] }) => {
 
       {responseMessage && <p>{responseMessage}</p>}
 
-      {jobId && <PodcastPlayer jobId={jobId}/>}
+      {jobId && <PodcastPlayer jobId='b38d7f98-7b3a-4c92-be4c-62831d567595'/>}
     </div>
   );
 };
