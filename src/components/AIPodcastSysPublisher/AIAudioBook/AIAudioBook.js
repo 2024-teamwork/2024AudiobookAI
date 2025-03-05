@@ -51,12 +51,12 @@ const AIAudioBook = ({ selectedFiles = [] }) => {
         payload,
         {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3NDI2Nzk4MTR9.T8rmAYHaVD_fHRfw1PUDcee2-UwLJ3ausGE-_63w3kw`
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNDU4MGVlZC0zMjIyLTQ5YmQtODE3MS0wYmNkZTBiMmQ3OTQiLCJleHAiOjE3NDM3NzU3Mjd9.iGmsi1jCjc-fgrJ7J9eUzr8mQR0qOhD6mFsVTN_ZYL0`
           },
         }
       );
-      // setJobId(response.data.task_id);
-      setJobId('93f71ef1-4c94-4aa7-9bdb-84331a28b47a');
+      setJobId(response.data.task_id);
+      // setJobId('93f71ef1-4c94-4aa7-9bdb-84331a28b47a');
     } catch (error) {
       console.error("Submission Error:", error);
       alert(`Error: ${error.response?.data || "Server error"}`);

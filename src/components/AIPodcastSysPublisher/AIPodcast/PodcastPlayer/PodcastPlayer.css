@@ -39,17 +39,54 @@
 
 .loading-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  text-align: center;
 }
 
-.loading-button {
-  padding: 10px 20px;
+.loading-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.loading-subtitle {
   font-size: 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: not-allowed;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.loading-progress-bar {
+  width: 50%;
+  max-width: 400px;
+  height: 12px;
+  background-color: #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.loading-progress-bar::before {
+  content: "";
+  position: absolute;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(135deg, #7287f9, #929ee3);
+  border-radius: 8px;
+  animation: loading-progress 2s infinite linear;
+}
+
+@keyframes loading-progress {
+  0% {
+    left: -30%;
+  }
+  50% {
+    left: 50%;
+  }
+  100% {
+    left: 100%;
+  }
 }

@@ -88,19 +88,19 @@ const PodcastPlayer = ({ jobId }) => {
   if (isLoading) {
     return (
       <div className="loading-container">
-        <button className="loading-button" disabled>
-          Loading...
-        </button>
+        <h2 className="loading-title">AI Audio Processing</h2>
+        <p className="loading-subtitle">Your podcast is being generated. Please wait...</p>
+        <div className="loading-progress-bar"></div>
       </div>
     );
   }
-
+  
   if (!isJobReady) {
     return (
       <div className="loading-container">
-        <button className="loading-button" disabled>
-          Loading...
-        </button>
+        <h2 className="loading-title">AI Audio Processing</h2>
+        <p className="loading-subtitle">Your podcast is being generated. Please wait...</p>
+        <div className="loading-progress-bar"></div>
       </div>
     );
   }
