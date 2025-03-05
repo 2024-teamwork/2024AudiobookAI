@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./PodcastPlayer.css";
+import microphoneIcon from "../../../../images/icon/microphone.png";
 
 const PodcastPlayer = ({ jobId }) => {
   const [audioUrl, setAudioUrl] = useState(null);

@@ -211,6 +211,9 @@ const AIAudioBook = ({ selectedFiles = [] }) => {
 
           <div className="audiobook-button-container">
             <button type="submit">Submit</button>
+            <button type="submit" onClick={() => setJobId(sampleJob)}>
+              See Sample
+            </button>
           </div>
         </form>
       )}

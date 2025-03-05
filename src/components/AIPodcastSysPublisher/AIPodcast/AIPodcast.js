@@ -251,6 +251,9 @@ const AIPodcast = ({ selectedFiles = [] }) => {
         <button type="submit" disabled={loading}>
           {loading ? "Submitting..." : "Generate"}
         </button>
+        <button type="button" onClick={() => setJobId(sampleJob)}>
+          See Sample
+        </button>
       </form>
 
       {responseMessage && <p>{responseMessage}</p>}

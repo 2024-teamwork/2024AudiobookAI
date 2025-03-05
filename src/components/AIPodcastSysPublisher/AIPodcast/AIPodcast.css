@@ -107,3 +107,25 @@ button[type="submit"]:hover:enabled {
   background-color: #7287f9;
   opacity: 70%;
 }
+
+
+button[type="button"] {
+  border-radius: 15px;
+  background-color: #7287f9;
+  font-weight: 600;
+  width: 350px;
+  font-size: 16px;
+  color: white;
+  border: none;
+  margin-top: 10px;
+}
+
+button[type="button"]:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button[type="button"]:hover:enabled {
+  background-color: #7287f9;
+  opacity: 70%;
+}
