@@ -24,6 +24,12 @@ const AIPodcast = ({ selectedFiles = [] }) => {
   const [jobId, setJobId] = useState(null);
   const sampleJob = '8961e00f-ad32-4f31-9b5e-35cab438bf72';
 
+  const resetState = () => {
+    setJobId(null);  // 清空 jobId，确保重新加载 PodcastPlayer
+    setResponseMessage("");
+    setLoading(false);
+  };
+  
   // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -40,7 +46,10 @@ const AIPodcast = ({ selectedFiles = [] }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
+    // 重置状态，确保 PodcastPlayer 重新渲染
+    resetState();
+      
     // Validate required fields
     if (!formData.topic && !formData.text && selectedFiles.length === 0) {
       setResponseMessage("Please provide Topic, Text, or upload files.");
@@ -80,8 +89,6 @@ const AIPodcast = ({ selectedFiles = [] }) => {
   
       // setResponseMessage(`Job submitted successfully! Job ID: ${response.data.task_id}`);
       setJobId(response.data.task_id);
-
-      console.log("Response:", response);
     } catch (error) {
       console.error("Submission Error:", error.response);
       setResponseMessage(`Error: ${error.response?.data || "Server error"}`);
@@ -251,7 +258,12 @@ const AIPodcast = ({ selectedFiles = [] }) => {
         <button type="submit" disabled={loading}>
           {loading ? "Submitting..." : "Generate"}
         </button>
-        <button type="button" onClick={() => setJobId(sampleJob)}>
+        <button
+          type="button"
+          onClick={() => {
+            resetState(); // 清空状态
+            setTimeout(() => setJobId(sampleJob), 100); // 确保状态变化触发重新渲染
+        }}>
           See Sample
         </button>
       </form>

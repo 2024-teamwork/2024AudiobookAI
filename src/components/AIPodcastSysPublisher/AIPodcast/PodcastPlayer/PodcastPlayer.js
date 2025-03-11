@@ -83,28 +83,44 @@ const PodcastPlayer = ({ jobId }) => {
   };
 
   useEffect(() => {
-    fetchAudioAndTranscript();
-  }, []);
+    if (jobId) {
+      fetchAudioAndTranscript();
+    }
+  }, [jobId]);  // 监听 jobId 变化，触发加载
 
-  if (isLoading) {
+  if (isLoading || !isJobReady) {
     return (
       <div className="loading-container">
-        <h2 className="loading-title">AI Audio Processing</h2>
-        <p className="loading-subtitle">Your podcast is being generated. Please wait...</p>
+        <h2 className="loading-title">Processing...</h2>
+        <p className="loading-subtitle">Generating your podcast. Please wait...</p>
         <div className="loading-progress-bar"></div>
       </div>
     );
   }
   
-  if (!isJobReady) {
-    return (
-      <div className="loading-container">
-        <h2 className="loading-title">AI Audio Processing</h2>
-        <p className="loading-subtitle">Your podcast is being generated. Please wait...</p>
-        <div className="loading-progress-bar"></div>
-      </div>
-    );
-  }
+  // useEffect(() => {
+  //   fetchAudioAndTranscript();
+  // }, []);
+
+  // if (isLoading) {
+  //   return (
+  //     <div className="loading-container">
+  //       <h2 className="loading-title">AI Audio Processing</h2>
+  //       <p className="loading-subtitle">Your podcast is being generated. Please wait...</p>
+  //       <div className="loading-progress-bar"></div>
+  //     </div>
+  //   );
+  // }
+  
+  // if (!isJobReady) {
+  //   return (
+  //     <div className="loading-container">
+  //       <h2 className="loading-title">AI Audio Processing</h2>
+  //       <p className="loading-subtitle">Your podcast is being generated. Please wait...</p>
+  //       <div className="loading-progress-bar"></div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="podcast-container">
