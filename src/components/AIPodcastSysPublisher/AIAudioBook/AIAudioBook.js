@@ -19,6 +19,7 @@ const AIAudioBook = ({ selectedFiles = [] }) => {
   const [isFormVisible, setIsFormVisible] = useState(true);
 
   const sampleJob = '93f71ef1-4c94-4aa7-9bdb-84331a28b47a';
+  const sampleText = "Nestled between towering peaks and lush valleys lies a landscape that feels almost otherworldly. The morning sun casts its golden glow over rolling hills blanketed in emerald-green grass, each blade glistening with dew. A soft mist lingers, curling around the base of ancient trees that stand like silent sentinels, their twisted branches reaching skyward. The air is crisp and carries the faint, sweet aroma of wildflowers, scattered like tiny jewels across the landscape—pinks, yellows, and purples blending seamlessly into the tapestry of nature.  \nIn the distance, a crystal-clear river winds its way through the terrain, its waters shimmering like liquid silver under the sun's warm rays. The sound of its gentle flow is a soothing melody, harmonizing with the soft rustle of leaves stirred by a light breeze. Birds flit from branch to branch, their vibrant feathers catching the light as they sing joyful tunes that echo across the expanse. \nBeyond the river, a field of golden wheat sways lazily, rippling like an ocean in the wind. The scene is framed by towering mountains, their rugged peaks capped with snow that glows with an ethereal pink hue in the early light. Wisps of clouds cling to their slopes, adding an air of mystery to their grandeur. \nA dirt path meanders through the valley, inviting wanderers to explore its hidden corners. Along the trail, small wooden bridges span bubbling brooks, and moss-covered rocks sit like natural sculptures, adorned with tiny ferns and lichens. The path leads to a serene lake at the heart of the valley, its surface so still it mirrors the surrounding landscape with breathtaking clarity. As the sun climbs higher, the lake sparkles, its azure waters a stark contrast to the deep greens and browns of the earth around it. \nThe tranquility of the scene is broken only by the occasional call of a distant hawk or the rustle of an unseen creature in the underbrush. Time seems to slow in this idyllic haven, where nature's beauty unfolds in every direction. It is a place that invites peace, reflection, and a deep appreciation for the wonders of the world. "
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -86,14 +87,14 @@ const AIAudioBook = ({ selectedFiles = [] }) => {
               onChange={handleInputChange}
             />
           </div>
-          <div className="form-group">
+          {/* <div className="form-group">
             <label>Selected Files</label>
             <ul>
               {selectedFiles.map((file, index) => (
                 <li key={index}>{file.fileName}</li>
               ))}
             </ul>
-          </div>
+          </div> */}
           
 	<div className="form-group-row">
               {/* First Row: Language, Speed */}
@@ -211,7 +212,13 @@ const AIAudioBook = ({ selectedFiles = [] }) => {
 
           <div className="audiobook-button-container">
             <button type="submit">Submit</button>
-            <button type="submit" onClick={() => setJobId(sampleJob)}>
+            <button 
+                type="submit" 
+                onClick={() => {
+                  setJobId(sampleJob);
+                  setFormData({ ...formData, sampleText });
+                }}
+            >
               See Sample
             </button>
           </div>
